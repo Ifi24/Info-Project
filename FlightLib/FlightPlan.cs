@@ -24,6 +24,48 @@ namespace FlightLib
             this.velocidad = velocidad;
         }
 
+        // Gets y Sets
+        public string GetId()
+        {
+            return id;
+        }
+
+        public Position GetCurrenPosition()
+        {
+            return currentPosition;
+        }
+
+        public Position GetFinalPosition()
+        {
+            return finalPosition;
+        }
+
+        public double GetVelocidad()
+        {
+            return velocidad;
+        }
+
+        public void SetId(string id)
+        {
+            this.id = id;
+        }
+
+        public void SetCurrentPosition(Position currentPosition)
+        {
+            this.currentPosition = currentPosition;
+        }
+
+        public void SetFinalPosition(Position finalPosition)
+        {
+            this.finalPosition = finalPosition;
+        }
+
+        public void SetVelocidad(double velocidad)
+        {
+            this.velocidad = velocidad;
+        }
+
+
         // Metodos
 
         public void SetVelocidad(double velocidad)
@@ -45,7 +87,7 @@ namespace FlightLib
             double x = currentPosition.GetX() + distancia * coseno;
             double y = currentPosition.GetY() + distancia * seno;
 
-            // Cambiamos el nombre porque la vamos a usar para saber si estamos todavía en el vuelo o si hemos llegado al final de este por lo que nos pararíamos 
+            // Cambiamos el nombre porque la vamos a usar para saber si estamos todavía en el vuelo o si hemos llegado al final de este por lo que nos pararíamos
             // Hay que poner Position porque nextPosition no está declarada, antes no la poníamos porque la hemos declarado antes
             Position nextPosition = new Position(x, y);
 
@@ -86,9 +128,9 @@ namespace FlightLib
             Console.WriteLine("Velocidad: {0:F2}", velocidad);
             Console.WriteLine("Posición actual: ({0:F2},{1:F2})", currentPosition.GetX(), currentPosition.GetY());
             // Hacemos que en el caso de que nuestro método nos devuelva true, escriba el mensaje siguiente: "El vuelo ha llegado a su destino"
-            if (this.VueloDestino()) 
+            if (this.VueloDestino())
                 Console.WriteLine("El vuelo ha llegado a su destino");
-            // En el caso de que nuestro método nos devuelva false, hacemos que escriba el siguiente mensaje: "El vuelo todavía no ha llegado a su destino" 
+            // En el caso de que nuestro método nos devuelva false, hacemos que escriba el siguiente mensaje: "El vuelo todavía no ha llegado a su destino"
             else
                 Console.WriteLine("El vuelo todavía no ha llegado a su destino");
             Console.WriteLine("******************************");
