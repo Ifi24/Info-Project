@@ -14,14 +14,16 @@ namespace FlightLib
         Position currentPosition; // posicion actual
         Position finalPosition; // posicion final
         double velocidad;
+        Position initialPosition;
 
         // Constructures
-        public FlightPlan(string id, double cpx, double cpy, double fpx, double fpy, double velocidad)
+        public FlightPlan(string id, double cpx, double cpy, double fpx, double fpy, double velocidad, double ipx, double ipy)
         {
             this.id = id;
             this.currentPosition = new Position(cpx, cpy);
             this.finalPosition = new Position(fpx, fpy);
             this.velocidad = velocidad;
+            this.initialPosition = new Position(ipx, ipy);
         }
 
         // Gets y Sets
@@ -30,7 +32,7 @@ namespace FlightLib
             return id;
         }
 
-        public Position GetCurrenPosition()
+        public Position GetCurrentPosition()
         {
             return currentPosition;
         }
@@ -43,6 +45,11 @@ namespace FlightLib
         public double GetVelocidad()
         {
             return velocidad;
+        }
+
+        public Position GetInitialPosition()
+        {
+            return initialPosition;
         }
 
         public void SetId(string id)
@@ -65,12 +72,13 @@ namespace FlightLib
             this.velocidad = velocidad;
         }
 
+        public void SetInitialPosition(Position initialPosition)
+        {
+            this.initialPosition = initialPosition;
+        }
+
 
         // Metodos
-
-        public void SetVelocidad(double velocidad)
-        // setter del atributo velocidad
-        { this.velocidad = velocidad; }
 
         public void Mover(double tiempo)
         // Mueve el vuelo a la posición correspondiente a viajar durante el tiempo que se recibe como parámetro
@@ -99,7 +107,7 @@ namespace FlightLib
 
 
         // Método para saber si un vuelo ha llegado a su destino o no
-        public bool VueloDestino()
+        public bool HasArrived()
         {
             bool destino = false;
             if (currentPosition == finalPosition)
@@ -107,6 +115,15 @@ namespace FlightLib
             return destino;
         }
 
+        public void Restart()
+        {
+            currentPosition = initialPosition;
+        }
+
+        public double Distance(FlightPlan plan)
+        {
+            return this.currentPosition.Distancia(plan.currentPosition);
+        }
 
         // Método que detecta el conflicto según la distancia de seguridad proporcionada
         public bool ConflictoDistancia(FlightPlan b, double distanciaSeguridad)
@@ -128,7 +145,7 @@ namespace FlightLib
             Console.WriteLine("Velocidad: {0:F2}", velocidad);
             Console.WriteLine("Posición actual: ({0:F2},{1:F2})", currentPosition.GetX(), currentPosition.GetY());
             // Hacemos que en el caso de que nuestro método nos devuelva true, escriba el mensaje siguiente: "El vuelo ha llegado a su destino"
-            if (this.VueloDestino())
+            if (this.HasArrived())
                 Console.WriteLine("El vuelo ha llegado a su destino");
             // En el caso de que nuestro método nos devuelva false, hacemos que escriba el siguiente mensaje: "El vuelo todavía no ha llegado a su destino"
             else
