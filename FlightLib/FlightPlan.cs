@@ -105,7 +105,6 @@ namespace FlightLib
                 currentPosition = finalPosition;
         }
 
-
         // Método para saber si un vuelo ha llegado a su destino o no
         public bool HasArrived()
         {
@@ -133,7 +132,6 @@ namespace FlightLib
                 conflicto = true;
             return conflicto;
         }
-
 
         public void EscribeConsola()
         // escribe en consola los datos del plan de vuelo

@@ -4,9 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-// comentario random
-// cambios nuevos en la versión 0
-//Hola soy la laia probando github
 namespace FlightLib
 {
     public class FlightPlanList

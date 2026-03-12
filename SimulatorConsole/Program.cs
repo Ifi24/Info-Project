@@ -34,7 +34,7 @@ namespace SimulatorConsole
                 double fx = Convert.ToDouble(trozos[0]);
                 double fy = Convert.ToDouble(trozos[1]);
 
-                FlightPlan plan_a = new FlightPlan(identificador, ix, iy, fx, fy, velocidad);
+                FlightPlan plan_a = new FlightPlan(identificador, ix, iy, fx, fy, velocidad, ix, iy);
 
                 Console.WriteLine("Escribe el identificador");
                 //   string nombre = Console.ReadLine();
@@ -55,7 +55,7 @@ namespace SimulatorConsole
                 fx = Convert.ToDouble(trozos[0]);
                 fy = Convert.ToDouble(trozos[1]);
 
-                FlightPlan plan_b = new FlightPlan(identificador, ix, iy, fx, fy, velocidad);
+                FlightPlan plan_b = new FlightPlan(identificador, ix, iy, fx, fy, velocidad, ix, iy);
 
                 lista.AddFlightPlan(plan_a);
                 lista.AddFlightPlan(plan_b);
