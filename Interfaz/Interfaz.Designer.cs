@@ -32,6 +32,7 @@
             opcionesToolStripMenuItem = new ToolStripMenuItem();
             cargarListaDeVuelosToolStripMenuItem = new ToolStripMenuItem();
             introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem = new ToolStripMenuItem();
+            verSimulaciónToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -47,7 +48,7 @@
             // 
             // opcionesToolStripMenuItem
             // 
-            opcionesToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { cargarListaDeVuelosToolStripMenuItem, introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem });
+            opcionesToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { cargarListaDeVuelosToolStripMenuItem, introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem, verSimulaciónToolStripMenuItem });
             opcionesToolStripMenuItem.Name = "opcionesToolStripMenuItem";
             opcionesToolStripMenuItem.Size = new Size(85, 24);
             opcionesToolStripMenuItem.Text = "Opciones";
@@ -64,7 +65,14 @@
             introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem.Name = "introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem";
             introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem.Size = new Size(417, 26);
             introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem.Text = "Introducir Distancia Seguridad y Tiempo de Ciclo";
-            introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem.Click += this.introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem_Click;
+            introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem.Click += introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem_Click;
+            // 
+            // verSimulaciónToolStripMenuItem
+            // 
+            verSimulaciónToolStripMenuItem.Name = "verSimulaciónToolStripMenuItem";
+            verSimulaciónToolStripMenuItem.Size = new Size(417, 26);
+            verSimulaciónToolStripMenuItem.Text = "Ver Simulación";
+            verSimulaciónToolStripMenuItem.Click += verSimulaciónToolStripMenuItem_Click;
             // 
             // Principal
             // 
@@ -87,5 +95,6 @@
         private ToolStripMenuItem opcionesToolStripMenuItem;
         private ToolStripMenuItem cargarListaDeVuelosToolStripMenuItem;
         private ToolStripMenuItem introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem;
+        private ToolStripMenuItem verSimulaciónToolStripMenuItem;
     }
 }

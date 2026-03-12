@@ -49,5 +49,9 @@ namespace FlightLib
                 i++;
             }
         }
+        public int GetNum()
+        {
+            return this.number; // 'num' es el contador de aviones que declaraste en la Fase 1
+        }
     }
 }
