@@ -41,7 +41,7 @@ namespace Interfaz
 
         private void verSimulaciónToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Simulacion VentanaSimulacion = new Simulacion(miLista);
+            Simulación VentanaSimulacion = new Simulación(miLista);
             VentanaSimulacion.ShowDialog();
         }
     }
