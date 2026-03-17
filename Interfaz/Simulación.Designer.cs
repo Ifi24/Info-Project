@@ -52,6 +52,7 @@
             PanelSimulacion.Size = new Size(974, 639);
             PanelSimulacion.TabIndex = 0;
             PanelSimulacion.Paint += PanelSimulacion_Paint;
+            PanelSimulacion.MouseClick += PanelSimulacion_MouseClick;
             // 
             // Simulación
             // 

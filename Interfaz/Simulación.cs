@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Interfaz
 {
-    
+
     public partial class Simulación : Form
     {
         FlightLib.FlightPlanList listaVuelos; // Creamos una variable que apunte a nuestra lista (queremos usarla para dinujar los aviones y moverlos)
@@ -47,6 +47,7 @@ namespace Interfaz
                 }
                 // Si el avión es el primero se dibuja rojo y si no, azul 
                 g.FillEllipse(brush, (float)pos.GetX() - tamañoAvion, (float)pos.GetY() - tamañoAvion, tamañoAvion * 2, tamañoAvion * 2);
+                // Esto del (float) no se si se puede usar aqui porque siempre usamos eso de Convert.ToInt32(pos.GetX()) para convertir a entero, pero lo dejo así por ahora porque es más directo. Si no se puede usar, lo cambiamos a Convert.ToInt32(pos.GetX()) - tamañoAvion
                 // Hacemos que la esquina izqda del rectángulo que rodea el círculo sea la coordenada X del avión, la superior dcha la Y, y le restamos tamañoAvion para que quede en el centro y establecemos el ancho y el alto del círculo
 
             }
@@ -66,6 +67,28 @@ namespace Interfaz
                     MessageBox.Show("¡Conflicto de distancia de seguridad!");
             }
 
+        }
+
+        private void PanelSimulacion_MouseClick(object sender, MouseEventArgs e)
+        {
+            int clickX = e.X;
+            int clickY = e.Y;
+
+            for (int i = 0; i < listaVuelos.GetNum(); i++)
+            {
+                FlightLib.FlightPlan plan = listaVuelos.GetFlightPlan(i);
+                Position pos = plan.GetCurrentPosition();
+                
+                double avionX = pos.GetX();
+                double avionY = pos.GetY();
+
+                double distance = Math.Sqrt(Math.Pow(clickX - avionX, 2) + Math.Pow(clickY - avionY, 2));
+
+                if (distance <= tamañoAvion) 
+                {
+
+                }
+            }
         }
     }
 }
