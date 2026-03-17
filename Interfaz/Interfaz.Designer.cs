@@ -42,7 +42,8 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { opcionesToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(800, 28);
+            menuStrip1.Padding = new Padding(10, 3, 0, 3);
+            menuStrip1.Size = new Size(1300, 44);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -50,37 +51,38 @@
             // 
             opcionesToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { cargarListaDeVuelosToolStripMenuItem, introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem, verSimulaciónToolStripMenuItem });
             opcionesToolStripMenuItem.Name = "opcionesToolStripMenuItem";
-            opcionesToolStripMenuItem.Size = new Size(85, 24);
+            opcionesToolStripMenuItem.Size = new Size(134, 38);
             opcionesToolStripMenuItem.Text = "Opciones";
             // 
             // cargarListaDeVuelosToolStripMenuItem
             // 
             cargarListaDeVuelosToolStripMenuItem.Name = "cargarListaDeVuelosToolStripMenuItem";
-            cargarListaDeVuelosToolStripMenuItem.Size = new Size(417, 26);
+            cargarListaDeVuelosToolStripMenuItem.Size = new Size(668, 44);
             cargarListaDeVuelosToolStripMenuItem.Text = "Introducir Datos de Vuelo";
             cargarListaDeVuelosToolStripMenuItem.Click += cargarListaDeVuelosToolStripMenuItem_Click;
             // 
             // introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem
             // 
             introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem.Name = "introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem";
-            introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem.Size = new Size(417, 26);
+            introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem.Size = new Size(668, 44);
             introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem.Text = "Introducir Distancia Seguridad y Tiempo de Ciclo";
             introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem.Click += introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem_Click;
             // 
             // verSimulaciónToolStripMenuItem
             // 
             verSimulaciónToolStripMenuItem.Name = "verSimulaciónToolStripMenuItem";
-            verSimulaciónToolStripMenuItem.Size = new Size(417, 26);
+            verSimulaciónToolStripMenuItem.Size = new Size(668, 44);
             verSimulaciónToolStripMenuItem.Text = "Ver Simulación";
             verSimulaciónToolStripMenuItem.Click += verSimulaciónToolStripMenuItem_Click;
             // 
             // Principal
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1300, 720);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
+            Margin = new Padding(5, 5, 5, 5);
             Name = "Principal";
             Text = "Principal";
             menuStrip1.ResumeLayout(false);
