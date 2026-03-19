@@ -34,9 +34,10 @@
             // 
             // button1
             // 
-            button1.Location = new Point(1111, 288);
+            button1.Location = new Point(684, 180);
+            button1.Margin = new Padding(2);
             button1.Name = "button1";
-            button1.Size = new Size(150, 46);
+            button1.Size = new Size(92, 29);
             button1.TabIndex = 1;
             button1.Text = "Ciclo";
             button1.UseVisualStyleBackColor = true;
@@ -46,24 +47,21 @@
             // 
             PanelSimulacion.BackColor = Color.Black;
             PanelSimulacion.BorderStyle = BorderStyle.FixedSingle;
-            PanelSimulacion.Location = new Point(91, 61);
-            PanelSimulacion.Margin = new Padding(5);
+            PanelSimulacion.Location = new Point(56, 38);
             PanelSimulacion.Name = "PanelSimulacion";
-            PanelSimulacion.Size = new Size(974, 639);
+            PanelSimulacion.Size = new Size(600, 400);
             PanelSimulacion.TabIndex = 0;
-            PanelSimulacion.Paint += PanelSimulacion_Paint;
-            PanelSimulacion.MouseClick += PanelSimulacion_MouseClick;
             // 
             // Simulación
             // 
-            AutoScaleDimensions = new SizeF(13F, 32F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1300, 720);
+            ClientSize = new Size(800, 450);
             Controls.Add(button1);
             Controls.Add(PanelSimulacion);
-            Margin = new Padding(5);
             Name = "Simulación";
             Text = "Simulación";
+            Load += Simulación_Load;
             ResumeLayout(false);
         }
 

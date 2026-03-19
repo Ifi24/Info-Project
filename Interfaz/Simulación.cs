@@ -10,84 +10,61 @@ using System.Windows.Forms;
 
 namespace Interfaz
 {
-
     public partial class Simulación : Form
     {
-        FlightLib.FlightPlanList listaVuelos; // Creamos una variable que apunte a nuestra lista (queremos usarla para dinujar los aviones y moverlos)
-        int tamañoAvion = 10; // Qué tan grande se verá nuestro "avión"
-        double distanciaSeguridad;
-        public Simulación(FlightLib.FlightPlanList miLista, double distSeguridad)
+        FlightLib.FlightPlanList listaVuelos; // Creamos una variable que apunte a nuestra lista
+        double dist;
+        double tiemp;
+        PictureBox[] misPics;
+        public Simulación(FlightLib.FlightPlanList miLista, double distSeguridad, double tiempoCiclo)
         {
             InitializeComponent();
             this.listaVuelos = miLista; // Inicializamos nuestra lista en el constructor
-            this.distanciaSeguridad = distSeguridad;
-        }
-
-
-        private void PanelSimulacion_Paint(object sender, PaintEventArgs e)
-        {
-            Graphics g = e.Graphics; // Obtenemos "lienzo virtual" donde podremos dibujar
-            g.Clear(Color.Black); // Borra todo lo que había y deja un fondo negro
-
-            for (int i = 0; i < listaVuelos.GetNum(); i++) // Recorre todos los vuelos en la lista (listaVuelos), siendo i el índice del vuelo actual. listaVuelos.GetNum() devuelve cuántos vuelos hay en la lista
-            {
-                FlightLib.FlightPlan plan = listaVuelos.GetFlightPlan(i); // Objeto plan de la clase FlightPlan del vuelo actual
-                Position pos = plan.GetCurrentPosition(); // Posición actual del avión dentro del vuelo
-
-                // Dibujamos el avión como un círculo
-                Brush brush;
-
-                if (i == 0)
-                {
-                    brush = Brushes.Red;
-                }
-                else
-                {
-                    brush = Brushes.Blue;
-                }
-                // Si el avión es el primero se dibuja rojo y si no, azul 
-                g.FillEllipse(brush, (float)pos.GetX() - tamañoAvion, (float)pos.GetY() - tamañoAvion, tamañoAvion * 2, tamañoAvion * 2);
-                // Esto del (float) no se si se puede usar aqui porque siempre usamos eso de Convert.ToInt32(pos.GetX()) para convertir a entero, pero lo dejo así por ahora porque es más directo. Si no se puede usar, lo cambiamos a Convert.ToInt32(pos.GetX()) - tamañoAvion
-                // Hacemos que la esquina izqda del rectángulo que rodea el círculo sea la coordenada X del avión, la superior dcha la Y, y le restamos tamañoAvion para que quede en el centro y establecemos el ancho y el alto del círculo
-
-            }
+            this.dist = distSeguridad;
+            this.tiemp = tiempoCiclo;
+            misPics = new PictureBox[listaVuelos.GetNum()];
         }
 
         private void BotonUnCiclo_Click(object sender, EventArgs e)
         {
-            listaVuelos.Mover(1); // tiempo = 1 ciclo
-            PanelSimulacion.Invalidate(); // redibujamos para dejar de ver las antiguas posiciones de los aviones
-            // Detectar conflictos
+            listaVuelos.Mover(this.tiemp); 
+
+            //Loop para calcular la posición
+            for (int i = 0; i < listaVuelos.GetNum(); i++)
+            {
+                FlightPlan fp = listaVuelos.GetFlightPlan(i);
+                int x = (int)fp.GetCurrentPosition().GetX();
+                int y = (int)fp.GetCurrentPosition().GetY();
+                misPics[i].Location = new Point(x - 5, y - 5); // Movemos el cuadrito existente
+            }
+
+            //Detectamos si hay conflictos
             if (listaVuelos.GetNum() >= 2)
             {
                 FlightPlan planA = listaVuelos.GetFlightPlan(0);
                 FlightPlan planB = listaVuelos.GetFlightPlan(1);
-
-                if (planA.ConflictoDistancia(planB, distanciaSeguridad))
-                    MessageBox.Show("¡Conflicto de distancia de seguridad!");
+                if (planA.ConflictoDistancia(planB, dist))
+                    MessageBox.Show("Atención: Conflicto con distancia de seguridad.");
             }
-
         }
 
-        private void PanelSimulacion_MouseClick(object sender, MouseEventArgs e)
+        private void Simulación_Load(object sender, EventArgs e)
         {
-            int clickX = e.X;
-            int clickY = e.Y;
-
             for (int i = 0; i < listaVuelos.GetNum(); i++)
             {
-                FlightLib.FlightPlan plan = listaVuelos.GetFlightPlan(i);
-                Position pos = plan.GetCurrentPosition();
-                
-                double avionX = pos.GetX();
-                double avionY = pos.GetY();
+                FlightPlan fp = listaVuelos.GetFlightPlan(i);
 
-                double distance = Math.Sqrt(Math.Pow(clickX - avionX, 2) + Math.Pow(clickY - avionY, 2));
+                PictureBox pic = new PictureBox();
+                pic.Size = new Size(10, 10);
+                pic.BackColor = Color.Red;
 
-                if (distance <= tamañoAvion) 
-                {
+                int x = (int)fp.GetCurrentPosition().GetX();
+                int y = (int)fp.GetCurrentPosition().GetY();
+                pic.Location = new Point(x - 5, y - 5);
 
-                }
+                PanelSimulacion.Controls.Add(pic);
+
+                misPics[i] = pic;
             }
         }
     }

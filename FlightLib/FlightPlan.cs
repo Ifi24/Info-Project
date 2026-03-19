@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FlightLib
 {
-    public class FlightPlan
+    public class FlightPlan //Aquí tenemos todos nuestros métodos, atributos y constructores básicos
     {
         // Atributos
 
@@ -83,15 +83,22 @@ namespace FlightLib
         public void Mover(double tiempo)
         // Mueve el vuelo a la posición correspondiente a viajar durante el tiempo que se recibe como parámetro
         {
+            //Primero miramos si hemos llegado o no (para evitar errores de cálculo):
+            if (this.HasArrived())
+            {
+                currentPosition = finalPosition;
+                return; //Sale del loop
+            }
+
             //Calculamos la distancia recorrida en el tiempo dado
-            double distancia = tiempo * this.velocidad / 60;
+            double distancia = tiempo * this.velocidad; //Velocidad en m/s y tiempo en s
 
             //Calculamos las razones trigonométricas
-            double hipotenusa = Math.Sqrt((finalPosition.GetX() - currentPosition.GetX()) * (finalPosition.GetX() - currentPosition.GetX()) + (finalPosition.GetY() - currentPosition.GetY()) * (finalPosition.GetY() - currentPosition.GetY()));
+            double hipotenusa = currentPosition.Distancia(finalPosition);
             double coseno = (finalPosition.GetX() - currentPosition.GetX()) / hipotenusa;
             double seno = (finalPosition.GetY() - currentPosition.GetY()) / hipotenusa;
 
-            //Caculamos la nueva posición del vuelo
+            //Calculamos la nueva posición del vuelo
             double x = currentPosition.GetX() + distancia * coseno;
             double y = currentPosition.GetY() + distancia * seno;
 
@@ -109,7 +116,7 @@ namespace FlightLib
         public bool HasArrived()
         {
             bool destino = false;
-            if (currentPosition == finalPosition)
+            if (currentPosition.Distancia(finalPosition) < 0.1) //Corregido por pequeños errores
                 destino = true;
             return destino;
         }

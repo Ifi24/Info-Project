@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FlightLib
 {
-    public class Position
+    public class Position //Todo lo que tiene que ver con la posición de un avión
     {
         // Atributos
         double x; // coordenada X (2D)
@@ -31,7 +31,7 @@ namespace FlightLib
         { return y; }
 
         public double Distancia(Position b)
-        // retorna la distancia entre los dos Postion
+        // retorna la distancia entre los dos Position
         {
             double resultado = Math.Sqrt((x - b.x) * (x - b.x) + (y - b.y) * (y - b.y));
             return resultado;

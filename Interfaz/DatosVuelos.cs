@@ -20,7 +20,7 @@ namespace Interfaz
 
         private void DatosVuelos_Load(object sender, EventArgs e)
         {
-
+            //borrar
         }
 
         //Botón "Guardar" datos de vuelo:

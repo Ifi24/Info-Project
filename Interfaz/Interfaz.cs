@@ -5,6 +5,8 @@ namespace Interfaz
     public partial class Principal : Form //FASE 2.1
     {
         FlightPlanList miLista = new FlightPlanList();
+        PictureBox[] misPics = new PictureBox[10]; //10 como número máximo de prueba
+        int numPics = 0;
 
         //Variables predeterminadas Fase 2.3:
         double distanciaSeguridad = 10;
@@ -23,13 +25,6 @@ namespace Interfaz
         {
             DatosVuelos VentanaVuelos = new DatosVuelos(miLista);
             VentanaVuelos.ShowDialog();
-
-            //Para representar aviones:
-            for (int i = numAviones; i < miLista.GetNum(); i++)
-            {
-                
-            }
-
         }
 
         private void introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem_Click(object sender, EventArgs e) //Fase 2.3
@@ -38,10 +33,9 @@ namespace Interfaz
             VentanaSegTiempo.ShowDialog();
 
         }
-
         private void verSimulaciónToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Simulación VentanaSimulacion = new Simulación(miLista, distanciaSeguridad);
+            Simulación VentanaSimulacion = new Simulación(miLista, distanciaSeguridad, tiempoCiclo);
             VentanaSimulacion.ShowDialog();
         }
     }

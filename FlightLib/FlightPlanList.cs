@@ -13,9 +13,10 @@ namespace FlightLib
 
         public int AddFlightPlan(FlightPlan p)
         {
-            if (number == 10)
-            { return -1; }
-            vector[number] = p;
+            if (number == 10) // Máximo
+                return -1; 
+
+            vector[number] = p; // Añadimos flightplan p
             number++;
             return 0;
         }
@@ -23,14 +24,12 @@ namespace FlightLib
         public FlightPlan GetFlightPlan(int i)
         {
             if (i < 0 || i >= number)
-            { return null; }
+                return null; 
             else
-            {
                 return vector[i];
-            }
         }
 
-        public void Mover(double tiempo)
+        public void Mover(double tiempo) //Avisa para activar movimiento
         {
             int i = 0;
             while (i < number)
