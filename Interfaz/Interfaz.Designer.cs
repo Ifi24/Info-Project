@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             menuStrip1 = new MenuStrip();
-            opcionesToolStripMenuItem = new ToolStripMenuItem();
+            Opciones = new ToolStripMenuItem();
             cargarListaDeVuelosToolStripMenuItem = new ToolStripMenuItem();
             introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem = new ToolStripMenuItem();
             verSimulaciónToolStripMenuItem = new ToolStripMenuItem();
@@ -38,51 +38,61 @@
             // 
             // menuStrip1
             // 
+            menuStrip1.BackColor = SystemColors.ControlLight;
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { opcionesToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { Opciones });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Padding = new Padding(10, 3, 0, 3);
-            menuStrip1.Size = new Size(1300, 44);
+            menuStrip1.Size = new Size(622, 36);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
-            // opcionesToolStripMenuItem
+            // Opciones
             // 
-            opcionesToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { cargarListaDeVuelosToolStripMenuItem, introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem, verSimulaciónToolStripMenuItem });
-            opcionesToolStripMenuItem.Name = "opcionesToolStripMenuItem";
-            opcionesToolStripMenuItem.Size = new Size(134, 38);
-            opcionesToolStripMenuItem.Text = "Opciones";
+            Opciones.BackColor = Color.DarkSlateGray;
+            Opciones.DropDownItems.AddRange(new ToolStripItem[] { cargarListaDeVuelosToolStripMenuItem, introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem, verSimulaciónToolStripMenuItem });
+            Opciones.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Opciones.ForeColor = SystemColors.Control;
+            Opciones.Name = "Opciones";
+            Opciones.Padding = new Padding(10, 10, 5, 0);
+            Opciones.Size = new Size(96, 32);
+            Opciones.Text = "Opciones";
             // 
             // cargarListaDeVuelosToolStripMenuItem
             // 
+            cargarListaDeVuelosToolStripMenuItem.BackColor = Color.DarkSlateGray;
+            cargarListaDeVuelosToolStripMenuItem.ForeColor = SystemColors.Control;
             cargarListaDeVuelosToolStripMenuItem.Name = "cargarListaDeVuelosToolStripMenuItem";
-            cargarListaDeVuelosToolStripMenuItem.Size = new Size(668, 44);
+            cargarListaDeVuelosToolStripMenuItem.Size = new Size(454, 26);
             cargarListaDeVuelosToolStripMenuItem.Text = "Introducir Datos de Vuelo";
             cargarListaDeVuelosToolStripMenuItem.Click += cargarListaDeVuelosToolStripMenuItem_Click;
             // 
             // introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem
             // 
+            introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem.BackColor = Color.DarkSlateGray;
+            introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem.ForeColor = SystemColors.Control;
             introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem.Name = "introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem";
-            introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem.Size = new Size(668, 44);
+            introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem.Size = new Size(454, 26);
             introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem.Text = "Introducir Distancia Seguridad y Tiempo de Ciclo";
             introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem.Click += introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem_Click;
             // 
             // verSimulaciónToolStripMenuItem
             // 
+            verSimulaciónToolStripMenuItem.BackColor = Color.DarkSlateGray;
+            verSimulaciónToolStripMenuItem.ForeColor = SystemColors.Control;
             verSimulaciónToolStripMenuItem.Name = "verSimulaciónToolStripMenuItem";
-            verSimulaciónToolStripMenuItem.Size = new Size(668, 44);
+            verSimulaciónToolStripMenuItem.Size = new Size(454, 26);
             verSimulaciónToolStripMenuItem.Text = "Ver Simulación";
             verSimulaciónToolStripMenuItem.Click += verSimulaciónToolStripMenuItem_Click;
             // 
             // Principal
             // 
-            AutoScaleDimensions = new SizeF(13F, 32F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1300, 720);
+            BackColor = SystemColors.Control;
+            ClientSize = new Size(622, 450);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
-            Margin = new Padding(5, 5, 5, 5);
             Name = "Principal";
             Text = "Principal";
             menuStrip1.ResumeLayout(false);
@@ -94,7 +104,7 @@
         #endregion
 
         private MenuStrip menuStrip1;
-        private ToolStripMenuItem opcionesToolStripMenuItem;
+        private ToolStripMenuItem Opciones;
         private ToolStripMenuItem cargarListaDeVuelosToolStripMenuItem;
         private ToolStripMenuItem introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem;
         private ToolStripMenuItem verSimulaciónToolStripMenuItem;
