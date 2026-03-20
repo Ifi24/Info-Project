@@ -27,7 +27,7 @@ namespace Interfaz
 
         private void BotonUnCiclo_Click(object sender, EventArgs e)
         {
-            listaVuelos.Mover(this.tiemp); 
+            listaVuelos.Mover(this.tiemp);
 
             //Loop para calcular la posición
             for (int i = 0; i < listaVuelos.GetNum(); i++)
@@ -65,6 +65,28 @@ namespace Interfaz
                 PanelSimulacion.Controls.Add(pic);
 
                 misPics[i] = pic;
+
+                PanelSimulacion.Invalidate(); //Ejecute el evento Paint
+            }
+        }
+
+        //FASE 6: Función que dibuja una línia entre la posición inicial i final.
+        private void PanelSimulacion_Paint(object sender, PaintEventArgs e)
+        // Utilizaremos e.Graphics ya que es la única manera de dibujar línias.
+        {
+            Graphics g = e.Graphics;
+            Pen Lapiz = new Pen(Color.Gray, 1); //Creamos lápiz grosor 1
+
+            for (int i = 0; i < listaVuelos.GetNum(); i++) //Recorremos la lista de vuelos
+            {
+                FlightPlan fp = listaVuelos.GetFlightPlan(i); //Cogemos un FlightPLan por orden
+                //Obtenemos posiciones iniciales i finales:
+                int xi = (int)fp.GetInitialPosition().GetX();
+                int yi = (int)fp.GetInitialPosition().GetY();
+                int xf = (int)fp.GetFinalPosition().GetX();
+                int yf = (int)fp.GetFinalPosition().GetY();
+
+                g.DrawLine(Lapiz,xi, yi, xf, yf); //Dibujamos
             }
         }
     }

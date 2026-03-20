@@ -51,6 +51,7 @@
             PanelSimulacion.Name = "PanelSimulacion";
             PanelSimulacion.Size = new Size(600, 400);
             PanelSimulacion.TabIndex = 0;
+            PanelSimulacion.Paint += PanelSimulacion_Paint;
             // 
             // Simulación
             // 
