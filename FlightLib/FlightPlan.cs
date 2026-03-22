@@ -140,6 +140,66 @@ namespace FlightLib
             return conflicto;
         }
 
+        //FASE 10: Método para predecir si habrá un conflicto a lo largo de toda la trayectoria
+        public bool ConflictoTrayectoria(FlightPlan otroVuelo, double distanciaSeguridad, double tiempoCiclo)
+        {
+            //Obtenemos las coordenadas de inicio de ambos vuelos
+            double x1 = this.currentPosition.GetX();
+            double y1 = this.currentPosition.GetY();
+            double x2 = otroVuelo.currentPosition.GetX();
+            double y2 = otroVuelo.currentPosition.GetY();
+
+            double distTotal1 = this.currentPosition.Distancia(this.finalPosition);
+            double distTotal2 = otroVuelo.currentPosition.Distancia(otroVuelo.finalPosition);
+
+            double coseno1 = 0;
+            double seno1 = 0;
+            double coseno2 = 0;
+            double seno2 = 0;
+
+            if (distTotal1 > 0)
+            {
+                coseno1 = (this.finalPosition.GetX() - x1) / distTotal1;
+                seno1 = (this.finalPosition.GetY() - y1) / distTotal1;
+            }
+            if (distTotal2 > 0)
+            {
+                coseno2 = (otroVuelo.finalPosition.GetX() - x2) / distTotal2;
+                seno2 = (otroVuelo.finalPosition.GetY() - y2) / distTotal2;
+            }
+            //Calculamos el tiempo maximo de cada vuelo
+            //Es un if-else resumido para evitar errores de división por 0 en caso de que la velocidad sea 0
+            double tMax1 = (this.velocidad > 0) ? (distTotal1 / this.velocidad) : 0;
+            double tMax2 = (otroVuelo.velocidad > 0) ? (distTotal2 / otroVuelo.velocidad) : 0;
+            double tiempoMax = Math.Max(tMax1, tMax2);
+
+            if (tiempoCiclo <= 0)
+            {
+                tiempoCiclo = 1.0; //Evitar errores de división por 0 o ciclos infinitos
+            }
+
+            for (double t = 0; t <= tiempoMax; t += tiempoCiclo)
+            {
+                double d1 = t * this.velocidad; //el desplaçament
+                double sx1 = (d1 > distTotal1) ? this.finalPosition.GetX() : x1 + d1 * coseno1;
+                double sy1 = (d1 > distTotal1) ? this.finalPosition.GetY() : y1 + d1 * seno1;
+
+                double d2 = t * otroVuelo.velocidad;
+                double sx2 = (d2 > distTotal2) ? otroVuelo.finalPosition.GetX() : x2 + d2 * coseno2;
+                double sy2 = (d2 > distTotal2) ? otroVuelo.finalPosition.GetY() : y2 + d2 * seno2;
+                //he acabat fent els if-else resumits per mandra jajaja
+
+                double distActual = Math.Sqrt(Math.Pow(sx1 - sx2, 2) + Math.Pow(sy1 - sy2, 2));
+
+                if (distActual < distanciaSeguridad)
+                {
+                    return true; // Conflicto detectado
+                }
+            }
+            return false; // No se detectó ningún conflicto a lo largo de la trayectoria
+        }
+
+
         public void EscribeConsola()
         // escribe en consola los datos del plan de vuelo
         {

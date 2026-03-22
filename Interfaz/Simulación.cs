@@ -32,6 +32,8 @@ namespace Interfaz
         {
             listaVuelos.Mover(this.tiemp);
 
+            labelAlarma.Visible = false;
+
             //Loop para calcular la posición
             for (int i = 0; i < listaVuelos.GetNum(); i++)
             {
@@ -112,10 +114,7 @@ namespace Interfaz
                 }
             }
             //Por lo que he ido aprendiendo, lo que he hecho antes es esto de abajo a prueba de errores
-            //PictureBox pic = (PictureBox)sender; //es correcto hacerlo de esta manera? o tengo que hacer sender as PictureBox?
-            //FlightPlan fp = (FlightPlan)pic.Tag;
-            //InfoAvion info = new InfoAvion(fp);
-            //info.ShowDialog();
+            
 
         }
 
@@ -127,6 +126,8 @@ namespace Interfaz
             Graphics g = e.Graphics;
             Pen Lapiz = new Pen(Color.Gray, 1); //Creamos lápiz grosor 1
             Lapiz.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
+            //FASE 7: Parte de la función que dibuja una elipse de distancia de seguridad alrededor del avión seleccionado
+            Pen Rotulador = new Pen(Color.Blue, 2);
 
             for (int i = 0; i < listaVuelos.GetNum(); i++) //Recorremos la lista de vuelos
             {
@@ -138,25 +139,17 @@ namespace Interfaz
                 int yf = (int)fp.GetFinalPosition().GetY();
 
                 g.DrawLine(Lapiz, xi, yi, xf, yf); //Dibujamos
-            }
-        }
 
-        //FASE 7: Función que dibuja una elipse de distancia de seguridad alrededor del avión seleccionado
-        private void PanelSimulacion_DibujarElipse(object sender, PaintEventArgs e)
-        {
-            Graphics g = e.Graphics;
-            Pen Rotulador = new Pen(Color.Blue, 3);
-
-            for (int i = 0; i < listaVuelos.GetNum(); i++)
-            {
-                FlightPlan fp = listaVuelos.GetFlightPlan(i);
+                //FASE 7: Parte de la función que dibuja una elipse de distancia de seguridad alrededor del avión seleccionado
                 double x = fp.GetCurrentPosition().GetX();
                 double y = fp.GetCurrentPosition().GetY();
                 double radio = this.dist;
                 g.DrawEllipse(Rotulador, (float)(x - radio), (float)(y - radio), (float)(radio * 2), (float)(radio * 2));
+                //Quiero mejorar como se ve la elipse y que a medida que avance se borre la elipse anterior, pero lo arreglo más tarde, que ahora quiero avanzar con las demás fases.
             }
         }
 
+        
         //FASE 8: Botón de ciclo automático:
         private void Automático_Click(object sender, EventArgs e)
         {
@@ -193,6 +186,7 @@ namespace Interfaz
             }
         }
 
+        //FASE 10 2a Parte: Botón para predecir conflictos futuros entre los vuelos
         private void boton_PredecirConflictos_Click(object sender, EventArgs e)
         {
             if (listaVuelos.GetNum() >= 2)
@@ -206,7 +200,7 @@ namespace Interfaz
                     {
                         FlightPlan fp1 = listaVuelos.GetFlightPlan(i);
                         FlightPlan fp2 = listaVuelos.GetFlightPlan(j);
-                        if (fp1.ConflictoDistancia(fp2, this.dist))
+                        if (fp1.ConflictoTrayectoria(fp2, this.dist, this.tiemp))
                         {
                             hayConflictos = true;
                             mensajeConflictos += $"- {fp1.GetId()} y {fp2.GetId()}\n";

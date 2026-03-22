@@ -39,11 +39,11 @@
             Automático = new Button();
             TimerSimulación = new System.Windows.Forms.Timer(components);
             groupBox1 = new GroupBox();
+            boton_PredecirConflictos = new Button();
+            label7 = new Label();
             button2 = new Button();
             label6 = new Label();
             label5 = new Label();
-            label7 = new Label();
-            boton_PredecirConflictos = new Button();
             PanelSimulacion.SuspendLayout();
             groupBox1.SuspendLayout();
             SuspendLayout();
@@ -81,9 +81,8 @@
             labelAlarma.ForeColor = Color.LightCoral;
             labelAlarma.Location = new Point(302, 14);
             labelAlarma.Name = "labelAlarma";
-            labelAlarma.Size = new Size(653, 45);
+            labelAlarma.Size = new Size(0, 45);
             labelAlarma.TabIndex = 0;
-            labelAlarma.Text = "ALARMA: ¡CONFLICTO DE SEPARACIÓN!";
             labelAlarma.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label1
@@ -172,6 +171,28 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Panel de Simulación";
             // 
+            // boton_PredecirConflictos
+            // 
+            boton_PredecirConflictos.Font = new Font("Tahoma", 9F);
+            boton_PredecirConflictos.ForeColor = SystemColors.ActiveCaptionText;
+            boton_PredecirConflictos.Location = new Point(42, 356);
+            boton_PredecirConflictos.Name = "boton_PredecirConflictos";
+            boton_PredecirConflictos.Size = new Size(211, 46);
+            boton_PredecirConflictos.TabIndex = 11;
+            boton_PredecirConflictos.Text = "Predecir";
+            boton_PredecirConflictos.UseVisualStyleBackColor = true;
+            boton_PredecirConflictos.Click += boton_PredecirConflictos_Click;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label7.Location = new Point(10, 324);
+            label7.Name = "label7";
+            label7.Size = new Size(213, 29);
+            label7.TabIndex = 10;
+            label7.Text = "Predecir conflictos:";
+            // 
             // button2
             // 
             button2.Font = new Font("Segoe UI Historic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -204,28 +225,6 @@
             label5.Size = new Size(222, 29);
             label5.TabIndex = 7;
             label5.Text = "Avance automático:";
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label7.Location = new Point(10, 324);
-            label7.Name = "label7";
-            label7.Size = new Size(213, 29);
-            label7.TabIndex = 10;
-            label7.Text = "Predecir conflictos:";
-            // 
-            // boton_PredecirConflictos
-            // 
-            boton_PredecirConflictos.Font = new Font("Tahoma", 9F);
-            boton_PredecirConflictos.ForeColor = SystemColors.ActiveCaptionText;
-            boton_PredecirConflictos.Location = new Point(42, 356);
-            boton_PredecirConflictos.Name = "boton_PredecirConflictos";
-            boton_PredecirConflictos.Size = new Size(211, 46);
-            boton_PredecirConflictos.TabIndex = 11;
-            boton_PredecirConflictos.Text = "Predecir";
-            boton_PredecirConflictos.UseVisualStyleBackColor = true;
-            boton_PredecirConflictos.Click += boton_PredecirConflictos_Click;
             // 
             // Simulación
             // 
