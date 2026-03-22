@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FlightLib;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,14 +11,18 @@ namespace Interfaz
 {
     public partial class InfoAvion : Form
     {
-        public InfoAvion()
+        public InfoAvion(FlightLib.FlightPlan vueloSeleccionado)
         {
             InitializeComponent();
-        }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
+            Position posicion = vueloSeleccionado.GetCurrentPosition();
+            labelTitulo.Text = "Información del avión " + vueloSeleccionado.GetId();
+            labelID.Text = "ID: " + vueloSeleccionado.GetId();
+            labelX.Text = "Posición X: " + posicion.GetX();
+            labelY.Text = "Posición Y: " + posicion.GetY();
+            labelVelocidad.Text = "Velocidad: " + vueloSeleccionado.GetVelocidad();
         }
+        
+        
     }
 }

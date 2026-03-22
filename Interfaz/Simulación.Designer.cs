@@ -46,10 +46,9 @@
             // 
             button1.Font = new Font("Segoe UI Historic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             button1.ForeColor = SystemColors.ActiveCaptionText;
-            button1.Location = new Point(26, 34);
-            button1.Margin = new Padding(2);
+            button1.Location = new Point(42, 54);
             button1.Name = "button1";
-            button1.Size = new Size(130, 29);
+            button1.Size = new Size(211, 46);
             button1.TabIndex = 1;
             button1.Text = "Avanzar Ciclo";
             button1.UseVisualStyleBackColor = true;
@@ -59,9 +58,10 @@
             // 
             PanelSimulacion.BackColor = Color.Black;
             PanelSimulacion.BorderStyle = BorderStyle.FixedSingle;
-            PanelSimulacion.Location = new Point(199, 12);
+            PanelSimulacion.Location = new Point(323, 19);
+            PanelSimulacion.Margin = new Padding(5, 5, 5, 5);
             PanelSimulacion.Name = "PanelSimulacion";
-            PanelSimulacion.Size = new Size(600, 400);
+            PanelSimulacion.Size = new Size(974, 639);
             PanelSimulacion.TabIndex = 0;
             PanelSimulacion.Paint += PanelSimulacion_Paint;
             // 
@@ -70,9 +70,10 @@
             label1.AutoSize = true;
             label1.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = SystemColors.Control;
-            label1.Location = new Point(199, 415);
+            label1.Location = new Point(323, 664);
+            label1.Margin = new Padding(5, 0, 5, 0);
             label1.Name = "label1";
-            label1.Size = new Size(18, 18);
+            label1.Size = new Size(28, 29);
             label1.TabIndex = 2;
             label1.Text = "0";
             // 
@@ -81,9 +82,10 @@
             label2.AutoSize = true;
             label2.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.ForeColor = SystemColors.Control;
-            label2.Location = new Point(805, 12);
+            label2.Location = new Point(1308, 19);
+            label2.Margin = new Padding(5, 0, 5, 0);
             label2.Name = "label2";
-            label2.Size = new Size(18, 18);
+            label2.Size = new Size(28, 29);
             label2.TabIndex = 3;
             label2.Text = "0";
             // 
@@ -92,9 +94,10 @@
             label3.AutoSize = true;
             label3.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = SystemColors.Control;
-            label3.Location = new Point(805, 392);
+            label3.Location = new Point(1308, 627);
+            label3.Margin = new Padding(5, 0, 5, 0);
             label3.Name = "label3";
-            label3.Size = new Size(38, 18);
+            label3.Size = new Size(58, 29);
             label3.TabIndex = 4;
             label3.Text = "400";
             // 
@@ -103,9 +106,10 @@
             label4.AutoSize = true;
             label4.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label4.ForeColor = SystemColors.Control;
-            label4.Location = new Point(766, 415);
+            label4.Location = new Point(1245, 664);
+            label4.Margin = new Padding(5, 0, 5, 0);
             label4.Name = "label4";
-            label4.Size = new Size(38, 18);
+            label4.Size = new Size(58, 29);
             label4.TabIndex = 0;
             label4.Text = "600";
             // 
@@ -113,9 +117,10 @@
             // 
             Automático.Font = new Font("Segoe UI Historic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Automático.ForeColor = SystemColors.ActiveCaptionText;
-            Automático.Location = new Point(26, 102);
+            Automático.Location = new Point(42, 163);
+            Automático.Margin = new Padding(5, 5, 5, 5);
             Automático.Name = "Automático";
-            Automático.Size = new Size(130, 29);
+            Automático.Size = new Size(211, 46);
             Automático.TabIndex = 6;
             Automático.Text = "Iniciar";
             Automático.UseVisualStyleBackColor = true;
@@ -133,9 +138,11 @@
             groupBox1.Controls.Add(Automático);
             groupBox1.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox1.ForeColor = SystemColors.Control;
-            groupBox1.Location = new Point(12, 12);
+            groupBox1.Location = new Point(20, 19);
+            groupBox1.Margin = new Padding(5, 5, 5, 5);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(181, 419);
+            groupBox1.Padding = new Padding(5, 5, 5, 5);
+            groupBox1.Size = new Size(294, 670);
             groupBox1.TabIndex = 7;
             groupBox1.TabStop = false;
             groupBox1.Text = "Panel de Simulación";
@@ -144,24 +151,26 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.Location = new Point(6, 81);
+            label5.Location = new Point(10, 130);
+            label5.Margin = new Padding(5, 0, 5, 0);
             label5.Name = "label5";
-            label5.Size = new Size(138, 18);
+            label5.Size = new Size(222, 29);
             label5.TabIndex = 7;
             label5.Text = "Avance automático:";
             // 
             // Simulación
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaptionText;
-            ClientSize = new Size(850, 443);
+            ClientSize = new Size(1381, 709);
             Controls.Add(groupBox1);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(PanelSimulacion);
+            Margin = new Padding(5, 5, 5, 5);
             Name = "Simulación";
             Text = "Simulación";
             Load += Simulación_Load;

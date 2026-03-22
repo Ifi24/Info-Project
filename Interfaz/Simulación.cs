@@ -70,6 +70,10 @@ namespace Interfaz
                 int y = (int)fp.GetCurrentPosition().GetY();
                 pic.Location = new Point(x - 5, y - 5);
 
+                //Para la fase 5
+                pic.Tag = fp;
+                pic.Click += new EventHandler(Avion_Click);
+
                 PanelSimulacion.Controls.Add(pic);
 
                 misPics[i] = pic;
@@ -77,6 +81,17 @@ namespace Interfaz
                 PanelSimulacion.Invalidate(); //Ejecute el evento Paint
             }
         }
+
+        //FASE 5: Creamos el evento click para mostrar la información del vuelo
+        private void Avion_Click(object sender, EventArgs e)
+        {
+            PictureBox pic = (PictureBox)sender; //es correcto hacerlo de esta manera? o tengo que hacer sender as PictureBox?
+            FlightPlan fp = (FlightPlan)pic.Tag;
+            InfoAvion info = new InfoAvion(fp);
+            info.ShowDialog();
+
+        }
+
 
         //FASE 6: Función que dibuja una línia entre la posición inicial i final:
         private void PanelSimulacion_Paint(object sender, PaintEventArgs e)
@@ -120,5 +135,7 @@ namespace Interfaz
         {
             MoverCiclo();
         }
+
+        
     }
 }
