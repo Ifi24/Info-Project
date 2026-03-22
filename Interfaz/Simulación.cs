@@ -141,6 +141,22 @@ namespace Interfaz
             }
         }
 
+        //FASE 7: Función que dibuja una elipse de distancia de seguridad alrededor del avión seleccionado
+        private void PanelSimulacion_DibujarElipse(object sender, PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            Pen Rotulador = new Pen(Color.Blue, 3);
+
+            for (int i = 0; i < listaVuelos.GetNum(); i++)
+            {
+                FlightPlan fp = listaVuelos.GetFlightPlan(i);
+                double x = fp.GetCurrentPosition().GetX();
+                double y = fp.GetCurrentPosition().GetY();
+                double radio = this.dist;
+                g.DrawEllipse(Rotulador, (float)(x - radio), (float)(y - radio), (float)(radio * 2), (float)(radio * 2));
+            }
+        }
+
         //FASE 8: Botón de ciclo automático:
         private void Automático_Click(object sender, EventArgs e)
         {
