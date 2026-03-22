@@ -39,6 +39,8 @@
             TimerSimulación = new System.Windows.Forms.Timer(components);
             groupBox1 = new GroupBox();
             label5 = new Label();
+            label6 = new Label();
+            button2 = new Button();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -59,7 +61,7 @@
             PanelSimulacion.BackColor = Color.Black;
             PanelSimulacion.BorderStyle = BorderStyle.FixedSingle;
             PanelSimulacion.Location = new Point(323, 19);
-            PanelSimulacion.Margin = new Padding(5, 5, 5, 5);
+            PanelSimulacion.Margin = new Padding(5);
             PanelSimulacion.Name = "PanelSimulacion";
             PanelSimulacion.Size = new Size(974, 639);
             PanelSimulacion.TabIndex = 0;
@@ -118,7 +120,7 @@
             Automático.Font = new Font("Segoe UI Historic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Automático.ForeColor = SystemColors.ActiveCaptionText;
             Automático.Location = new Point(42, 163);
-            Automático.Margin = new Padding(5, 5, 5, 5);
+            Automático.Margin = new Padding(5);
             Automático.Name = "Automático";
             Automático.Size = new Size(211, 46);
             Automático.TabIndex = 6;
@@ -133,15 +135,17 @@
             // groupBox1
             // 
             groupBox1.BackColor = Color.DarkSlateGray;
+            groupBox1.Controls.Add(button2);
+            groupBox1.Controls.Add(label6);
             groupBox1.Controls.Add(label5);
             groupBox1.Controls.Add(button1);
             groupBox1.Controls.Add(Automático);
             groupBox1.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox1.ForeColor = SystemColors.Control;
             groupBox1.Location = new Point(20, 19);
-            groupBox1.Margin = new Padding(5, 5, 5, 5);
+            groupBox1.Margin = new Padding(5);
             groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new Padding(5, 5, 5, 5);
+            groupBox1.Padding = new Padding(5);
             groupBox1.Size = new Size(294, 670);
             groupBox1.TabIndex = 7;
             groupBox1.TabStop = false;
@@ -158,6 +162,28 @@
             label5.TabIndex = 7;
             label5.Text = "Avance automático:";
             // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label6.Location = new Point(10, 227);
+            label6.Name = "label6";
+            label6.Size = new Size(272, 29);
+            label6.TabIndex = 8;
+            label6.Text = "Mostrar todos los datos:";
+            // 
+            // button2
+            // 
+            button2.Font = new Font("Segoe UI Historic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button2.ForeColor = SystemColors.ActiveCaptionText;
+            button2.Location = new Point(42, 259);
+            button2.Name = "button2";
+            button2.Size = new Size(211, 46);
+            button2.TabIndex = 9;
+            button2.Text = "Mostrar";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += boton_MostarDatos;
+            // 
             // Simulación
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
@@ -170,7 +196,7 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(PanelSimulacion);
-            Margin = new Padding(5, 5, 5, 5);
+            Margin = new Padding(5);
             Name = "Simulación";
             Text = "Simulación";
             Load += Simulación_Load;
@@ -191,5 +217,7 @@
         private System.Windows.Forms.Timer TimerSimulación;
         private GroupBox groupBox1;
         private Label label5;
+        private Label label6;
+        private Button button2;
     }
 }

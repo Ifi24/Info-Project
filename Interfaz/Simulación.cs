@@ -85,10 +85,24 @@ namespace Interfaz
         //FASE 5: Creamos el evento click para mostrar la información del vuelo
         private void Avion_Click(object sender, EventArgs e)
         {
-            PictureBox pic = (PictureBox)sender; //es correcto hacerlo de esta manera? o tengo que hacer sender as PictureBox?
-            FlightPlan fp = (FlightPlan)pic.Tag;
-            InfoAvion info = new InfoAvion(fp);
-            info.ShowDialog();
+            if (sender is PictureBox pic) //Comprova si el sender es un PictureBox i l'assigna a la variable pic
+            {
+                if (pic.Tag is FlightPlan fp) //Comprova si el Tag del PictureBox es un FlightPlan i l'assigna a la variable fp
+                {
+                    InfoAvion info = new InfoAvion(fp);
+                    info.ShowDialog();
+                }
+                else
+                {
+                    //No creo que ocurra nunca, pero por si acaso, que muestre un mensaje de error.
+                    MessageBox.Show("Error: Este avión no tiene información de vuelo asociada.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            //Por lo que he ido aprendiendo, lo que he hecho antes es esto de abajo a prueba de errores
+            //PictureBox pic = (PictureBox)sender; //es correcto hacerlo de esta manera? o tengo que hacer sender as PictureBox?
+            //FlightPlan fp = (FlightPlan)pic.Tag;
+            //InfoAvion info = new InfoAvion(fp);
+            //info.ShowDialog();
 
         }
 
@@ -136,6 +150,18 @@ namespace Interfaz
             MoverCiclo();
         }
 
-        
+        //FASE 9: Botón para mostrar todos los datos de los vuelos
+        private void boton_MostarDatos(object sender, EventArgs e)
+        {
+            if (listaVuelos.GetNum() <= 2)
+            {
+                TablaVuelos ventanaTabla = new TablaVuelos(listaVuelos);
+                ventanaTabla.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("No hay sufiecientes vuelos para mostrar en la tabla. Se necesitan 2 o menos vuelos.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
     }
 }
