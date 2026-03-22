@@ -31,6 +31,7 @@
             components = new System.ComponentModel.Container();
             button1 = new Button();
             PanelSimulacion = new Panel();
+            labelAlarma = new Label();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
@@ -38,9 +39,12 @@
             Automático = new Button();
             TimerSimulación = new System.Windows.Forms.Timer(components);
             groupBox1 = new GroupBox();
-            label5 = new Label();
-            label6 = new Label();
             button2 = new Button();
+            label6 = new Label();
+            label5 = new Label();
+            label7 = new Label();
+            boton_PredecirConflictos = new Button();
+            PanelSimulacion.SuspendLayout();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -60,12 +64,27 @@
             // 
             PanelSimulacion.BackColor = Color.Black;
             PanelSimulacion.BorderStyle = BorderStyle.FixedSingle;
+            PanelSimulacion.Controls.Add(labelAlarma);
             PanelSimulacion.Location = new Point(323, 19);
             PanelSimulacion.Margin = new Padding(5);
             PanelSimulacion.Name = "PanelSimulacion";
             PanelSimulacion.Size = new Size(974, 639);
             PanelSimulacion.TabIndex = 0;
             PanelSimulacion.Paint += PanelSimulacion_Paint;
+            // 
+            // labelAlarma
+            // 
+            labelAlarma.AutoSize = true;
+            labelAlarma.BackColor = Color.Transparent;
+            labelAlarma.Enabled = false;
+            labelAlarma.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            labelAlarma.ForeColor = Color.LightCoral;
+            labelAlarma.Location = new Point(302, 14);
+            labelAlarma.Name = "labelAlarma";
+            labelAlarma.Size = new Size(653, 45);
+            labelAlarma.TabIndex = 0;
+            labelAlarma.Text = "ALARMA: ¡CONFLICTO DE SEPARACIÓN!";
+            labelAlarma.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label1
             // 
@@ -135,6 +154,8 @@
             // groupBox1
             // 
             groupBox1.BackColor = Color.DarkSlateGray;
+            groupBox1.Controls.Add(boton_PredecirConflictos);
+            groupBox1.Controls.Add(label7);
             groupBox1.Controls.Add(button2);
             groupBox1.Controls.Add(label6);
             groupBox1.Controls.Add(label5);
@@ -151,27 +172,6 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Panel de Simulación";
             // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.Location = new Point(10, 130);
-            label5.Margin = new Padding(5, 0, 5, 0);
-            label5.Name = "label5";
-            label5.Size = new Size(222, 29);
-            label5.TabIndex = 7;
-            label5.Text = "Avance automático:";
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label6.Location = new Point(10, 227);
-            label6.Name = "label6";
-            label6.Size = new Size(272, 29);
-            label6.TabIndex = 8;
-            label6.Text = "Mostrar todos los datos:";
-            // 
             // button2
             // 
             button2.Font = new Font("Segoe UI Historic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -183,6 +183,49 @@
             button2.Text = "Mostrar";
             button2.UseVisualStyleBackColor = true;
             button2.Click += boton_MostarDatos;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label6.Location = new Point(10, 227);
+            label6.Name = "label6";
+            label6.Size = new Size(272, 29);
+            label6.TabIndex = 8;
+            label6.Text = "Mostrar todos los datos:";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label5.Location = new Point(10, 130);
+            label5.Margin = new Padding(5, 0, 5, 0);
+            label5.Name = "label5";
+            label5.Size = new Size(222, 29);
+            label5.TabIndex = 7;
+            label5.Text = "Avance automático:";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label7.Location = new Point(10, 324);
+            label7.Name = "label7";
+            label7.Size = new Size(213, 29);
+            label7.TabIndex = 10;
+            label7.Text = "Predecir conflictos:";
+            // 
+            // boton_PredecirConflictos
+            // 
+            boton_PredecirConflictos.Font = new Font("Tahoma", 9F);
+            boton_PredecirConflictos.ForeColor = SystemColors.ActiveCaptionText;
+            boton_PredecirConflictos.Location = new Point(42, 356);
+            boton_PredecirConflictos.Name = "boton_PredecirConflictos";
+            boton_PredecirConflictos.Size = new Size(211, 46);
+            boton_PredecirConflictos.TabIndex = 11;
+            boton_PredecirConflictos.Text = "Predecir";
+            boton_PredecirConflictos.UseVisualStyleBackColor = true;
+            boton_PredecirConflictos.Click += boton_PredecirConflictos_Click;
             // 
             // Simulación
             // 
@@ -200,6 +243,8 @@
             Name = "Simulación";
             Text = "Simulación";
             Load += Simulación_Load;
+            PanelSimulacion.ResumeLayout(false);
+            PanelSimulacion.PerformLayout();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ResumeLayout(false);
@@ -219,5 +264,8 @@
         private Label label5;
         private Label label6;
         private Button button2;
+        private Label labelAlarma;
+        private Button boton_PredecirConflictos;
+        private Label label7;
     }
 }

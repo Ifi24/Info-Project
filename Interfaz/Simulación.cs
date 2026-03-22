@@ -39,15 +39,28 @@ namespace Interfaz
                 int x = (int)fp.GetCurrentPosition().GetX();
                 int y = (int)fp.GetCurrentPosition().GetY();
                 misPics[i].Location = new Point(x - 5, y - 5); // Movemos el cuadrito existente
+
+                //Reseteo el color por si antes estaba en amarillo por conflicto y ya no lo están.
+                misPics[i].BackColor = Color.Red;
             }
 
             //Detectamos si hay conflictos
-            if (listaVuelos.GetNum() >= 2)
+            //FASE 10 1a Parte: Mejoro lo que había antes y lo hago menos molesto en caso de conflicto. Solo se muestra un label y los aviones cambian de color.
+            for (int i = 0; i < listaVuelos.GetNum(); i++)
             {
-                FlightPlan planA = listaVuelos.GetFlightPlan(0);
-                FlightPlan planB = listaVuelos.GetFlightPlan(1);
-                if (planA.ConflictoDistancia(planB, dist))
-                    MessageBox.Show("Atención: Conflicto con distancia de seguridad.");
+                for (int j = i + 1; j < listaVuelos.GetNum(); j++) //Lo hago asi pensando en multiples vuelos a futuro
+                {
+                    FlightPlan fp1 = listaVuelos.GetFlightPlan(i);
+                    FlightPlan fp2 = listaVuelos.GetFlightPlan(j);
+                    if (fp1.ConflictoDistancia(fp2, this.dist))
+                    {
+                        //Si hay conflicto, cambiamos el color de los aviones a amarillo y mostramos el label.
+                        misPics[i].BackColor = Color.Yellow;
+                        misPics[j].BackColor = Color.Yellow;
+                        labelAlarma.Text = $"¡Conflicto entre {fp1.GetId()} y {fp2.GetId()}!";
+                        labelAlarma.Visible = true;
+                    }
+                }
             }
         }
 
@@ -161,6 +174,42 @@ namespace Interfaz
             else
             {
                 MessageBox.Show("No hay sufiecientes vuelos para mostrar en la tabla. Se necesitan 2 o menos vuelos.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void boton_PredecirConflictos_Click(object sender, EventArgs e)
+        {
+            if (listaVuelos.GetNum() >= 2)
+            {
+                bool hayConflictos = false;
+                string mensajeConflictos = "¡CONFLICTO DE SEPARACIÓN!\nConflictos futuros detectados entre los siguientes vuelos:\n";
+                
+                for (int i = 0; i < listaVuelos.GetNum(); i++)
+                {
+                    for (int j = i + 1; j < listaVuelos.GetNum(); j++)
+                    {
+                        FlightPlan fp1 = listaVuelos.GetFlightPlan(i);
+                        FlightPlan fp2 = listaVuelos.GetFlightPlan(j);
+                        if (fp1.ConflictoDistancia(fp2, this.dist))
+                        {
+                            hayConflictos = true;
+                            mensajeConflictos += $"- {fp1.GetId()} y {fp2.GetId()}\n";
+                        }
+
+                    }
+                }
+                if (hayConflictos)
+                {
+                    MessageBox.Show(mensajeConflictos, "Predicción de Conflictos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    MessageBox.Show("No se han detectado conflictos futuros entre los vuelos.\nEs una ruta segura.", "Predicción de Conflictos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Se necessitan al menos 2 vuelos para predecir conflictos.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }
