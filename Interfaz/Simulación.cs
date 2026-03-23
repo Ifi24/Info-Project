@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Interfaz
 {
@@ -114,7 +115,7 @@ namespace Interfaz
                 }
             }
             //Por lo que he ido aprendiendo, lo que he hecho antes es esto de abajo a prueba de errores
-            
+
 
         }
 
@@ -149,7 +150,7 @@ namespace Interfaz
             }
         }
 
-        
+
         //FASE 8: Botón de ciclo automático:
         private void Automático_Click(object sender, EventArgs e)
         {
@@ -161,7 +162,38 @@ namespace Interfaz
             }
             else
             {
-                //Y si está funcionando, lo paramos.
+                // Añadimos aquí lo de preguntarle al usuario si quiere resolver conflictos (FASE 11)
+                // Recorremos todos contra todos para no dejar ningún conflicto sin revisar
+                for (int i = 0; i < listaVuelos.GetNum(); i++)
+                {
+                    for (int j = i + 1; j < listaVuelos.GetNum(); j++)
+                    {
+                        FlightPlan v1 = listaVuelos.GetFlightPlan(i);
+                        FlightPlan v2 = listaVuelos.GetFlightPlan(j);
+
+                        if (v1.ConflictoTrayectoria(v2, this.dist, 1.0)) // Con ConflictoTrayectoria vemos si hay algún conflicto a resolver
+                        {
+                            DialogResult respuesta = MessageBox.Show(
+                                "¡Conflicto futuro detectado entre " + v1.GetId() + " y " + v2.GetId() + " ¿Desea resolverlo?",
+                                "Resolución Automática",
+                                MessageBoxButtons.YesNo,
+                                MessageBoxIcon.Warning);
+
+                            if (respuesta == DialogResult.Yes)
+                            {
+                                // Intentamos resolverlo cambiando la velocidad de uno de ellos (v2)
+                                bool logrado = v2.ResolverConflicto(v1, this.dist, 1.0);
+
+                                if (logrado)
+                                    MessageBox.Show("Resuelto: " + v2.GetId() + " ha cambiado su velocidad.");
+                                else
+                                    MessageBox.Show("No se pudo encontrar solución para " + v1.GetId() + " y " + v2.GetId());
+                            }
+                        }
+                    }
+                }
+
+                // Una vez revisados todos, arrancamos
                 TimerSimulación.Start();
                 Automático.Text = "Detener";
             }
@@ -193,7 +225,7 @@ namespace Interfaz
             {
                 bool hayConflictos = false;
                 string mensajeConflictos = "¡CONFLICTO DE SEPARACIÓN!\nConflictos futuros detectados entre los siguientes vuelos:\n";
-                
+
                 for (int i = 0; i < listaVuelos.GetNum(); i++)
                 {
                     for (int j = i + 1; j < listaVuelos.GetNum(); j++)

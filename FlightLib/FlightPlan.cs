@@ -199,6 +199,41 @@ namespace FlightLib
             return false; // No se detectó ningún conflicto a lo largo de la trayectoria
         }
 
+        // FASE 11: Método para intentar cambiar la velocidad (bajándola) y evitar chocar con otro vuelo (otroVuelo)
+        public bool ResolverConflicto(FlightPlan otroVuelo, double distanciaSeguridad, double tiempoCiclo)
+        {
+            double velocidadOriginal = this.velocidad; // La velocidad de nuestro avión
+            double nuevaVelocidad = velocidadOriginal; // La velocidad que probaremos para arreglar el problema (la igualamos a la original porque empezaremos a probar desde esta velocidad) 
+
+            // Estrategia: Intentar frenar un poco (hasta el 50% de la velocidad original)
+            while (nuevaVelocidad > velocidadOriginal * 0.5) // Sigue intentándolo mientras la nueva velocidad no sea menor a la mitad de la original (hay que poner un límite porque un avión no puede pararse por seguridad pero no sé si 50% está bien o qué)).
+            {
+                nuevaVelocidad -= 0.5; // Bajamos la velocidad de 0.5 en 0.5 unidades (no sé si 0.5 está bien o es poco/mucho)
+                this.velocidad = nuevaVelocidad;
+
+                // Probamos si con esta velocidad ya NO hay conflicto en el futuro
+                if (!this.ConflictoTrayectoria(otroVuelo, distanciaSeguridad, tiempoCiclo))
+                {
+                    return true; // Hemos encontrado una velocidad segura
+                }
+            }
+            // Estrategia alternativa: Si frenar no funcionó, intentamos acelerar (hasta un 50% más)
+            nuevaVelocidad = velocidadOriginal;
+            while (nuevaVelocidad < velocidadOriginal * 1.5)
+            {
+                nuevaVelocidad += 0.5;
+                this.velocidad = nuevaVelocidad;
+
+                if (!this.ConflictoTrayectoria(otroVuelo, distanciaSeguridad, tiempoCiclo))
+                {
+                    return true;
+                }
+            }
+
+            // Si ninguna de las dos funcionó, dejamos la velocidad como estaba (No sé si hay que hacer algo más aquí)
+            this.velocidad = velocidadOriginal;
+            return false;
+        }
 
         public void EscribeConsola()
         // escribe en consola los datos del plan de vuelo
