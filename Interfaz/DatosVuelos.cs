@@ -66,5 +66,25 @@ namespace Interfaz
                 MessageBox.Show("Error: Algo no ha salido bien." + ex.Message);
             }
         }
+
+        //Botón para que se autorellenen los datos
+        private void btnAutorellenar_Click(object sender, EventArgs e)
+        {
+            //VUELO 1
+            TextBoxID1.Text = "A1";
+            TextBoxV1.Text = "5";
+            TextBoxXI1.Text = "0";
+            TextBoxYI1.Text = "0";
+            TextBoxXF1.Text = "100";
+            TextBoxYF1.Text = "100";
+
+            //VUELO 2
+            TextBoxID2.Text = "B2";
+            TextBoxV2.Text = "4";
+            TextBoxXI2.Text = "100";
+            TextBoxYI2.Text = "0";
+            TextBoxXF2.Text = "0";
+            TextBoxYF2.Text = "100";
+        }
     }
 }

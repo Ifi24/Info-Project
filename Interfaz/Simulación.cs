@@ -17,6 +17,7 @@ namespace Interfaz
         double dist;
         double tiemp;
         PictureBox[] misPics;
+        Simulación sim;
         public Simulación(FlightLib.FlightPlanList miLista, double distSeguridad, double tiempoCiclo)
         {
             InitializeComponent();
@@ -93,6 +94,13 @@ namespace Interfaz
                 PanelSimulacion.Controls.Add(pic);
 
                 misPics[i] = pic;
+
+                //Etiquetas para los aviones
+                Label lbl = new Label();
+                lbl.Text = fp.GetId();
+                lbl.AutoSize = true;
+                lbl.Location = new Point(x, y - 15);
+                PanelSimulacion.Controls.Add(lbl);
 
                 PanelSimulacion.Invalidate(); //Ejecute el evento Paint
             }
@@ -209,7 +217,7 @@ namespace Interfaz
         {
             if (listaVuelos.GetNum() <= 2)
             {
-                TablaVuelos ventanaTabla = new TablaVuelos(listaVuelos);
+                TablaVuelos ventanaTabla = new TablaVuelos(listaVuelos, sim);
                 ventanaTabla.ShowDialog();
             }
             else
@@ -277,6 +285,30 @@ namespace Interfaz
             }
 
             TimerSimulación.Start(); //Vuelve a reiniciar el avión
+        }
+
+        private void btnResolver_Click(object sender, EventArgs e)
+        {
+            // 1. Parar simulación
+            TimerSimulación.Stop();
+            for (int i = 0; i < listaVuelos.GetNum(); i++) //Reiniciar todos los vuelos
+            {
+                FlightPlan fp = listaVuelos.GetFlightPlan(i);
+                fp.Restart();
+            }
+            for (int i = 0; i < listaVuelos.GetNum(); i++) //Iconos
+            {
+                FlightPlan fp = listaVuelos.GetFlightPlan(i);
+
+                int x = (int)fp.GetCurrentPosition().GetX();
+                int y = (int)fp.GetCurrentPosition().GetY();
+
+                misPics[i].Location = new Point(x - 5, y - 5);
+                misPics[i].BackColor = Color.Red;
+            }
+            TimerSimulación.Start(); //Renaudar simulación
+
+            MessageBox.Show("Simulación reiniciada correctamente.");
         }
     }
 }
