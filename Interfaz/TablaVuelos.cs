@@ -12,13 +12,15 @@ namespace Interfaz
     public partial class TablaVuelos : Form
     {
         FlightLib.FlightPlanList listaVuelos;
+        Simulación simulacion;
         int primerVuelo = -1;
-        public TablaVuelos(FlightLib.FlightPlanList miLista)
+        public TablaVuelos(FlightLib.FlightPlanList miLista, Simulación sim)
         {
             InitializeComponent();
             this.listaVuelos = miLista;
+            this.simulacion = sim;
 
-            dgvVuelos.ReadOnly = true;
+            dgvVuelos.ReadOnly = false; //Si es true no se puede editar
             dgvVuelos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
             //Hago que recorra toda la lista de vuelos, pensando a futuro para que se puedan agregar más vuelos, y los muestre en la tabla:
@@ -47,6 +49,22 @@ namespace Interfaz
                 FormDistancia ventanaDistancia = new FormDistancia(vueloClick, listaVuelos);
                 ventanaDistancia.ShowDialog();
             }
+        }
+
+        //Pongo un botón para aplicar los cambios (Fase 1.6)
+        private void btnAplicar_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < dgvVuelos.Rows.Count; i++) //Recorremos cada fila del dgvVuelos (aviones)
+            {
+                double nuevaVelocidad = Convert.ToDouble(dgvVuelos.Rows[i].Cells[3].Value); //Leemos nueva velocidad
+
+                FlightPlan fp = listaVuelos.GetFlightPlan(i); //El avión real
+                fp.SetVelocidad(nuevaVelocidad); //Actualizamos el fp
+            }
+
+            MessageBox.Show("Velocidades actualizadas. Reiniciando simulación..."); //Informamos al usuario 
+            this.Close();
+            simulacion.ReiniciarSimulacion(); //Llamamos a la función que hemos creado en simulación
         }
     }
 }

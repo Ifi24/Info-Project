@@ -254,5 +254,29 @@ namespace Interfaz
                 MessageBox.Show("Se necessitan al menos 2 vuelos para predecir conflictos.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+
+        public void ReiniciarSimulacion()
+        {
+            TimerSimulación.Stop(); //Detiene el movimiento automático (si no los paramos, los aviones se seguirán moviendo mientras reiniciamos)
+
+            for (int i = 0; i < listaVuelos.GetNum(); i++) //Recorremos todos los aviones
+            {
+                FlightPlan fp = listaVuelos.GetFlightPlan(i); //Obtenemos cada avión real
+                fp.Restart(); //Reiniciamos posición
+            }
+
+            //Volver a dibujar posiciones iniciales
+            for (int i = 0; i < listaVuelos.GetNum(); i++)
+            {
+                //Obtenemos posiciones del avión ya reiniciado
+                FlightPlan fp = listaVuelos.GetFlightPlan(i);
+                int x = (int)fp.GetCurrentPosition().GetX();
+                int y = (int)fp.GetCurrentPosition().GetY();
+
+                misPics[i].Location = new Point(x - 5, y - 5); //Mueve el icono
+            }
+
+            TimerSimulación.Start(); //Vuelve a reiniciar el avión
+        }
     }
 }
