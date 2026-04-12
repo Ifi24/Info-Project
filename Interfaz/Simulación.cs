@@ -13,20 +13,24 @@ namespace Interfaz
 {
     public partial class Simulación : Form
     {
-        FlightLib.FlightPlanList listaVuelos; // Creamos una variable que apunte a nuestra lista
+        FlightLib.FlightPlanList listaVuelos;
         double dist;
         double tiemp;
         PictureBox[] misPics;
+        Label[] misLabels;
         Simulación sim;
         public Simulación(FlightLib.FlightPlanList miLista, double distSeguridad, double tiempoCiclo)
         {
             InitializeComponent();
-            this.listaVuelos = miLista; // Inicializamos nuestra lista en el constructor
+            this.listaVuelos = miLista;
             this.dist = distSeguridad;
             this.tiemp = tiempoCiclo;
             this.TimerSimulación.Tick += new EventHandler(TimerSimulación_Tick);
             this.TimerSimulación.Interval = (int)(this.tiemp * 1000);
             misPics = new PictureBox[listaVuelos.GetNum()];
+            misLabels = new Label[listaVuelos.GetNum()];
+
+            this.DoubleBuffered = true; //Para evitar el parpadeo al dibujar elementos.
         }
 
         //FASE 4: Lógica y botón para mover los aviones un ciclo:
@@ -40,16 +44,18 @@ namespace Interfaz
             for (int i = 0; i < listaVuelos.GetNum(); i++)
             {
                 FlightPlan fp = listaVuelos.GetFlightPlan(i);
-                int x = (int)fp.GetCurrentPosition().GetX();
-                int y = (int)fp.GetCurrentPosition().GetY();
+                int x = (int)Math.Round(fp.GetCurrentPosition().GetX()); //Redondeamos porque no se puede dibujar entre píxeles.
+                int y = (int)Math.Round(fp.GetCurrentPosition().GetY());
+                //Actualizaciones:
                 misPics[i].Location = new Point(x - 5, y - 5); // Movemos el cuadrito existente
-
+                misLabels[i].Location = new Point(x, y - 15);
                 //Reseteo el color por si antes estaba en amarillo por conflicto y ya no lo están.
                 misPics[i].BackColor = Color.Red;
             }
+            PanelSimulacion.Invalidate(); //Borra elipses y linias anteriores y dibuja las nuevas.
 
             //Detectamos si hay conflictos
-            //FASE 10 1a Parte: Mejoro lo que había antes y lo hago menos molesto en caso de conflicto. Solo se muestra un label y los aviones cambian de color.
+            //FASE 10 (1a Parte): Mejoro lo que había antes y lo hago menos molesto en caso de conflicto. Solo se muestra un label y los aviones cambian de color.
             for (int i = 0; i < listaVuelos.GetNum(); i++)
             {
                 for (int j = i + 1; j < listaVuelos.GetNum(); j++) //Lo hago asi pensando en multiples vuelos a futuro
@@ -99,8 +105,10 @@ namespace Interfaz
                 Label lbl = new Label();
                 lbl.Text = fp.GetId();
                 lbl.AutoSize = true;
+                lbl.ForeColor = Color.White;
                 lbl.Location = new Point(x, y - 15);
                 PanelSimulacion.Controls.Add(lbl);
+                misLabels[i] = lbl;
 
                 PanelSimulacion.Invalidate(); //Ejecute el evento Paint
             }
@@ -119,14 +127,11 @@ namespace Interfaz
                 else
                 {
                     //No creo que ocurra nunca, pero por si acaso, que muestre un mensaje de error.
-                    MessageBox.Show("Error: Este avión no tiene información de vuelo asociada.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Error:\nEste avión no tiene información de vuelo asociada.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             //Por lo que he ido aprendiendo, lo que he hecho antes es esto de abajo a prueba de errores
-
-
         }
-
 
         //FASE 6: Función que dibuja una línia entre la posición inicial i final:
         private void PanelSimulacion_Paint(object sender, PaintEventArgs e)
@@ -157,7 +162,6 @@ namespace Interfaz
                 //Quiero mejorar como se ve la elipse y que a medida que avance se borre la elipse anterior, pero lo arreglo más tarde, que ahora quiero avanzar con las demás fases.
             }
         }
-
 
         //FASE 8: Botón de ciclo automático:
         private void Automático_Click(object sender, EventArgs e)
@@ -195,7 +199,7 @@ namespace Interfaz
                                 if (logrado)
                                     MessageBox.Show("Resuelto: " + v2.GetId() + " ha cambiado su velocidad.");
                                 else
-                                    MessageBox.Show("No se pudo encontrar solución para " + v1.GetId() + " y " + v2.GetId());
+                                    MessageBox.Show("No se pudo encontrar solución para " + v1.GetId() + " y " + v2.GetId(), "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                         }
                     }
@@ -215,18 +219,11 @@ namespace Interfaz
         //FASE 9: Botón para mostrar todos los datos de los vuelos
         private void boton_MostarDatos(object sender, EventArgs e)
         {
-            if (listaVuelos.GetNum() <= 2)
-            {
-                TablaVuelos ventanaTabla = new TablaVuelos(listaVuelos, sim);
-                ventanaTabla.ShowDialog();
-            }
-            else
-            {
-                MessageBox.Show("No hay sufiecientes vuelos para mostrar en la tabla. Se necesitan 2 o menos vuelos.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            TablaVuelos ventanaTabla = new TablaVuelos(listaVuelos, sim);
+            ventanaTabla.ShowDialog();
         }
 
-        //FASE 10 2a Parte: Botón para predecir conflictos futuros entre los vuelos
+        //FASE 10 (2a Parte): Botón para predecir conflictos futuros entre los vuelos
         private void boton_PredecirConflictos_Click(object sender, EventArgs e)
         {
             if (listaVuelos.GetNum() >= 2)
@@ -262,7 +259,6 @@ namespace Interfaz
                 MessageBox.Show("Se necessitan al menos 2 vuelos para predecir conflictos.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-
         public void ReiniciarSimulacion()
         {
             TimerSimulación.Stop(); //Detiene el movimiento automático (si no los paramos, los aviones se seguirán moviendo mientras reiniciamos)
@@ -308,7 +304,12 @@ namespace Interfaz
             }
             TimerSimulación.Start(); //Renaudar simulación
 
-            MessageBox.Show("Simulación reiniciada correctamente.");
+            MessageBox.Show("Simulación reiniciada correctamente.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void cerrarBtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

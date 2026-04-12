@@ -29,25 +29,44 @@
         private void InitializeComponent()
         {
             labelDistancia = new Label();
+            btnCerrar = new Button();
             SuspendLayout();
             // 
             // labelDistancia
             // 
             labelDistancia.AutoSize = true;
-            labelDistancia.Location = new Point(76, 55);
+            labelDistancia.BackColor = SystemColors.ButtonFace;
+            labelDistancia.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelDistancia.ForeColor = Color.DarkSlateGray;
+            labelDistancia.Location = new Point(20, 20);
+            labelDistancia.Margin = new Padding(2, 0, 2, 0);
             labelDistancia.Name = "labelDistancia";
-            labelDistancia.Size = new Size(78, 32);
+            labelDistancia.Size = new Size(23, 18);
             labelDistancia.TabIndex = 0;
-            labelDistancia.Text = "label1";
+            labelDistancia.Text = "...";
+            // 
+            // btnCerrar
+            // 
+            btnCerrar.Location = new Point(100, 150);
+            btnCerrar.Name = "btnCerrar";
+            btnCerrar.Size = new Size(94, 29);
+            btnCerrar.TabIndex = 1;
+            btnCerrar.Text = "Cerrar";
+            btnCerrar.UseVisualStyleBackColor = true;
+            btnCerrar.Click += btnCerrar_Click;
             // 
             // FormDistancia
             // 
-            AutoScaleDimensions = new SizeF(13F, 32F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            BackColor = SystemColors.Desktop;
+            ClientSize = new Size(282, 203);
+            Controls.Add(btnCerrar);
             Controls.Add(labelDistancia);
+            Margin = new Padding(2);
             Name = "FormDistancia";
             Text = "FormDistancia";
+            Load += FormDistancia_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -55,5 +74,6 @@
         #endregion
 
         private Label labelDistancia;
+        private Button btnCerrar;
     }
 }

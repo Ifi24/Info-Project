@@ -11,29 +11,55 @@ namespace Interfaz
 {
     public partial class FormDistancia : Form
     {
-        public FormDistancia(FlightPlan vueloBase, FlightPlanList listaVuelos)
+        public FlightLib.FlightPlan seleccionado;
+        public FlightLib.FlightPlanList lista;
+
+        public void SetDatos(FlightLib.FlightPlan seleccionado, FlightLib.FlightPlanList lista)
+        {
+            this.seleccionado = seleccionado;
+            this.lista = lista;
+        }
+        public FormDistancia()
         {
             InitializeComponent();
-
-            string texto = "Distancias desde el vuelo " + vueloBase.GetId() + ":\n\n";
-
-            double x1 = vueloBase.GetCurrentPosition().GetX();
-            double y1 = vueloBase.GetCurrentPosition().GetY();
-
-            for (int i = 0; i < listaVuelos.GetNum(); i++)
+        }
+        private void FormDistancia_Load(object sender, EventArgs e)
+        {
+            if ((seleccionado != null) && (lista != null))
             {
-                FlightPlan otroVuelo = listaVuelos.GetFlightPlan(i);
+                string textoresultado = "";
 
-                if (vueloBase != otroVuelo)
+                double x1 = seleccionado.GetCurrentPosition().GetX();
+                double y1 = seleccionado.GetCurrentPosition().GetY();
+
+                for (int i = 0; i < lista.GetNum(); i++)
                 {
-                    double x2 = otroVuelo.GetCurrentPosition().GetX();
-                    double y2 = otroVuelo.GetCurrentPosition().GetY();
-                    double distancia = Math.Sqrt(Math.Pow(x2 - x1, 2) + Math.Pow(y2 - y1, 2));
-                    texto += "Distancia a " + otroVuelo.GetId() + ": " + Math.Round(distancia, 3) + " unidades\n";
-                }
-            }
-            labelDistancia.Text = texto;
+                    FlightLib.FlightPlan otroVuelo = lista.GetFlightPlan(i);
 
+                    //Nos aseguramos que no es el mismo avión:
+                    if (otroVuelo.GetId() != seleccionado.GetId())
+                    {
+                        //Calculamos Pitágoras
+                        double x2 = otroVuelo.GetCurrentPosition().GetX();
+                        double y2 = otroVuelo.GetCurrentPosition().GetY();
+                        double distancia = Math.Sqrt(Math.Pow(x2 - x1, 2) + Math.Pow(y2 - y1, 2));
+
+                        //Mostramos en el label las distancias.
+                        textoresultado += "Distancia al vuelo " + otroVuelo.GetId() + ": " + distancia.ToString("F2") + "m\n";
+                    }
+                }
+                if (textoresultado == "")
+                {
+                    textoresultado = "No hay otros vuelos cerca.";
+                }
+
+                labelDistancia.Text = textoresultado;
+            }
+        }
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

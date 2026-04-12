@@ -9,22 +9,39 @@ using System.Windows.Forms;
 
 namespace Interfaz
 {
-    public partial class TablaVuelos : Form
+    public partial class TablaVuelos : Form //Mostrar datos vuelos.
     {
         FlightLib.FlightPlanList listaVuelos;
         Simulación simulacion;
-        int primerVuelo = -1;
+
         public TablaVuelos(FlightLib.FlightPlanList miLista, Simulación sim)
         {
             InitializeComponent();
+
+            //Gets:
             this.listaVuelos = miLista;
             this.simulacion = sim;
 
             dgvVuelos.ReadOnly = false; //Si es true no se puede editar
             dgvVuelos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvVuelos.CellClick += new DataGridViewCellEventHandler(dgvVuelos_CellClick);
 
-            //Hago que recorra toda la lista de vuelos, pensando a futuro para que se puedan agregar más vuelos, y los muestre en la tabla:
-            for (int i = 0; i < listaVuelos.GetNum(); i++)
+        }
+        private void TablaVuelos_Load(object sender, EventArgs e)
+        {
+            dgvVuelos.ColumnCount = 4;
+            dgvVuelos.Columns[0].Name = "ID";
+            dgvVuelos.Columns[1].Name = "Posición X";
+            dgvVuelos.Columns[2].Name = "Posición Y";
+            dgvVuelos.Columns[3].Name = "Velocidad";
+            dgvVuelos.RowHeadersVisible = false;
+            dgvVuelos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvVuelos.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dgvVuelos.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            int numVuelos = listaVuelos.GetNum();
+
+            for (int i = 0; i < numVuelos; i++)
             {
                 FlightPlan fp = listaVuelos.GetFlightPlan(i);
 
@@ -34,11 +51,7 @@ namespace Interfaz
                 double speed = fp.GetVelocidad();
 
                 dgvVuelos.Rows.Add(id, x, y, speed);
-
             }
-
-            dgvVuelos.CellClick += new DataGridViewCellEventHandler(dgvVuelos_CellClick);
-
         }
         public void dgvVuelos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -46,12 +59,13 @@ namespace Interfaz
             {
                 FlightPlan vueloClick = listaVuelos.GetFlightPlan(e.RowIndex);
 
-                FormDistancia ventanaDistancia = new FormDistancia(vueloClick, listaVuelos);
+                FormDistancia ventanaDistancia = new FormDistancia();
+                ventanaDistancia.SetDatos(vueloClick, listaVuelos);
                 ventanaDistancia.ShowDialog();
             }
         }
 
-        //Pongo un botón para aplicar los cambios (Fase 1.6)
+        //FASE 1.6: Pongo un botón para aplicar los cambios 
         private void btnAplicar_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < dgvVuelos.Rows.Count; i++) //Recorremos cada fila del dgvVuelos (aviones)
@@ -62,9 +76,14 @@ namespace Interfaz
                 fp.SetVelocidad(nuevaVelocidad); //Actualizamos el fp
             }
 
-            MessageBox.Show("Velocidades actualizadas. Reiniciando simulación..."); //Informamos al usuario 
+            MessageBox.Show("Velocidades actualizadas. Reiniciando simulación...", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information); //Informamos al usuario 
             this.Close();
             simulacion.ReiniciarSimulacion(); //Llamamos a la función que hemos creado en simulación
+        }
+
+        private void cerrarBtn_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

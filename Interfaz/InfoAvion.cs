@@ -16,13 +16,16 @@ namespace Interfaz
             InitializeComponent();
 
             Position posicion = vueloSeleccionado.GetCurrentPosition();
-            labelTitulo.Text = "Información del avión " + vueloSeleccionado.GetId();
+            Informacion.Text = "Información del avión: " + vueloSeleccionado.GetId();
             labelID.Text = "ID: " + vueloSeleccionado.GetId();
             labelX.Text = "Posición X: " + posicion.GetX();
             labelY.Text = "Posición Y: " + posicion.GetY();
             labelVelocidad.Text = "Velocidad: " + vueloSeleccionado.GetVelocidad();
         }
-        
-        
+
+        private void cerrarBtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

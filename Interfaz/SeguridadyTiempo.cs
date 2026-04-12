@@ -40,7 +40,7 @@ namespace Interfaz
 
                 if (dist < 0 || tiempo <=0)
                 {
-                    MessageBox.Show("Introduce valores positivos.");
+                    MessageBox.Show("Error:\nIntroduce valores positivos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -49,7 +49,7 @@ namespace Interfaz
             }
             catch (FormatException)
             {
-                MessageBox.Show("Error: Datos introducidos incorrectos.");
+                MessageBox.Show("Error:\nDatos introducidos incorrectos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

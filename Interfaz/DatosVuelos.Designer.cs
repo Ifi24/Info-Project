@@ -64,6 +64,8 @@
             label18 = new Label();
             label19 = new Label();
             label20 = new Label();
+            btnAutorellenar = new Button();
+            cerrarBtn = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             SuspendLayout();
@@ -79,6 +81,7 @@
             // 
             // TextBoxV1
             // 
+            TextBoxV1.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TextBoxV1.Location = new Point(98, 141);
             TextBoxV1.Name = "TextBoxV1";
             TextBoxV1.Size = new Size(80, 26);
@@ -86,6 +89,7 @@
             // 
             // TextBoxYF1
             // 
+            TextBoxYF1.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TextBoxYF1.Location = new Point(249, 102);
             TextBoxYF1.Name = "TextBoxYF1";
             TextBoxYF1.Size = new Size(53, 26);
@@ -93,6 +97,7 @@
             // 
             // TextBoxXF1
             // 
+            TextBoxXF1.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TextBoxXF1.Location = new Point(160, 102);
             TextBoxXF1.Name = "TextBoxXF1";
             TextBoxXF1.Size = new Size(53, 26);
@@ -100,6 +105,7 @@
             // 
             // TextBoxYI1
             // 
+            TextBoxYI1.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TextBoxYI1.Location = new Point(249, 70);
             TextBoxYI1.Name = "TextBoxYI1";
             TextBoxYI1.Size = new Size(53, 26);
@@ -107,6 +113,7 @@
             // 
             // TextBoxXI1
             // 
+            TextBoxXI1.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TextBoxXI1.Location = new Point(160, 70);
             TextBoxXI1.Name = "TextBoxXI1";
             TextBoxXI1.Size = new Size(53, 26);
@@ -114,6 +121,7 @@
             // 
             // TextBoxID1
             // 
+            TextBoxID1.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TextBoxID1.Location = new Point(46, 30);
             TextBoxID1.Name = "TextBoxID1";
             TextBoxID1.Size = new Size(165, 26);
@@ -179,6 +187,7 @@
             // 
             // TextBoxYF2
             // 
+            TextBoxYF2.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TextBoxYF2.Location = new Point(249, 100);
             TextBoxYF2.Name = "TextBoxYF2";
             TextBoxYF2.Size = new Size(53, 26);
@@ -186,6 +195,7 @@
             // 
             // TextBoxXF2
             // 
+            TextBoxXF2.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TextBoxXF2.Location = new Point(159, 102);
             TextBoxXF2.Name = "TextBoxXF2";
             TextBoxXF2.Size = new Size(53, 26);
@@ -193,6 +203,7 @@
             // 
             // TextBoxYI2
             // 
+            TextBoxYI2.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TextBoxYI2.Location = new Point(249, 70);
             TextBoxYI2.Name = "TextBoxYI2";
             TextBoxYI2.Size = new Size(53, 26);
@@ -200,6 +211,7 @@
             // 
             // TextBoxXI2
             // 
+            TextBoxXI2.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TextBoxXI2.Location = new Point(160, 70);
             TextBoxXI2.Name = "TextBoxXI2";
             TextBoxXI2.Size = new Size(53, 26);
@@ -207,6 +219,7 @@
             // 
             // TextBoxID2
             // 
+            TextBoxID2.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TextBoxID2.Location = new Point(46, 29);
             TextBoxID2.Name = "TextBoxID2";
             TextBoxID2.Size = new Size(166, 26);
@@ -214,6 +227,7 @@
             // 
             // TextBoxV2
             // 
+            TextBoxV2.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TextBoxV2.Location = new Point(98, 140);
             TextBoxV2.Name = "TextBoxV2";
             TextBoxV2.Size = new Size(81, 26);
@@ -271,8 +285,8 @@
             // 
             // Guardar
             // 
-            Guardar.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            Guardar.Location = new Point(288, 207);
+            Guardar.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Guardar.Location = new Point(288, 239);
             Guardar.Name = "Guardar";
             Guardar.Size = new Size(94, 29);
             Guardar.TabIndex = 26;
@@ -299,7 +313,7 @@
             groupBox1.Controls.Add(label8);
             groupBox1.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox1.ForeColor = SystemColors.Control;
-            groupBox1.Location = new Point(12, 12);
+            groupBox1.Location = new Point(12, 44);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(321, 189);
             groupBox1.TabIndex = 27;
@@ -325,7 +339,7 @@
             groupBox2.Controls.Add(label20);
             groupBox2.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox2.ForeColor = SystemColors.Control;
-            groupBox2.Location = new Point(339, 12);
+            groupBox2.Location = new Point(339, 44);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(321, 189);
             groupBox2.TabIndex = 28;
@@ -408,12 +422,34 @@
             label20.TabIndex = 13;
             label20.Text = "Velocidad";
             // 
+            // btnAutorellenar
+            // 
+            btnAutorellenar.Location = new Point(261, 9);
+            btnAutorellenar.Name = "btnAutorellenar";
+            btnAutorellenar.Size = new Size(145, 29);
+            btnAutorellenar.TabIndex = 29;
+            btnAutorellenar.Text = "Autorellenar";
+            btnAutorellenar.UseVisualStyleBackColor = true;
+            btnAutorellenar.Click += btnAutorellenar_Click;
+            // 
+            // cerrarBtn
+            // 
+            cerrarBtn.Location = new Point(566, 239);
+            cerrarBtn.Name = "cerrarBtn";
+            cerrarBtn.Size = new Size(94, 29);
+            cerrarBtn.TabIndex = 30;
+            cerrarBtn.Text = "Cerrar";
+            cerrarBtn.UseVisualStyleBackColor = true;
+            cerrarBtn.Click += cerrarBtn_Click;
+            // 
             // DatosVuelos
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaptionText;
-            ClientSize = new Size(683, 249);
+            ClientSize = new Size(683, 281);
+            Controls.Add(cerrarBtn);
+            Controls.Add(btnAutorellenar);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Controls.Add(Guardar);
@@ -424,7 +460,6 @@
             Controls.Add(Avion2);
             Name = "DatosVuelos";
             Text = "DatosVuelos";
-            Load += DatosVuelos_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
@@ -470,5 +505,7 @@
         private Label label18;
         private Label label19;
         private Label label20;
+        private Button btnAutorellenar;
+        private Button cerrarBtn;
     }
 }

@@ -77,9 +77,7 @@ namespace FlightLib
             this.initialPosition = initialPosition;
         }
 
-
         // Metodos
-
         public void Mover(double tiempo)
         // Mueve el vuelo a la posición correspondiente a viajar durante el tiempo que se recibe como parámetro
         {
