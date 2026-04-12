@@ -66,5 +66,10 @@ namespace Interfaz
                 MessageBox.Show("Error: Algo no ha salido bien." + ex.Message);
             }
         }
+
+        private void btnAutorellenar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
