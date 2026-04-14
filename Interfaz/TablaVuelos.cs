@@ -78,19 +78,25 @@ namespace Interfaz
         {
             for (int i = 0; i < listaVuelos.GetNum(); i++)
             {
-                double nuevaVelocidad = Convert.ToDouble(dgvVuelos.Rows[i].Cells[3].Value); //Leemos nueva velocidad
-
-                FlightPlan fp = listaVuelos.GetFlightPlan(i); //El avión real
-                if (fp != null)
+                try
                 {
-                    fp.SetVelocidad(nuevaVelocidad);
-                }
-                //Actualizamos el fp
-            }
+                    double nuevaVelocidad = Convert.ToDouble(dgvVuelos.Rows[i].Cells[3].Value); //Leemos nueva velocidad
 
-            MessageBox.Show("Velocidades actualizadas. Reiniciando simulación...", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information); //Informamos al usuario 
-            this.Close();
-            simulacion.ReiniciarSimulacion(); //Llamamos a la función que hemos creado en simulación
+                    FlightPlan fp = listaVuelos.GetFlightPlan(i); //El avión real
+                    if (fp != null)
+                    {
+                        fp.SetVelocidad(nuevaVelocidad);
+                    }
+                    //Actualizamos el fp
+                    MessageBox.Show("Velocidades actualizándose. Reiniciando simulación...", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information); //Informamos al usuario 
+                    this.Close();
+                    simulacion.ReiniciarSimulacion(); //Llamamos a la función que hemos creado en simulación
+                }
+                catch(FormatException)
+                {
+                    MessageBox.Show("No se ha podido cambiar la velocidad por un error de formato.\nIntroduzca correctamente los datos de la velocidad", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
         }
     }
 }

@@ -36,10 +36,8 @@
             flowLayoutPanel1 = new FlowLayoutPanel();
             Titulo = new Label();
             label1 = new Label();
-            label2 = new Label();
             label3 = new Label();
             label4 = new Label();
-            label5 = new Label();
             menuStrip1.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             SuspendLayout();
@@ -51,7 +49,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { Opciones });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(622, 36);
+            menuStrip1.Size = new Size(624, 36);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -127,16 +125,6 @@
             label1.Text = "Grupo 8: Ana López, Ifesinachi Egbera, Laia Alba";
             label1.TextAlign = ContentAlignment.TopCenter;
             // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.ForeColor = SystemColors.Control;
-            label2.Location = new Point(336, 107);
-            label2.Name = "label2";
-            label2.Size = new Size(172, 20);
-            label2.TabIndex = 2;
-            label2.Text = "Lista de funcionalidades:";
-            // 
             // label3
             // 
             label3.AutoSize = true;
@@ -159,27 +147,14 @@
             label4.TabIndex = 4;
             label4.Text = "Este es nuestro proyecto de informática II";
             // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.BackColor = Color.DarkSlateGray;
-            label5.ForeColor = Color.White;
-            label5.Location = new Point(349, 135);
-            label5.Name = "label5";
-            label5.Size = new Size(18, 20);
-            label5.TabIndex = 5;
-            label5.Text = "...";
-            // 
             // Principal
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Desktop;
-            ClientSize = new Size(622, 390);
-            Controls.Add(label5);
+            ClientSize = new Size(624, 390);
             Controls.Add(label4);
             Controls.Add(label3);
-            Controls.Add(label2);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
@@ -203,9 +178,7 @@
         private FlowLayoutPanel flowLayoutPanel1;
         private Label Titulo;
         private Label label1;
-        private Label label2;
         private Label label3;
         private Label label4;
-        private Label label5;
     }
 }

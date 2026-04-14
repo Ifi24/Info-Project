@@ -41,7 +41,7 @@ namespace Interfaz
             labelAlarma.Visible = false;
 
             //Loop para calcular la posición
-            for (int i = 0; i < listaVuelos.GetNum(); i++)
+            for (int i = 0; i < listaVuelos.GetNum() && i < misPics.Length; i++)
             {
                 FlightPlan fp = listaVuelos.GetFlightPlan(i);
                 int x = (int)Math.Round(fp.GetCurrentPosition().GetX()); //Redondeamos porque no se puede dibujar entre píxeles.
