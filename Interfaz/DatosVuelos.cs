@@ -12,11 +12,12 @@ namespace Interfaz
     public partial class DatosVuelos : Form //FASE 2.2
     {
         FlightPlanList listaEnVentana;
-        int contadorVuelos = 1;
-        public DatosVuelos(FlightPlanList listaRecibida)
+        public int contadorVuelos;
+        public DatosVuelos(FlightPlanList listaRecibida, int numVuelos)
         {
             InitializeComponent();
             this.listaEnVentana = listaRecibida;
+            this.contadorVuelos = numVuelos;
         }
 
         //Botón "Guardar" datos de vuelo:
@@ -83,7 +84,7 @@ namespace Interfaz
                 Random random = new Random(); //Géneramos valores aleatorios.
 
                 //Datos avión 1:
-                string id1 = Convert.ToString(contadorVuelos);
+                string id1 = Convert.ToString(contadorVuelos+1);
                 double v1 = random.Next(1, 10); //Máximo subjetivo (se puede cambiar)
                 double xi1 = random.Next(0, 600);
                 double yi1 = random.Next(0, 400);
@@ -95,7 +96,7 @@ namespace Interfaz
                 contadorVuelos++;
 
                 //Datos avión 2:
-                string id2 = Convert.ToString(contadorVuelos);
+                string id2 = Convert.ToString(contadorVuelos+1);
                 double v2 = random.Next(1, 10);
                 double xi2 = random.Next(0, 600);
                 double yi2 = random.Next(0, 400);
@@ -117,7 +118,6 @@ namespace Interfaz
                       "- Origen: (" + xi2 + ", " + yi2 + ")";
 
                 MessageBox.Show(info, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Close();
             }
             catch (Exception ex) //Otros errores
             {
