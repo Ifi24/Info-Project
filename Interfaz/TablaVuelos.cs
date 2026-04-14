@@ -51,6 +51,7 @@ namespace Interfaz
                 double speed = fp.GetVelocidad();
 
                 dgvVuelos.Rows.Add(id, x, y, speed);
+                dgvVuelos.EditMode = DataGridViewEditMode.EditOnEnter;
             }
         }
         public void dgvVuelos_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -65,25 +66,31 @@ namespace Interfaz
             }
         }
 
-        //FASE 1.6: Pongo un botón para aplicar los cambios 
+
+        private void cerrarBtn_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        //FASE 1.6: Pongo un botón para aplicar los cambios
+
         private void btnAplicar_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < dgvVuelos.Rows.Count; i++) //Recorremos cada fila del dgvVuelos (aviones)
+            for (int i = 0; i < listaVuelos.GetNum(); i++)
             {
                 double nuevaVelocidad = Convert.ToDouble(dgvVuelos.Rows[i].Cells[3].Value); //Leemos nueva velocidad
 
                 FlightPlan fp = listaVuelos.GetFlightPlan(i); //El avión real
-                fp.SetVelocidad(nuevaVelocidad); //Actualizamos el fp
+                if (fp != null)
+                {
+                    fp.SetVelocidad(nuevaVelocidad);
+                }
+                //Actualizamos el fp
             }
 
             MessageBox.Show("Velocidades actualizadas. Reiniciando simulación...", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information); //Informamos al usuario 
             this.Close();
             simulacion.ReiniciarSimulacion(); //Llamamos a la función que hemos creado en simulación
-        }
-
-        private void cerrarBtn_Click(object sender, EventArgs e)
-        {
-            Close();
         }
     }
 }

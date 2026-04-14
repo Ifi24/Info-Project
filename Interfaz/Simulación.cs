@@ -219,7 +219,7 @@ namespace Interfaz
         //FASE 9: Botón para mostrar todos los datos de los vuelos
         private void boton_MostarDatos(object sender, EventArgs e)
         {
-            TablaVuelos ventanaTabla = new TablaVuelos(listaVuelos, sim);
+            TablaVuelos ventanaTabla = new TablaVuelos(listaVuelos, this);
             ventanaTabla.ShowDialog();
         }
 

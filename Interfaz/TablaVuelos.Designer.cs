@@ -35,6 +35,7 @@
             PosY = new DataGridViewTextBoxColumn();
             ColumnSpeed = new DataGridViewTextBoxColumn();
             cerrarBtn = new Button();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvVuelos).BeginInit();
             SuspendLayout();
             // 
@@ -96,12 +97,23 @@
             cerrarBtn.UseVisualStyleBackColor = true;
             cerrarBtn.Click += cerrarBtn_Click;
             // 
+            // button1
+            // 
+            button1.Location = new Point(416, 220);
+            button1.Name = "button1";
+            button1.Size = new Size(94, 29);
+            button1.TabIndex = 2;
+            button1.Text = "Cambiar";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += btnAplicar_Click;
+            // 
             // TablaVuelos
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Desktop;
             ClientSize = new Size(522, 263);
+            Controls.Add(button1);
             Controls.Add(cerrarBtn);
             Controls.Add(dgvVuelos);
             Margin = new Padding(2);
@@ -120,5 +132,6 @@
         private DataGridViewTextBoxColumn PosY;
         private DataGridViewTextBoxColumn ColumnSpeed;
         private Button cerrarBtn;
+        private Button button1;
     }
 }
