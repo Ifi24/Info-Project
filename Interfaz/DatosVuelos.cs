@@ -18,6 +18,9 @@ namespace Interfaz
             InitializeComponent();
             this.listaEnVentana = listaRecibida;
             this.contadorVuelos = numVuelos;
+
+            TextBoxID1.BackColor = Color.Transparent;
+            TextBoxID2.BackColor = Color.Transparent;
         }
 
         //Botón "Guardar" datos de vuelo:
