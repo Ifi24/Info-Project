@@ -23,8 +23,9 @@ namespace Interfaz
 
         private void cargarListaDeVuelosToolStripMenuItem_Click(object sender, EventArgs e) //Fase 2.2
         {
-            DatosVuelos VentanaVuelos = new DatosVuelos(miLista);
+            DatosVuelos VentanaVuelos = new DatosVuelos(miLista, numAviones);
             VentanaVuelos.ShowDialog();
+            this.numAviones = VentanaVuelos.contadorVuelos;
         }
 
         private void introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem_Click(object sender, EventArgs e) //Fase 2.3
