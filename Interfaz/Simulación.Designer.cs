@@ -39,14 +39,14 @@
             Automático = new Button();
             TimerSimulación = new System.Windows.Forms.Timer(components);
             groupBox1 = new GroupBox();
+            label8 = new Label();
+            button3 = new Button();
             cerrarBtn = new Button();
             boton_PredecirConflictos = new Button();
             label7 = new Label();
             button2 = new Button();
             label6 = new Label();
             label5 = new Label();
-            button3 = new Button();
-            label8 = new Label();
             PanelSimulacion.SuspendLayout();
             groupBox1.SuspendLayout();
             SuspendLayout();
@@ -69,9 +69,11 @@
             PanelSimulacion.BackColor = Color.Black;
             PanelSimulacion.BorderStyle = BorderStyle.FixedSingle;
             PanelSimulacion.Controls.Add(labelAlarma);
+            PanelSimulacion.Controls.Add(label2);
+            PanelSimulacion.Controls.Add(label1);
             PanelSimulacion.Location = new Point(199, 12);
             PanelSimulacion.Name = "PanelSimulacion";
-            PanelSimulacion.Size = new Size(600, 400);
+            PanelSimulacion.Size = new Size(800, 600);
             PanelSimulacion.TabIndex = 0;
             PanelSimulacion.Paint += PanelSimulacion_Paint;
             // 
@@ -94,7 +96,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = SystemColors.Control;
-            label1.Location = new Point(199, 415);
+            label1.Location = new Point(-1, 581);
             label1.Name = "label1";
             label1.Size = new Size(18, 18);
             label1.TabIndex = 2;
@@ -105,7 +107,7 @@
             label2.AutoSize = true;
             label2.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.ForeColor = SystemColors.Control;
-            label2.Location = new Point(805, 12);
+            label2.Location = new Point(781, -1);
             label2.Name = "label2";
             label2.Size = new Size(18, 18);
             label2.TabIndex = 3;
@@ -116,22 +118,22 @@
             label3.AutoSize = true;
             label3.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = SystemColors.Control;
-            label3.Location = new Point(805, 392);
+            label3.Location = new Point(1000, 581);
             label3.Name = "label3";
             label3.Size = new Size(38, 18);
             label3.TabIndex = 4;
-            label3.Text = "400";
+            label3.Text = "600";
             // 
             // label4
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label4.ForeColor = SystemColors.Control;
-            label4.Location = new Point(766, 415);
+            label4.Location = new Point(957, 615);
             label4.Name = "label4";
             label4.Size = new Size(38, 18);
             label4.TabIndex = 0;
-            label4.Text = "600";
+            label4.Text = "800";
             // 
             // Automático
             // 
@@ -166,10 +168,32 @@
             groupBox1.ForeColor = SystemColors.Control;
             groupBox1.Location = new Point(12, 12);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(181, 419);
+            groupBox1.Size = new Size(181, 600);
             groupBox1.TabIndex = 7;
             groupBox1.TabStop = false;
             groupBox1.Text = "Panel de Simulación";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label8.Location = new Point(6, 262);
+            label8.Name = "label8";
+            label8.Size = new Size(149, 18);
+            label8.TabIndex = 14;
+            label8.Text = "Reiniciar la simulación:";
+            // 
+            // button3
+            // 
+            button3.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button3.ForeColor = SystemColors.ActiveCaptionText;
+            button3.Location = new Point(40, 283);
+            button3.Name = "button3";
+            button3.Size = new Size(94, 29);
+            button3.TabIndex = 13;
+            button3.Text = "Reiniciar";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += btnReinicio_Click;
             // 
             // cerrarBtn
             // 
@@ -241,39 +265,15 @@
             label5.TabIndex = 7;
             label5.Text = "Avance automático:";
             // 
-            // button3
-            // 
-            button3.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button3.ForeColor = SystemColors.ActiveCaptionText;
-            button3.Location = new Point(40, 283);
-            button3.Name = "button3";
-            button3.Size = new Size(94, 29);
-            button3.TabIndex = 13;
-            button3.Text = "Reiniciar";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += btnReinicio_Click;
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label8.Location = new Point(6, 262);
-            label8.Name = "label8";
-            label8.Size = new Size(149, 18);
-            label8.TabIndex = 14;
-            label8.Text = "Reiniciar la simulación:";
-            // 
             // Simulación
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaptionText;
-            ClientSize = new Size(850, 443);
+            ClientSize = new Size(1045, 646);
             Controls.Add(groupBox1);
             Controls.Add(label4);
             Controls.Add(label3);
-            Controls.Add(label2);
-            Controls.Add(label1);
             Controls.Add(PanelSimulacion);
             Name = "Simulación";
             Text = "Simulación";
