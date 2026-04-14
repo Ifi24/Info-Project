@@ -19,8 +19,8 @@ namespace Interfaz
             this.listaEnVentana = listaRecibida;
             this.contadorVuelos = numVuelos;
 
-            TextBoxID1.BackColor = Color.Transparent;
-            TextBoxID2.BackColor = Color.Transparent;
+            TextBoxID1.BackColor = Color.White;
+            TextBoxID2.BackColor = Color.White;
         }
 
         //Botón "Guardar" datos de vuelo:

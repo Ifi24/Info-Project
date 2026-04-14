@@ -121,6 +121,7 @@
             // 
             // TextBoxID1
             // 
+            TextBoxID1.BackColor = SystemColors.Window;
             TextBoxID1.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TextBoxID1.Location = new Point(46, 30);
             TextBoxID1.Name = "TextBoxID1";
@@ -219,6 +220,7 @@
             // 
             // TextBoxID2
             // 
+            TextBoxID2.BackColor = SystemColors.Window;
             TextBoxID2.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TextBoxID2.Location = new Point(46, 29);
             TextBoxID2.Name = "TextBoxID2";

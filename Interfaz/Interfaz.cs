@@ -35,10 +35,7 @@ namespace Interfaz
 
         }
         private void verSimulaciónToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            bool hayConflictos = false;
-            for (int i = 0; i < miLista.GetNum(); i++);
-
+        { 
             Simulación VentanaSimulacion = new Simulación(miLista, distanciaSeguridad, tiempoCiclo);
             VentanaSimulacion.ShowDialog();
         }
