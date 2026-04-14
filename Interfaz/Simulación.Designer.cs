@@ -45,6 +45,8 @@
             button2 = new Button();
             label6 = new Label();
             label5 = new Label();
+            button3 = new Button();
+            label8 = new Label();
             PanelSimulacion.SuspendLayout();
             groupBox1.SuspendLayout();
             SuspendLayout();
@@ -150,6 +152,8 @@
             // groupBox1
             // 
             groupBox1.BackColor = Color.DarkSlateGray;
+            groupBox1.Controls.Add(label8);
+            groupBox1.Controls.Add(button3);
             groupBox1.Controls.Add(cerrarBtn);
             groupBox1.Controls.Add(boton_PredecirConflictos);
             groupBox1.Controls.Add(label7);
@@ -237,6 +241,28 @@
             label5.TabIndex = 7;
             label5.Text = "Avance automático:";
             // 
+            // button3
+            // 
+            button3.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button3.ForeColor = SystemColors.ActiveCaptionText;
+            button3.Location = new Point(40, 283);
+            button3.Name = "button3";
+            button3.Size = new Size(94, 29);
+            button3.TabIndex = 13;
+            button3.Text = "Reiniciar";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += btnReinicio_Click;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label8.Location = new Point(6, 262);
+            label8.Name = "label8";
+            label8.Size = new Size(149, 18);
+            label8.TabIndex = 14;
+            label8.Text = "Reiniciar la simulación:";
+            // 
             // Simulación
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -277,5 +303,7 @@
         private Button boton_PredecirConflictos;
         private Label label7;
         private Button cerrarBtn;
+        private Button button3;
+        private Label label8;
     }
 }

@@ -311,5 +311,10 @@ namespace Interfaz
         {
             this.Close();
         }
+
+        private void btnReinicio_Click(object sender, EventArgs e)
+        {
+            ReiniciarSimulacion();
+        }
     }
 }
