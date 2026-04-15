@@ -36,13 +36,14 @@ namespace Interfaz
                 double xf1 = Convert.ToDouble(TextBoxXF1.Text);
                 double yf1 = Convert.ToDouble(TextBoxYF1.Text);
 
-                if (xi1 < 0 || xi1 > 600 || yi1 < 0 || yi1 > 400 || xf1 < 0 || xf1 > 600 || yf1 < 0 || yf1 > 400)
+                if (xi1 < 0 || xi1 > 800 || yi1 < 0 || yi1 > 600 || xf1 < 0 || xf1 > 800 || yf1 < 0 || yf1 > 600)
                 {
-                    MessageBox.Show($"Las coordenadas del avión {id1} deben estar dentro del panel (X: 0-600, Y: 0-400).", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show($"Las coordenadas del avión {id1} deben estar dentro del panel (X: 0-800, Y: 0-4600).", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return; // Aborta la función para que el usuario pueda corregirlo
                 }
 
                 FlightPlan avion1 = new FlightPlan(id1, xi1, yi1, xf1, yf1, v1, xi1, yi1);
+                
 
                 //Datos avión 2:
                 string id2 = TextBoxID2.Text;
@@ -52,13 +53,14 @@ namespace Interfaz
                 double xf2 = Convert.ToDouble(TextBoxXF2.Text);
                 double yf2 = Convert.ToDouble(TextBoxYF2.Text);
 
-                if (xi2 < 0 || xi2 > 600 || yi2 < 0 || yi2 > 400 || xf2 < 0 || xf2 > 600 || yf2 < 0 || yf2 > 400)
+                if (xi2 < 0 || xi2 > 800 || yi2 < 0 || yi2 > 600 || xf2 < 0 || xf2 > 800 || yf2 < 0 || yf2 > 600)
                 {
-                    MessageBox.Show($"Las coordenadas del avión {id2} deben estar dentro del panel (X: 0-600, Y: 0-400).", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show($"Las coordenadas del avión {id2} deben estar dentro del panel (X: 0-800, Y: 0-600).", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return; // Aborta la función
                 }
 
                 FlightPlan avion2 = new FlightPlan(id2, xi2, yi2, xf2, yf2, v2, xi2, yi2);
+                
 
                 //Añadir datos:
                 listaEnVentana.AddFlightPlan(avion1);

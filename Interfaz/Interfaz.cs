@@ -35,7 +35,27 @@ namespace Interfaz
 
         }
         private void verSimulaciónToolStripMenuItem_Click(object sender, EventArgs e)
-        { 
+        {
+            bool hayConflictos = false; //Para comprobar si hay conflictos
+
+            for (int i = 0; i < miLista.GetNum(); i++)
+            {
+                for (int j = i + 1; j < miLista.GetNum(); j++)
+                {
+                    FlightPlan v1 = miLista.GetFlightPlan(i);
+                    FlightPlan v2 = miLista.GetFlightPlan(j);
+
+                    if (v1.ConflictoTrayectoria(v2, distanciaSeguridad, tiempoCiclo))
+                    {
+                        hayConflictos = true;
+                        MessageBox.Show("Se ha detectado conflictos entre" + v1 + "y" + v2, "Simulación con conflicto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+            }
+            if (!hayConflictos)
+            {
+                MessageBox.Show("No hay conflictos previstos. Simulación segura.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
             Simulación VentanaSimulacion = new Simulación(miLista, distanciaSeguridad, tiempoCiclo);
             VentanaSimulacion.ShowDialog();
         }
