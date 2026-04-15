@@ -32,8 +32,8 @@
             button1 = new Button();
             PanelSimulacion = new Panel();
             labelAlarma = new Label();
-            label1 = new Label();
             label2 = new Label();
+            label1 = new Label();
             label3 = new Label();
             label4 = new Label();
             Automático = new Button();
@@ -91,17 +91,6 @@
             labelAlarma.TabIndex = 0;
             labelAlarma.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.ForeColor = SystemColors.Control;
-            label1.Location = new Point(-1, 581);
-            label1.Name = "label1";
-            label1.Size = new Size(18, 18);
-            label1.TabIndex = 2;
-            label1.Text = "0";
-            // 
             // label2
             // 
             label2.AutoSize = true;
@@ -112,6 +101,17 @@
             label2.Size = new Size(18, 18);
             label2.TabIndex = 3;
             label2.Text = "0";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.ForeColor = SystemColors.Control;
+            label1.Location = new Point(-1, 581);
+            label1.Name = "label1";
+            label1.Size = new Size(18, 18);
+            label1.TabIndex = 2;
+            label1.Text = "0";
             // 
             // label3
             // 
@@ -187,9 +187,9 @@
             // 
             button3.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             button3.ForeColor = SystemColors.ActiveCaptionText;
-            button3.Location = new Point(40, 283);
+            button3.Location = new Point(26, 283);
             button3.Name = "button3";
-            button3.Size = new Size(94, 29);
+            button3.Size = new Size(130, 29);
             button3.TabIndex = 13;
             button3.Text = "Reiniciar";
             button3.UseVisualStyleBackColor = true;
@@ -199,7 +199,7 @@
             // 
             cerrarBtn.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cerrarBtn.ForeColor = SystemColors.ActiveCaptionText;
-            cerrarBtn.Location = new Point(40, 371);
+            cerrarBtn.Location = new Point(40, 553);
             cerrarBtn.Name = "cerrarBtn";
             cerrarBtn.Size = new Size(94, 29);
             cerrarBtn.TabIndex = 12;

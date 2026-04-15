@@ -106,13 +106,14 @@ namespace Interfaz
                 lbl.Text = fp.GetId();
                 lbl.AutoSize = true;
                 lbl.ForeColor = Color.White;
+                lbl.BackColor = Color.Transparent;
                 lbl.Location = new Point(x, y - 15);
                 PanelSimulacion.Controls.Add(lbl);
                 misLabels[i] = lbl;
 
                 PanelSimulacion.Invalidate(); //Ejecute el evento Paint
             }
-        }
+        }     
 
         //FASE 5: Creamos el evento click para mostrar la información del vuelo
         private void Avion_Click(object sender, EventArgs e)
@@ -126,11 +127,9 @@ namespace Interfaz
                 }
                 else
                 {
-                    //No creo que ocurra nunca, pero por si acaso, que muestre un mensaje de error.
                     MessageBox.Show("Error:\nEste avión no tiene información de vuelo asociada.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            //Por lo que he ido aprendiendo, lo que he hecho antes es esto de abajo a prueba de errores
         }
 
         //FASE 6: Función que dibuja una línia entre la posición inicial i final:
@@ -237,7 +236,7 @@ namespace Interfaz
                     {
                         FlightPlan fp1 = listaVuelos.GetFlightPlan(i);
                         FlightPlan fp2 = listaVuelos.GetFlightPlan(j);
-                        if (fp1.ConflictoTrayectoria(fp2, this.dist, this.tiemp))
+                        if (fp1.ConflictoTrayectoria(fp2, this.dist, 10000))
                         {
                             hayConflictos = true;
                             mensajeConflictos += $"- {fp1.GetId()} y {fp2.GetId()}\n";
@@ -256,12 +255,13 @@ namespace Interfaz
             }
             else
             {
-                MessageBox.Show("Se necessitan al menos 2 vuelos para predecir conflictos.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Se necesitan al menos 2 vuelos para predecir conflictos.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
         public void ReiniciarSimulacion()
         {
             TimerSimulación.Stop(); //Detiene el movimiento automático (si no los paramos, los aviones se seguirán moviendo mientras reiniciamos)
+            Automático.Text = "Iniciar";
 
             for (int i = 0; i < listaVuelos.GetNum(); i++) //Recorremos todos los aviones
             {
@@ -278,9 +278,12 @@ namespace Interfaz
                 int y = (int)fp.GetCurrentPosition().GetY();
 
                 misPics[i].Location = new Point(x - 5, y - 5); //Mueve el icono
+                misPics[i].BackColor = Color.Red; 
+                misLabels[i].Location = new Point(x, y - 15);
             }
 
-            TimerSimulación.Start(); //Vuelve a reiniciar el avión
+            labelAlarma.Visible = false;
+            PanelSimulacion.Invalidate();
         }
 
         private void btnResolver_Click(object sender, EventArgs e)

@@ -60,7 +60,6 @@ namespace Interfaz
                 }
 
                 FlightPlan avion2 = new FlightPlan(id2, xi2, yi2, xf2, yf2, v2, xi2, yi2);
-                
 
                 //Añadir datos:
                 listaEnVentana.AddFlightPlan(avion1);

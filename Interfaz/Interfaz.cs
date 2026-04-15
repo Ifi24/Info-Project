@@ -5,15 +5,15 @@ namespace Interfaz
     public partial class Principal : Form //FASE 2.1
     {
         FlightPlanList miLista = new FlightPlanList();
-        PictureBox[] misPics = new PictureBox[10]; //10 como número máximo de prueba
+        PictureBox[] misPics = new PictureBox[10];
         int numPics = 0;
 
-        //Variables predeterminadas Fase 2.3:
+        //Variables predeterminadas (FASE 2.3):
         double distanciaSeguridad = 10;
         double tiempoCiclo = 1;
 
         //Guardar dibujos aviones:
-        PictureBox[] misAviones = new PictureBox[10]; //Ejemplo: Máx 10
+        PictureBox[] misAviones = new PictureBox[10];
         int numAviones = 0; //Contador de cuantos llevamos.
 
         public Principal()
@@ -36,26 +36,30 @@ namespace Interfaz
         }
         private void verSimulaciónToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            bool hayConflictos = false; //Para comprobar si hay conflictos
-
-            for (int i = 0; i < miLista.GetNum(); i++)
+            if (miLista.GetNum() >= 2)
             {
-                for (int j = i + 1; j < miLista.GetNum(); j++)
-                {
-                    FlightPlan v1 = miLista.GetFlightPlan(i);
-                    FlightPlan v2 = miLista.GetFlightPlan(j);
+                bool hayConflictos = false;
 
-                    if (v1.ConflictoTrayectoria(v2, distanciaSeguridad, tiempoCiclo))
+                for (int i = 0; i < miLista.GetNum(); i++)
+                {
+                    for (int j = i + 1; j < miLista.GetNum(); j++)
                     {
-                        hayConflictos = true;
-                        MessageBox.Show("Se ha detectado conflictos entre" + v1 + "y" + v2, "Simulación con conflicto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        FlightPlan fp1 = miLista.GetFlightPlan(i);
+                        FlightPlan fp2 = miLista.GetFlightPlan(j);
+                        if (fp1.ConflictoTrayectoria(fp2, distanciaSeguridad, 10000))
+                            hayConflictos = true;
                     }
                 }
+                if (hayConflictos)
+                {
+                    MessageBox.Show("Se han detectado conflictos.", "Predicción de Conflictos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    MessageBox.Show("No hay conflictos previstos. Simulación segura.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
-            if (!hayConflictos)
-            {
-                MessageBox.Show("No hay conflictos previstos. Simulación segura.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+
             Simulación VentanaSimulacion = new Simulación(miLista, distanciaSeguridad, tiempoCiclo);
             VentanaSimulacion.ShowDialog();
         }
