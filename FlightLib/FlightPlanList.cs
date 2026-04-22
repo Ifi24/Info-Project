@@ -8,49 +8,37 @@ namespace FlightLib
 {
     public class FlightPlanList
     {
-        FlightPlan[] vector = new FlightPlan[10];
-        int number = 0;
+        List<FlightPlan> listaVuelos = new List<FlightPlan>();
 
-        public int AddFlightPlan(FlightPlan p)
+        // Métodos:
+        public int GetNumAviones()
         {
-            if (number == 10) // Máximo
-                return -1; 
-
-            vector[number] = p; // Añadimos flightplan p
-            number++;
-            return 0;
+            return listaVuelos.Count;
         }
-
+        public void AddFlightPlan(FlightPlan p)
+        {
+            listaVuelos.Add(p);
+        }
         public FlightPlan GetFlightPlan(int i)
         {
-            if (i < 0 || i >= number)
+            if (i < 0 || i >= listaVuelos.Count)
                 return null; 
             else
-                return vector[i];
+                return listaVuelos[i];
         }
-
         public void Mover(double tiempo) //Avisa para activar movimiento
         {
-            int i = 0;
-            while (i < number)
+            foreach (FlightPlan vuelo in listaVuelos)
             {
-                vector[i].Mover(tiempo);
-                i++;
+                vuelo.Mover(tiempo);
             }
         }
-
         public void EscribeConsola()
         {
-            int i = 0;
-            while (i < number)
+            foreach (FlightPlan vuelo in listaVuelos)
             {
-                vector[i].EscribeConsola();
-                i++;
+                vuelo.EscribeConsola();
             }
-        }
-        public int GetNum()
-        {
-            return this.number; // 'num' es el contador de aviones que declaraste en la Fase 1
         }
     }
 }

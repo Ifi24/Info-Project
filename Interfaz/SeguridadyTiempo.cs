@@ -16,21 +16,33 @@ namespace Interfaz
         public SeguridadyTiempo(double distActual, double tActual)
         {
             InitializeComponent();
+
             //Pasamos lo escrito en las TextBox a las variables actuales:
             TextBoxDistSeg.Text = distActual.ToString();
             TextBoxTCiclo.Text = tActual.ToString();
         }
 
-        //Métodos Get para leer los resultados:
+        // Métodos
+        // Gets y Sets:
         public double GetDistancia()
         { 
             return this.dist;
         }
+        public void SetDistancia(double d)
+        {
+            this.dist = d;
+        }
+
         public double GetTiempo()
         {
             return this.tiempo; 
         }
+        public void SetTiempo(double t)
+        {
+            this.tiempo = t;
+        }
 
+        // Botón para guardar los cambios:
         private void Aceptar_Click(object sender, EventArgs e)
         {
             try

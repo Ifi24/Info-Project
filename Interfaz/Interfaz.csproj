@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FlightLib\FlightLib.csproj" />
-    <ProjectReference Include="..\SimulatorConsole\SimulatorConsole.csproj" />
   </ItemGroup>
 
 </Project>

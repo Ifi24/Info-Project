@@ -58,6 +58,7 @@
             dgvVuelos.RowHeadersWidth = 82;
             dgvVuelos.Size = new Size(500, 200);
             dgvVuelos.TabIndex = 0;
+            dgvVuelos.CellContentClick += dgvVuelos_CellContentClick;
             // 
             // ColumnID
             // 

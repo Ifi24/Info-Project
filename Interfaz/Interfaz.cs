@@ -1,67 +1,67 @@
 using FlightLib;
+using System.Collections.Generic;
 
 namespace Interfaz
 {
-    public partial class Principal : Form //FASE 2.1
+    public partial class Principal : Form 
     {
         FlightPlanList miLista = new FlightPlanList();
-        PictureBox[] misPics = new PictureBox[10];
-        int numPics = 0;
+        List<PictureBox> misAviones = new List<PictureBox>();
 
-        //Variables predeterminadas (FASE 2.3):
+        //Variables predeterminadas:
         double distanciaSeguridad = 10;
         double tiempoCiclo = 1;
-
-        //Guardar dibujos aviones:
-        PictureBox[] misAviones = new PictureBox[10];
-        int numAviones = 0; //Contador de cuantos llevamos.
 
         public Principal()
         {
             InitializeComponent();
         }
 
-        private void cargarListaDeVuelosToolStripMenuItem_Click(object sender, EventArgs e) //Fase 2.2
+        // Abre un form para añadir los datos de los vuelos:
+        private void cargarListaDeVuelosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DatosVuelos VentanaVuelos = new DatosVuelos(miLista, numAviones);
-            VentanaVuelos.ShowDialog();
-            this.numAviones = VentanaVuelos.contadorVuelos;
+            DatosVuelos FormDatosVuelos = new DatosVuelos(miLista);
+            FormDatosVuelos.ShowDialog();
         }
-
+        // Abre un form para cambiar la distancia de seguridad y el tiempo de ciclo:
         private void introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem_Click(object sender, EventArgs e) //Fase 2.3
         {
-            SeguridadyTiempo VentanaSegTiempo = new SeguridadyTiempo(distanciaSeguridad, tiempoCiclo);
-            VentanaSegTiempo.ShowDialog();
+            SeguridadyTiempo FormSeguridadyTiempo = new SeguridadyTiempo(distanciaSeguridad, tiempoCiclo);
+            FormSeguridadyTiempo.ShowDialog();
 
         }
+        // Abre un form para ver la simulación de los vuelos:
         private void verSimulaciónToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (miLista.GetNum() >= 2)
-            {
-                bool hayConflictos = false;
+            bool conflictos = false;
+            string infoConflictos = "";
+            int numVuelos = miLista.GetNumAviones();
 
-                for (int i = 0; i < miLista.GetNum(); i++)
+            if (numVuelos >= 2) //Sólo si hay más de 2 vuelos.
+            {
+                for (int i = 0; i < numVuelos; i++)
                 {
-                    for (int j = i + 1; j < miLista.GetNum(); j++)
+                    for (int j = i + 1; j < numVuelos; j++)
                     {
                         FlightPlan fp1 = miLista.GetFlightPlan(i);
                         FlightPlan fp2 = miLista.GetFlightPlan(j);
-                        if (fp1.ConflictoTrayectoria(fp2, distanciaSeguridad, 10000))
-                            hayConflictos = true;
+
+                        if (fp1.PrediccionConflicto(fp2, distanciaSeguridad))
+                        {
+                            conflictos = true;
+                            infoConflictos += $"- {fp1.GetId} con {fp2.GetId}\n";
+                        }
                     }
                 }
-                if (hayConflictos)
-                {
-                    MessageBox.Show("Se han detectado conflictos.", "Predicción de Conflictos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
+                if (conflictos)
+                    MessageBox.Show("Se han detectado los siguientes conflictos:" + infoConflictos, "Predicción de Conflictos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 else
-                {
-                    MessageBox.Show("No hay conflictos previstos. Simulación segura.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+                    MessageBox.Show("No hay conflictos previstos.", "Predicción de Conflictos", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
-            Simulación VentanaSimulacion = new Simulación(miLista, distanciaSeguridad, tiempoCiclo);
-            VentanaSimulacion.ShowDialog();
+            // Abrimos el form.
+            Simulación FormSimulación = new Simulación(miLista, distanciaSeguridad, tiempoCiclo);
+            FormSimulación.ShowDialog();
         }
     }
 }

@@ -6,32 +6,41 @@ using System.Threading.Tasks;
 
 namespace FlightLib
 {
-    public class Position //Todo lo que tiene que ver con la posición de un avión
+    public class Position 
     {
-        // Atributos
-        double x; // coordenada X (2D)
-        double y; // coordenada Y (2D)
+        // Atributos:
+        double x; 
+        double y; 
 
-        // Constructores
-
+        // Constructor:
         public Position(double x, double y)
         {
             this.x = x;
             this.y = y;
         }
 
-        // Metodos
-
+        // Métodos:
+        // Gets y Sets:
         public double GetX()
-        // getter del atributo x
-        { return x; }
+        {
+            return x; 
+        }
+        public void SetX(double x)
+        {
+            this.x = x;
+        }
 
         public double GetY()
-        // getter del atributo y
-        { return y; }
+        {
+            return y;
+        }
+        public void SetY(double y)
+        {
+            this.y = y;
+        }
 
+        // Método que calcula la distancia entre dos posiciones:
         public double Distancia(Position b)
-        // retorna la distancia entre los dos Position
         {
             double resultado = Math.Sqrt((x - b.x) * (x - b.x) + (y - b.y) * (y - b.y));
             return resultado;

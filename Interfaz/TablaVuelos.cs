@@ -39,7 +39,7 @@ namespace Interfaz
             dgvVuelos.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgvVuelos.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
-            int numVuelos = listaVuelos.GetNum();
+            int numVuelos = listaVuelos.GetNumAviones();
 
             for (int i = 0; i < numVuelos; i++)
             {
@@ -65,18 +65,15 @@ namespace Interfaz
                 ventanaDistancia.ShowDialog();
             }
         }
-
-
         private void cerrarBtn_Click(object sender, EventArgs e)
         {
             Close();
         }
 
         //FASE 1.6: Pongo un botón para aplicar los cambios
-
         private void btnAplicar_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < listaVuelos.GetNum(); i++)
+            for (int i = 0; i < listaVuelos.GetNumAviones(); i++)
             {
                 try
                 {
@@ -92,11 +89,16 @@ namespace Interfaz
                     this.Close();
                     simulacion.ReiniciarSimulacion(); //Llamamos a la función que hemos creado en simulación
                 }
-                catch(FormatException)
+                catch (FormatException)
                 {
                     MessageBox.Show("No se ha podido cambiar la velocidad por un error de formato.\nIntroduzca correctamente los datos de la velocidad", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
+        }
+
+        private void dgvVuelos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

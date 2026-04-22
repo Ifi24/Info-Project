@@ -27,8 +27,8 @@ namespace Interfaz
             this.tiemp = tiempoCiclo;
             this.TimerSimulación.Tick += new EventHandler(TimerSimulación_Tick);
             this.TimerSimulación.Interval = (int)(this.tiemp * 1000);
-            misPics = new PictureBox[listaVuelos.GetNum()];
-            misLabels = new Label[listaVuelos.GetNum()];
+            misPics = new PictureBox[listaVuelos.GetNumAviones()];
+            misLabels = new Label[listaVuelos.GetNumAviones()];
 
             this.DoubleBuffered = true; //Para evitar el parpadeo al dibujar elementos.
         }
@@ -41,7 +41,7 @@ namespace Interfaz
             labelAlarma.Visible = false;
 
             //Loop para calcular la posición
-            for (int i = 0; i < listaVuelos.GetNum() && i < misPics.Length; i++)
+            for (int i = 0; i < listaVuelos.GetNumAviones() && i < misPics.Length; i++)
             {
                 FlightPlan fp = listaVuelos.GetFlightPlan(i);
                 int x = (int)Math.Round(fp.GetCurrentPosition().GetX()); //Redondeamos porque no se puede dibujar entre píxeles.
@@ -56,13 +56,13 @@ namespace Interfaz
 
             //Detectamos si hay conflictos
             //FASE 10 (1a Parte): Mejoro lo que había antes y lo hago menos molesto en caso de conflicto. Solo se muestra un label y los aviones cambian de color.
-            for (int i = 0; i < listaVuelos.GetNum(); i++)
+            for (int i = 0; i < listaVuelos.GetNumAviones(); i++)
             {
-                for (int j = i + 1; j < listaVuelos.GetNum(); j++) //Lo hago asi pensando en multiples vuelos a futuro
+                for (int j = i + 1; j < listaVuelos.GetNumAviones(); j++) //Lo hago asi pensando en multiples vuelos a futuro
                 {
                     FlightPlan fp1 = listaVuelos.GetFlightPlan(i);
                     FlightPlan fp2 = listaVuelos.GetFlightPlan(j);
-                    if (fp1.ConflictoDistancia(fp2, this.dist))
+                    if (fp1.Conflicto(fp2, this.dist))
                     {
                         //Si hay conflicto, cambiamos el color de los aviones a amarillo y mostramos el label.
                         misPics[i].BackColor = Color.Yellow;
@@ -81,7 +81,7 @@ namespace Interfaz
 
         private void Simulación_Load(object sender, EventArgs e)
         {
-            for (int i = 0; i < listaVuelos.GetNum(); i++)
+            for (int i = 0; i < listaVuelos.GetNumAviones(); i++)
             {
                 FlightPlan fp = listaVuelos.GetFlightPlan(i);
 
@@ -113,7 +113,7 @@ namespace Interfaz
 
                 PanelSimulacion.Invalidate(); //Ejecute el evento Paint
             }
-        }     
+        }
 
         //FASE 5: Creamos el evento click para mostrar la información del vuelo
         private void Avion_Click(object sender, EventArgs e)
@@ -142,7 +142,7 @@ namespace Interfaz
             //FASE 7: Parte de la función que dibuja una elipse de distancia de seguridad alrededor del avión seleccionado
             Pen Rotulador = new Pen(Color.Blue, 2);
 
-            for (int i = 0; i < listaVuelos.GetNum(); i++) //Recorremos la lista de vuelos
+            for (int i = 0; i < listaVuelos.GetNumAviones(); i++) //Recorremos la lista de vuelos
             {
                 FlightPlan fp = listaVuelos.GetFlightPlan(i); //Cogemos un FlightPLan por orden
                 //Obtenemos posiciones iniciales i finales:
@@ -175,14 +175,14 @@ namespace Interfaz
             {
                 // Añadimos aquí lo de preguntarle al usuario si quiere resolver conflictos (FASE 11)
                 // Recorremos todos contra todos para no dejar ningún conflicto sin revisar
-                for (int i = 0; i < listaVuelos.GetNum(); i++)
+                for (int i = 0; i < listaVuelos.GetNumAviones(); i++)
                 {
-                    for (int j = i + 1; j < listaVuelos.GetNum(); j++)
+                    for (int j = i + 1; j < listaVuelos.GetNumAviones(); j++)
                     {
                         FlightPlan v1 = listaVuelos.GetFlightPlan(i);
                         FlightPlan v2 = listaVuelos.GetFlightPlan(j);
 
-                        if (v1.ConflictoTrayectoria(v2, this.dist, 1.0)) // Con ConflictoTrayectoria vemos si hay algún conflicto a resolver
+                        if (v1.PrediccionConflicto(v2, this.dist)) // Con ConflictoTrayectoria vemos si hay algún conflicto a resolver
                         {
                             DialogResult respuesta = MessageBox.Show(
                                 "¡Conflicto futuro detectado entre " + v1.GetId() + " y " + v2.GetId() + " ¿Desea resolverlo?",
@@ -193,7 +193,7 @@ namespace Interfaz
                             if (respuesta == DialogResult.Yes)
                             {
                                 // Intentamos resolverlo cambiando la velocidad de uno de ellos (v2)
-                                bool logrado = v2.ResolverConflicto(v1, this.dist, 1.0);
+                                bool logrado = v2.ResolverConflicto(v1, this.dist);
 
                                 if (logrado)
                                     MessageBox.Show("Resuelto: " + v2.GetId() + " ha cambiado su velocidad.");
@@ -225,18 +225,18 @@ namespace Interfaz
         //FASE 10 (2a Parte): Botón para predecir conflictos futuros entre los vuelos
         private void boton_PredecirConflictos_Click(object sender, EventArgs e)
         {
-            if (listaVuelos.GetNum() >= 2)
+            if (listaVuelos.GetNumAviones() >= 2)
             {
                 bool hayConflictos = false;
                 string mensajeConflictos = "¡CONFLICTO DE SEPARACIÓN!\nConflictos futuros detectados entre los siguientes vuelos:\n";
 
-                for (int i = 0; i < listaVuelos.GetNum(); i++)
+                for (int i = 0; i < listaVuelos.GetNumAviones(); i++)
                 {
-                    for (int j = i + 1; j < listaVuelos.GetNum(); j++)
+                    for (int j = i + 1; j < listaVuelos.GetNumAviones(); j++)
                     {
                         FlightPlan fp1 = listaVuelos.GetFlightPlan(i);
                         FlightPlan fp2 = listaVuelos.GetFlightPlan(j);
-                        if (fp1.ConflictoTrayectoria(fp2, this.dist, 10000))
+                        if (fp1.PrediccionConflicto(fp2, this.dist))
                         {
                             hayConflictos = true;
                             mensajeConflictos += $"- {fp1.GetId()} y {fp2.GetId()}\n";
@@ -263,14 +263,14 @@ namespace Interfaz
             TimerSimulación.Stop(); //Detiene el movimiento automático (si no los paramos, los aviones se seguirán moviendo mientras reiniciamos)
             Automático.Text = "Iniciar";
 
-            for (int i = 0; i < listaVuelos.GetNum(); i++) //Recorremos todos los aviones
+            for (int i = 0; i < listaVuelos.GetNumAviones(); i++) //Recorremos todos los aviones
             {
                 FlightPlan fp = listaVuelos.GetFlightPlan(i); //Obtenemos cada avión real
-                fp.Restart(); //Reiniciamos posición
+                fp.Reseteo(); //Reiniciamos posición
             }
 
             //Volver a dibujar posiciones iniciales
-            for (int i = 0; i < listaVuelos.GetNum(); i++)
+            for (int i = 0; i < listaVuelos.GetNumAviones(); i++)
             {
                 //Obtenemos posiciones del avión ya reiniciado
                 FlightPlan fp = listaVuelos.GetFlightPlan(i);
@@ -278,7 +278,7 @@ namespace Interfaz
                 int y = (int)fp.GetCurrentPosition().GetY();
 
                 misPics[i].Location = new Point(x - 5, y - 5); //Mueve el icono
-                misPics[i].BackColor = Color.Red; 
+                misPics[i].BackColor = Color.Red;
                 misLabels[i].Location = new Point(x, y - 15);
             }
 
@@ -290,12 +290,12 @@ namespace Interfaz
         {
             // 1. Parar simulación
             TimerSimulación.Stop();
-            for (int i = 0; i < listaVuelos.GetNum(); i++) //Reiniciar todos los vuelos
+            for (int i = 0; i < listaVuelos.GetNumAviones(); i++) //Reiniciar todos los vuelos
             {
                 FlightPlan fp = listaVuelos.GetFlightPlan(i);
-                fp.Restart();
+                fp.Reseteo();
             }
-            for (int i = 0; i < listaVuelos.GetNum(); i++) //Iconos
+            for (int i = 0; i < listaVuelos.GetNumAviones(); i++) //Iconos
             {
                 FlightPlan fp = listaVuelos.GetFlightPlan(i);
 
@@ -318,6 +318,11 @@ namespace Interfaz
         private void btnReinicio_Click(object sender, EventArgs e)
         {
             ReiniciarSimulacion();
+        }
+
+        private void peligrolbl_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

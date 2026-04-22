@@ -65,7 +65,7 @@
             // 
             labelY.AutoSize = true;
             labelY.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            labelY.Location = new Point(130, 60);
+            labelY.Location = new Point(148, 60);
             labelY.Margin = new Padding(2, 0, 2, 0);
             labelY.Name = "labelY";
             labelY.Size = new Size(46, 18);

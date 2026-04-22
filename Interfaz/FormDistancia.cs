@@ -32,7 +32,7 @@ namespace Interfaz
                 double x1 = seleccionado.GetCurrentPosition().GetX();
                 double y1 = seleccionado.GetCurrentPosition().GetY();
 
-                for (int i = 0; i < lista.GetNum(); i++)
+                for (int i = 0; i < lista.GetNumAviones(); i++)
                 {
                     FlightLib.FlightPlan otroVuelo = lista.GetFlightPlan(i);
 
