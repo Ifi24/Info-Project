@@ -8,6 +8,8 @@ namespace Interfaz
         FlightPlanList miLista = new FlightPlanList();
         List<PictureBox> misAviones = new List<PictureBox>();
 
+        Simulación FormSimulación; //Para guardar el form de simulación.
+
         //Variables predeterminadas:
         double distanciaSeguridad = 10;
         double tiempoCiclo = 1;
@@ -16,7 +18,7 @@ namespace Interfaz
         {
             InitializeComponent();
         }
-
+        // Métodos:
         // Abre un form para añadir los datos de los vuelos:
         private void cargarListaDeVuelosToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -27,41 +29,27 @@ namespace Interfaz
         private void introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem_Click(object sender, EventArgs e) //Fase 2.3
         {
             SeguridadyTiempo FormSeguridadyTiempo = new SeguridadyTiempo(distanciaSeguridad, tiempoCiclo);
-            FormSeguridadyTiempo.ShowDialog();
+            if (FormSeguridadyTiempo.ShowDialog() == DialogResult.OK)
+            {
+                this.distanciaSeguridad = FormSeguridadyTiempo.GetDistancia();
+                this.tiempoCiclo = FormSeguridadyTiempo.GetTiempo();
 
+                MessageBox.Show("Cambios aplicados correctamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
         // Abre un form para ver la simulación de los vuelos:
         private void verSimulaciónToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            bool conflictos = false;
-            string infoConflictos = "";
-            int numVuelos = miLista.GetNumAviones();
+            string infoConflictos = miLista.InformeConflictos(distanciaSeguridad);
 
-            if (numVuelos >= 2) //Sólo si hay más de 2 vuelos.
-            {
-                for (int i = 0; i < numVuelos; i++)
-                {
-                    for (int j = i + 1; j < numVuelos; j++)
-                    {
-                        FlightPlan fp1 = miLista.GetFlightPlan(i);
-                        FlightPlan fp2 = miLista.GetFlightPlan(j);
+            if (infoConflictos != "")
+                MessageBox.Show("Se han detectado los siguientes conflictos: \n" + infoConflictos, "Predicción de Conflictos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            else
+                MessageBox.Show("No hay conflictos previstos.", "Predicción de Conflictos", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                        if (fp1.PrediccionConflicto(fp2, distanciaSeguridad))
-                        {
-                            conflictos = true;
-                            infoConflictos += $"- {fp1.GetId} con {fp2.GetId}\n";
-                        }
-                    }
-                }
-                if (conflictos)
-                    MessageBox.Show("Se han detectado los siguientes conflictos:" + infoConflictos, "Predicción de Conflictos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                else
-                    MessageBox.Show("No hay conflictos previstos.", "Predicción de Conflictos", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-
-            // Abrimos el form.
-            Simulación FormSimulación = new Simulación(miLista, distanciaSeguridad, tiempoCiclo);
-            FormSimulación.ShowDialog();
+        // Abrimos el form.
+        Simulación FormSimulación = new Simulación(miLista, distanciaSeguridad, tiempoCiclo);
+        FormSimulación.ShowDialog();
         }
     }
 }

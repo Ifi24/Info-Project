@@ -66,6 +66,7 @@
             label20 = new Label();
             btnAutorellenar = new Button();
             cerrarBtn = new Button();
+            btnConflicto = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             SuspendLayout();
@@ -85,7 +86,7 @@
             TextBoxV1.Location = new Point(98, 141);
             TextBoxV1.Name = "TextBoxV1";
             TextBoxV1.Size = new Size(80, 26);
-            TextBoxV1.TabIndex = 2;
+            TextBoxV1.TabIndex = 6;
             // 
             // TextBoxYF1
             // 
@@ -93,7 +94,7 @@
             TextBoxYF1.Location = new Point(249, 102);
             TextBoxYF1.Name = "TextBoxYF1";
             TextBoxYF1.Size = new Size(53, 26);
-            TextBoxYF1.TabIndex = 3;
+            TextBoxYF1.TabIndex = 5;
             // 
             // TextBoxXF1
             // 
@@ -109,7 +110,7 @@
             TextBoxYI1.Location = new Point(249, 70);
             TextBoxYI1.Name = "TextBoxYI1";
             TextBoxYI1.Size = new Size(53, 26);
-            TextBoxYI1.TabIndex = 5;
+            TextBoxYI1.TabIndex = 3;
             // 
             // TextBoxXI1
             // 
@@ -117,7 +118,7 @@
             TextBoxXI1.Location = new Point(160, 70);
             TextBoxXI1.Name = "TextBoxXI1";
             TextBoxXI1.Size = new Size(53, 26);
-            TextBoxXI1.TabIndex = 6;
+            TextBoxXI1.TabIndex = 2;
             // 
             // TextBoxID1
             // 
@@ -126,7 +127,7 @@
             TextBoxID1.Location = new Point(46, 30);
             TextBoxID1.Name = "TextBoxID1";
             TextBoxID1.Size = new Size(165, 26);
-            TextBoxID1.TabIndex = 7;
+            TextBoxID1.TabIndex = 0;
             // 
             // label3
             // 
@@ -192,7 +193,7 @@
             TextBoxYF2.Location = new Point(249, 100);
             TextBoxYF2.Name = "TextBoxYF2";
             TextBoxYF2.Size = new Size(53, 26);
-            TextBoxYF2.TabIndex = 14;
+            TextBoxYF2.TabIndex = 11;
             // 
             // TextBoxXF2
             // 
@@ -200,7 +201,7 @@
             TextBoxXF2.Location = new Point(159, 102);
             TextBoxXF2.Name = "TextBoxXF2";
             TextBoxXF2.Size = new Size(53, 26);
-            TextBoxXF2.TabIndex = 15;
+            TextBoxXF2.TabIndex = 10;
             // 
             // TextBoxYI2
             // 
@@ -208,7 +209,7 @@
             TextBoxYI2.Location = new Point(249, 70);
             TextBoxYI2.Name = "TextBoxYI2";
             TextBoxYI2.Size = new Size(53, 26);
-            TextBoxYI2.TabIndex = 16;
+            TextBoxYI2.TabIndex = 9;
             // 
             // TextBoxXI2
             // 
@@ -216,7 +217,7 @@
             TextBoxXI2.Location = new Point(160, 70);
             TextBoxXI2.Name = "TextBoxXI2";
             TextBoxXI2.Size = new Size(53, 26);
-            TextBoxXI2.TabIndex = 17;
+            TextBoxXI2.TabIndex = 8;
             // 
             // TextBoxID2
             // 
@@ -225,7 +226,7 @@
             TextBoxID2.Location = new Point(46, 29);
             TextBoxID2.Name = "TextBoxID2";
             TextBoxID2.Size = new Size(166, 26);
-            TextBoxID2.TabIndex = 18;
+            TextBoxID2.TabIndex = 7;
             // 
             // TextBoxV2
             // 
@@ -233,7 +234,7 @@
             TextBoxV2.Location = new Point(98, 140);
             TextBoxV2.Name = "TextBoxV2";
             TextBoxV2.Size = new Size(81, 26);
-            TextBoxV2.TabIndex = 19;
+            TextBoxV2.TabIndex = 12;
             // 
             // label9
             // 
@@ -426,7 +427,7 @@
             // 
             // btnAutorellenar
             // 
-            btnAutorellenar.Location = new Point(261, 9);
+            btnAutorellenar.Location = new Point(188, 9);
             btnAutorellenar.Name = "btnAutorellenar";
             btnAutorellenar.Size = new Size(145, 29);
             btnAutorellenar.TabIndex = 29;
@@ -444,12 +445,23 @@
             cerrarBtn.UseVisualStyleBackColor = true;
             cerrarBtn.Click += cerrarBtn_Click;
             // 
+            // btnConflicto
+            // 
+            btnConflicto.Location = new Point(339, 9);
+            btnConflicto.Name = "btnConflicto";
+            btnConflicto.Size = new Size(149, 29);
+            btnConflicto.TabIndex = 31;
+            btnConflicto.Text = "AutoConflictos";
+            btnConflicto.UseVisualStyleBackColor = true;
+            btnConflicto.Click += btnConflicto_Click;
+            // 
             // DatosVuelos
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaptionText;
             ClientSize = new Size(683, 281);
+            Controls.Add(btnConflicto);
             Controls.Add(cerrarBtn);
             Controls.Add(btnAutorellenar);
             Controls.Add(groupBox2);
@@ -509,5 +521,6 @@
         private Label label20;
         private Button btnAutorellenar;
         private Button cerrarBtn;
+        private Button btnConflicto;
     }
 }

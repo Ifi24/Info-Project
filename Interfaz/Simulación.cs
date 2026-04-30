@@ -33,6 +33,8 @@ namespace Interfaz
 
             this.DoubleBuffered = true; //Para evitar el parpadeo al dibujar elementos.
         }
+
+        // Métodos:
         private void Simulación_Load(object sender, EventArgs e)
         {
             misPics.Clear();
@@ -44,14 +46,14 @@ namespace Interfaz
 
                 // Configuramos el dibujo del avión.
                 PictureBox pic = new PictureBox();
-                pic.Size = new Size(10, 10);
+                pic.Size = new Size(9, 9); //Impar para que cuadre con los píxeles.
                 pic.BackColor = Color.Red;
                 pic.Tag = fp;
                 pic.Click += new EventHandler(Avion_Click);
 
                 int x = (int)fp.GetCurrentPosition().GetX();
                 int y = (int)fp.GetCurrentPosition().GetY();
-                pic.Location = new Point(x - 5, y - 5);
+                pic.Location = new Point(x - 4, y - 4);
 
                 //Etiquetas para los aviones
                 Label lbl = new Label();
@@ -66,14 +68,17 @@ namespace Interfaz
                 PanelSimulacion.Controls.Add(lbl);
                 misPics.Add(pic);
                 misLabels.Add(lbl);
+                pic.BringToFront(); //Para asegurarnos de que se dibujan bien.
+                lbl.BringToFront();
 
                 PanelSimulacion.Invalidate(); //Ejecute el evento Paint
             }
         }
 
         // Método para mover los aviones un ciclo:
-        private void MoverCiclo() //Método para mover un ciclo, usado para el botón ciclo y el automático
+        private void MoverCiclo()
         {
+            //Movemos todos los aviones
             listaVuelos.Mover(this.tiemp);
             labelAlarma.Visible = false;
 
@@ -87,43 +92,153 @@ namespace Interfaz
                 int y = (int)Math.Round(fp.GetCurrentPosition().GetY());
 
                 //Actualizaciones:
-                misPics[i].Location = new Point(x - 5, y - 5); // Movemos el cuadrito existente
-                misLabels[i].Location = new Point(x, y - 15);
+                misPics[i].Location = new Point(x - 4, y - 4); // Movemos el cuadrito existente
+                misLabels[i].Location = new Point(x + 6, y - 6);
                 //Reseteamos el color por si antes estaba en amarillo por conflicto y ya no lo están.
                 misPics[i].BackColor = Color.Red;
             }
-            PanelSimulacion.Invalidate(); //Borra elipses y linias anteriores y dibuja las nuevas.
 
             // Detectamos y mostramos si hay conflictos
-            for (int i = 0; i < listaVuelos.GetNumAviones(); i++)
+            var conflictosDetectados = listaVuelos.GetConflictos(this.dist);
+
+            if (conflictosDetectados.Count > 0)
             {
-                for (int j = i + 1; j < listaVuelos.GetNumAviones(); j++) //Lo hago asi pensando en multiples vuelos a futuro
+                string idsConflicto = "";
+
+                foreach (FlightPlan[] pareja in conflictosDetectados)
                 {
-                    FlightPlan fp1 = listaVuelos.GetFlightPlan(i);
-                    FlightPlan fp2 = listaVuelos.GetFlightPlan(j);
-                    if (fp1.Conflicto(fp2, this.dist))
+                    // Guardamos los ids en conflicto
+                    idsConflicto += $"{pareja[0].GetId()} y {pareja[1].GetId()}, ";
+
+                    // Pintamos de amarillo los aviones en conflicto
+                    for (int i = 0; i < listaVuelos.GetNumAviones(); i++)
                     {
-                        //Si hay conflicto, cambiamos el color de los aviones a amarillo y mostramos el label.
-                        misPics[i].BackColor = Color.Yellow;
-                        misPics[j].BackColor = Color.Yellow;
-                        labelAlarma.Text = $"¡Conflicto entre {fp1.GetId()} y {fp2.GetId()}!";
-                        labelAlarma.Visible = true;
+                        FlightPlan fp = listaVuelos.GetFlightPlan(i);
+                        if (fp == pareja[0] || fp == pareja[1])
+                        {
+                            misPics[i].BackColor = Color.Yellow;
+                        }
                     }
                 }
+
+                labelAlarma.Text = $"¡Conflicto entre: {idsConflicto.TrimEnd(',', ' ')}!";
+                labelAlarma.Visible = true;
+
+                PanelSimulacion.Invalidate(); //Borra elipses y linias anteriores y dibuja las nuevas.
             }
         }
 
-        private void BotonUnCiclo_Click(object sender, EventArgs e)
+        // Método que dibuja una línia entre la posición inicial y final (trayectoria) y elipses de distancia de seguridad:
+        private void PanelSimulacion_Paint(object sender, PaintEventArgs e)
+        // Utilizaremos e.Graphics ya que es la única manera de dibujar línias.
+        {
+            Graphics g = e.Graphics;
+            using (Pen Lapiz = new Pen(Color.Gray, 1) { DashStyle = System.Drawing.Drawing2D.DashStyle.Dot }) //Para las línias.
+            using (Pen Rotulador = new Pen(Color.Blue, 2)) //Para las elipses
+
+                for (int i = 0; i < listaVuelos.GetNumAviones(); i++) // Dibujamos uno por uno.
+                {
+                    FlightPlan fp = listaVuelos.GetFlightPlan(i); 
+
+                    int xi = (int)fp.GetInitialPosition().GetX();
+                    int yi = (int)fp.GetInitialPosition().GetY();
+                    int xf = (int)fp.GetFinalPosition().GetX();
+                    int yf = (int)fp.GetFinalPosition().GetY();
+
+                    g.DrawLine(Lapiz, xi, yi, xf, yf); //Dibujamos la línia
+
+                    // Dibujamos la elipse que representa la distancia de seguridad:
+                    float x = (float)fp.GetCurrentPosition().GetX();
+                    float y = (float)fp.GetCurrentPosition().GetY();
+                    float diametro = (float)this.dist * 2;
+                    g.DrawEllipse(Rotulador, x - (float)this.dist, y - (float)this.dist, diametro, diametro);
+                }
+        }
+
+        // Método que reinicia la simulación:
+        public void ReiniciarSimulacion()
+        {
+            TimerSimulación.Stop(); //Paramos el timer
+            btn_AutoCiclo.Text = "Iniciar";
+
+            listaVuelos.ReiniciarVuelos();
+
+            // Actualizamos la posición en el panel:
+            for (int i = 0; i < listaVuelos.GetNumAviones(); i++)
+            {
+                FlightPlan fp = listaVuelos.GetFlightPlan(i);
+                int x = (int)fp.GetCurrentPosition().GetX();
+                int y = (int)fp.GetCurrentPosition().GetY();
+
+                misPics[i].Location = new Point(x - 4, y - 4);
+                misPics[i].BackColor = Color.Red;
+                misLabels[i].Location = new Point(x + 6, y - 6);
+            }
+
+            labelAlarma.Visible = false;
+            PanelSimulacion.Invalidate();
+        }
+
+        // Botón que mueve un ciclo:
+        private void btn_UnCiclo_Click(object sender, EventArgs e)
         {
             MoverCiclo();
         }
 
-        //FASE 5: Creamos el evento click para mostrar la información del vuelo
+        // Cuando el timer avanza, se mueven los aviones un ciclo:
+        private void TimerSimulación_Tick(object sender, EventArgs e)
+        {
+            MoverCiclo();
+        }
+
+        // Botón de mover un ciclo automáticamente:
+        private void btnAutoCiclo_Click(object sender, EventArgs e)
+        {
+            if (TimerSimulación.Enabled)
+            {
+                //Si ya esta funcionando, lo paramos.
+                TimerSimulación.Stop();
+                btn_AutoCiclo.Text = "Iniciar";
+            }
+            else //Si queremos que funcione:
+            {
+                for (int i = 0; i < listaVuelos.GetNumAviones(); i++)
+                {
+                    for (int j = i + 1; j < listaVuelos.GetNumAviones(); j++)
+                    {
+                        FlightPlan v1 = listaVuelos.GetFlightPlan(i);
+                        FlightPlan v2 = listaVuelos.GetFlightPlan(j);
+
+                        if (v1.PrediccionConflicto(v2, this.dist)) // Si se detecta conflicto...
+                        {
+                            //Avisamos al usuario y le preguntamos si quiere resolverlo:
+                            DialogResult respuesta = MessageBox.Show("¡Conflicto futuro detectado entre " + v1.GetId() + " y " + v2.GetId() + " ¿Desea resolverlo?", "Resolución Automática", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                            if (respuesta == DialogResult.Yes)
+                            {
+                                // Intentamos resolverlo cambiando la velocidad de uno de ellos (v2)
+                                bool logrado = v2.ResolverConflicto(v1, this.dist);
+
+                                if (logrado)
+                                    MessageBox.Show("Conflicto resuelto. " + v2.GetId() + " ha cambiado su velocidad.", "Resolución Conflicto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                else
+                                    MessageBox.Show("No se pudo encontrar solución para el conflicto entre " + v1.GetId() + " y " + v2.GetId(), "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                        }
+                    }
+                }
+                // Una vez revisados todos, arrancamos
+                TimerSimulación.Start();
+                btn_AutoCiclo.Text = "Detener";
+            }
+        }
+
+        // Método que muestra los datos de un avión al que se le hace click:
         private void Avion_Click(object sender, EventArgs e)
         {
-            if (sender is PictureBox pic) //Comprova si el sender es un PictureBox i l'assigna a la variable pic
+            if (sender is PictureBox pic) //Comprueba si el sender es un PictureBox i se lo asigna a la variable pic.
             {
-                if (pic.Tag is FlightPlan fp) //Comprova si el Tag del PictureBox es un FlightPlan i l'assigna a la variable fp
+                if (pic.Tag is FlightPlan fp) //Comprueba si el Tag del PictureBox es un FlightPlan i se lo asigna a la variable fp.
                 {
                     InfoAvion info = new InfoAvion(fp);
                     info.ShowDialog();
@@ -135,161 +250,27 @@ namespace Interfaz
             }
         }
 
-        //FASE 6: Función que dibuja una línia entre la posición inicial i final:
-        private void PanelSimulacion_Paint(object sender, PaintEventArgs e)
-        // Utilizaremos e.Graphics ya que es la única manera de dibujar línias.
-        {
-            Graphics g = e.Graphics;
-            using (Pen Lapiz = new Pen(Color.Gray, 1) { DashStyle = System.Drawing.Drawing2D.DashStyle.Dot })
-            using (Pen Rotulador = new Pen(Color.Blue, 2))
-
-                for (int i = 0; i < listaVuelos.GetNumAviones(); i++) //Recorremos la lista de vuelos
-            {
-                FlightPlan fp = listaVuelos.GetFlightPlan(i); //Cogemos un FlightPLan por orden
-                //Obtenemos posiciones iniciales i finales:
-                int xi = (int)fp.GetInitialPosition().GetX();
-                int yi = (int)fp.GetInitialPosition().GetY();
-                int xf = (int)fp.GetFinalPosition().GetX();
-                int yf = (int)fp.GetFinalPosition().GetY();
-
-                g.DrawLine(Lapiz, xi, yi, xf, yf); //Dibujamos
-
-                //FASE 7: Parte de la función que dibuja una elipse de distancia de seguridad alrededor del avión seleccionado
-                float x = (float)fp.GetCurrentPosition().GetX();
-                float y = (float)fp.GetCurrentPosition().GetY();
-                float radio = (float)this.dist;
-                g.DrawEllipse(Rotulador, (float)(x - radio), (float)(y - radio), (float)(radio * 2), (float)(radio * 2));
-                //Quiero mejorar como se ve la elipse y que a medida que avance se borre la elipse anterior, pero lo arreglo más tarde, que ahora quiero avanzar con las demás fases.
-            }
-        }
-
-        //FASE 8: Botón de ciclo automático:
-        private void Automático_Click(object sender, EventArgs e)
-        {
-            if (TimerSimulación.Enabled)
-            {
-                //Para cuando no funcione, lo iniciamos.
-                TimerSimulación.Stop();
-                Automático.Text = "Iniciar";
-            }
-            else
-            {
-                // Añadimos aquí lo de preguntarle al usuario si quiere resolver conflictos (FASE 11)
-                // Recorremos todos contra todos para no dejar ningún conflicto sin revisar
-                for (int i = 0; i < listaVuelos.GetNumAviones(); i++)
-                {
-                    for (int j = i + 1; j < listaVuelos.GetNumAviones(); j++)
-                    {
-                        FlightPlan v1 = listaVuelos.GetFlightPlan(i);
-                        FlightPlan v2 = listaVuelos.GetFlightPlan(j);
-
-                        if (v1.PrediccionConflicto(v2, this.dist)) // Con ConflictoTrayectoria vemos si hay algún conflicto a resolver
-                        {
-                            DialogResult respuesta = MessageBox.Show(
-                                "¡Conflicto futuro detectado entre " + v1.GetId() + " y " + v2.GetId() + " ¿Desea resolverlo?",
-                                "Resolución Automática",
-                                MessageBoxButtons.YesNo,
-                                MessageBoxIcon.Warning);
-
-                            if (respuesta == DialogResult.Yes)
-                            {
-                                // Intentamos resolverlo cambiando la velocidad de uno de ellos (v2)
-                                bool logrado = v2.ResolverConflicto(v1, this.dist);
-
-                                if (logrado)
-                                    MessageBox.Show("Resuelto: " + v2.GetId() + " ha cambiado su velocidad.");
-                                else
-                                    MessageBox.Show("No se pudo encontrar solución para " + v1.GetId() + " y " + v2.GetId(), "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            }
-                        }
-                    }
-                }
-
-                // Una vez revisados todos, arrancamos
-                TimerSimulación.Start();
-                Automático.Text = "Detener";
-            }
-        }
-
-        private void TimerSimulación_Tick(object sender, EventArgs e)
-        {
-            MoverCiclo();
-        }
-
-        //FASE 9: Botón para mostrar todos los datos de los vuelos
-        private void boton_MostarDatos(object sender, EventArgs e)
+        //Botón para mostrar todos los datos de los vuelos
+        private void btn_DatosAviones_Click(object sender, EventArgs e)
         {
             TablaVuelos ventanaTabla = new TablaVuelos(listaVuelos, this);
             ventanaTabla.ShowDialog();
         }
 
-        //FASE 10 (2a Parte): Botón para predecir conflictos futuros entre los vuelos
-        private void boton_PredecirConflictos_Click(object sender, EventArgs e)
+        // Botón para predecir conflictos futuros entre los vuelos
+        private void btn_PredecirConflictos_Click(object sender, EventArgs e)
         {
-            if (listaVuelos.GetNumAviones() >= 2)
-            {
-                bool hayConflictos = false;
-                string mensajeConflictos = "¡CONFLICTO DE SEPARACIÓN!\nConflictos futuros detectados entre los siguientes vuelos:\n";
+            string informe = listaVuelos.InformeConflictos(this.dist);
 
-                for (int i = 0; i < listaVuelos.GetNumAviones(); i++)
-                {
-                    for (int j = i + 1; j < listaVuelos.GetNumAviones(); j++)
-                    {
-                        FlightPlan fp1 = listaVuelos.GetFlightPlan(i);
-                        FlightPlan fp2 = listaVuelos.GetFlightPlan(j);
-                        if (fp1.PrediccionConflicto(fp2, this.dist))
-                        {
-                            hayConflictos = true;
-                            mensajeConflictos += $"- {fp1.GetId()} y {fp2.GetId()}\n";
-                        }
-
-                    }
-                }
-                if (hayConflictos)
-                {
-                    MessageBox.Show(mensajeConflictos, "Predicción de Conflictos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-                else
-                {
-                    MessageBox.Show("No se han detectado conflictos futuros entre los vuelos.\nEs una ruta segura.", "Predicción de Conflictos", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
+            if (string.IsNullOrEmpty(informe))
+                MessageBox.Show("No se han detectado conflictos futuros. Ruta segura.","Predicción", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else
-            {
-                MessageBox.Show("Se necesitan al menos 2 vuelos para predecir conflictos.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-        public void ReiniciarSimulacion()
-        {
-            TimerSimulación.Stop(); //Detiene el movimiento automático (si no los paramos, los aviones se seguirán moviendo mientras reiniciamos)
-            Automático.Text = "Iniciar";
-
-            for (int i = 0; i < listaVuelos.GetNumAviones(); i++) //Recorremos todos los aviones
-            {
-                FlightPlan fp = listaVuelos.GetFlightPlan(i); //Obtenemos cada avión real
-                fp.Reseteo(); //Reiniciamos posición
-            }
-
-            //Volver a dibujar posiciones iniciales
-            for (int i = 0; i < listaVuelos.GetNumAviones(); i++)
-            {
-                //Obtenemos posiciones del avión ya reiniciado
-                FlightPlan fp = listaVuelos.GetFlightPlan(i);
-                int x = (int)fp.GetCurrentPosition().GetX();
-                int y = (int)fp.GetCurrentPosition().GetY();
-
-                misPics[i].Location = new Point(x - 5, y - 5); //Mueve el icono
-                misPics[i].BackColor = Color.Red;
-                misLabels[i].Location = new Point(x, y - 15);
-            }
-
-            labelAlarma.Visible = false;
-            PanelSimulacion.Invalidate();
+                MessageBox.Show("¡CONFLICTO DE SEPARACIÓN!\nDetectado en trayectoria entre:\n" + informe, "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         private void btnResolver_Click(object sender, EventArgs e)
         {
-            // 1. Parar simulación
+            // Paramos simulación
             TimerSimulación.Stop();
             for (int i = 0; i < listaVuelos.GetNumAviones(); i++) //Reiniciar todos los vuelos
             {
@@ -303,7 +284,7 @@ namespace Interfaz
                 int x = (int)fp.GetCurrentPosition().GetX();
                 int y = (int)fp.GetCurrentPosition().GetY();
 
-                misPics[i].Location = new Point(x - 5, y - 5);
+                misPics[i].Location = new Point(x - 4, y - 4);
                 misPics[i].BackColor = Color.Red;
             }
             TimerSimulación.Start(); //Renaudar simulación

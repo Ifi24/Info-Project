@@ -29,40 +29,40 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            button1 = new Button();
+            btn_UnCiclo = new Button();
             PanelSimulacion = new Panel();
             labelAlarma = new Label();
             label2 = new Label();
             label1 = new Label();
             label3 = new Label();
             label4 = new Label();
-            Automático = new Button();
+            btn_AutoCiclo = new Button();
             TimerSimulación = new System.Windows.Forms.Timer(components);
             groupBox1 = new GroupBox();
             label8 = new Label();
             button3 = new Button();
             cerrarBtn = new Button();
-            boton_PredecirConflictos = new Button();
+            btn_PredecirConflictos = new Button();
             label7 = new Label();
-            button2 = new Button();
+            btn_DatosAviones = new Button();
             label6 = new Label();
             label5 = new Label();
             PanelSimulacion.SuspendLayout();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
-            // button1
+            // btn_UnCiclo
             // 
-            button1.Font = new Font("Segoe UI Historic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.ForeColor = SystemColors.ActiveCaptionText;
-            button1.Location = new Point(26, 34);
-            button1.Margin = new Padding(2);
-            button1.Name = "button1";
-            button1.Size = new Size(130, 29);
-            button1.TabIndex = 1;
-            button1.Text = "Avanzar Ciclo";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += BotonUnCiclo_Click;
+            btn_UnCiclo.Font = new Font("Segoe UI Historic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btn_UnCiclo.ForeColor = SystemColors.ActiveCaptionText;
+            btn_UnCiclo.Location = new Point(26, 34);
+            btn_UnCiclo.Margin = new Padding(2);
+            btn_UnCiclo.Name = "btn_UnCiclo";
+            btn_UnCiclo.Size = new Size(130, 29);
+            btn_UnCiclo.TabIndex = 1;
+            btn_UnCiclo.Text = "Avanzar un Ciclo";
+            btn_UnCiclo.UseVisualStyleBackColor = true;
+            btn_UnCiclo.Click += btn_UnCiclo_Click;
             // 
             // PanelSimulacion
             // 
@@ -135,17 +135,17 @@
             label4.TabIndex = 0;
             label4.Text = "800";
             // 
-            // Automático
+            // btn_AutoCiclo
             // 
-            Automático.Font = new Font("Segoe UI Historic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Automático.ForeColor = SystemColors.ActiveCaptionText;
-            Automático.Location = new Point(26, 102);
-            Automático.Name = "Automático";
-            Automático.Size = new Size(130, 29);
-            Automático.TabIndex = 6;
-            Automático.Text = "Iniciar";
-            Automático.UseVisualStyleBackColor = true;
-            Automático.Click += Automático_Click;
+            btn_AutoCiclo.Font = new Font("Segoe UI Historic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btn_AutoCiclo.ForeColor = SystemColors.ActiveCaptionText;
+            btn_AutoCiclo.Location = new Point(26, 102);
+            btn_AutoCiclo.Name = "btn_AutoCiclo";
+            btn_AutoCiclo.Size = new Size(130, 29);
+            btn_AutoCiclo.TabIndex = 6;
+            btn_AutoCiclo.Text = "Iniciar";
+            btn_AutoCiclo.UseVisualStyleBackColor = true;
+            btn_AutoCiclo.Click += btnAutoCiclo_Click;
             // 
             // TimerSimulación
             // 
@@ -157,13 +157,13 @@
             groupBox1.Controls.Add(label8);
             groupBox1.Controls.Add(button3);
             groupBox1.Controls.Add(cerrarBtn);
-            groupBox1.Controls.Add(boton_PredecirConflictos);
+            groupBox1.Controls.Add(btn_PredecirConflictos);
             groupBox1.Controls.Add(label7);
-            groupBox1.Controls.Add(button2);
+            groupBox1.Controls.Add(btn_DatosAviones);
             groupBox1.Controls.Add(label6);
             groupBox1.Controls.Add(label5);
-            groupBox1.Controls.Add(button1);
-            groupBox1.Controls.Add(Automático);
+            groupBox1.Controls.Add(btn_UnCiclo);
+            groupBox1.Controls.Add(btn_AutoCiclo);
             groupBox1.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox1.ForeColor = SystemColors.Control;
             groupBox1.Location = new Point(12, 12);
@@ -207,18 +207,17 @@
             cerrarBtn.UseVisualStyleBackColor = true;
             cerrarBtn.Click += cerrarBtn_Click;
             // 
-            // boton_PredecirConflictos
+            // btn_PredecirConflictos
             // 
-            boton_PredecirConflictos.Font = new Font("Tahoma", 9F);
-            boton_PredecirConflictos.ForeColor = SystemColors.ActiveCaptionText;
-            boton_PredecirConflictos.Location = new Point(26, 222);
-            boton_PredecirConflictos.Margin = new Padding(2);
-            boton_PredecirConflictos.Name = "boton_PredecirConflictos";
-            boton_PredecirConflictos.Size = new Size(130, 29);
-            boton_PredecirConflictos.TabIndex = 11;
-            boton_PredecirConflictos.Text = "Predecir";
-            boton_PredecirConflictos.UseVisualStyleBackColor = true;
-            boton_PredecirConflictos.Click += boton_PredecirConflictos_Click;
+            btn_PredecirConflictos.Font = new Font("Tahoma", 9F);
+            btn_PredecirConflictos.ForeColor = SystemColors.ActiveCaptionText;
+            btn_PredecirConflictos.Location = new Point(26, 222);
+            btn_PredecirConflictos.Margin = new Padding(2);
+            btn_PredecirConflictos.Name = "btn_PredecirConflictos";
+            btn_PredecirConflictos.Size = new Size(130, 29);
+            btn_PredecirConflictos.TabIndex = 11;
+            btn_PredecirConflictos.Text = "Predecir";
+            btn_PredecirConflictos.UseVisualStyleBackColor = true;
             // 
             // label7
             // 
@@ -231,18 +230,18 @@
             label7.TabIndex = 10;
             label7.Text = "Predecir conflictos:";
             // 
-            // button2
+            // btn_DatosAviones
             // 
-            button2.Font = new Font("Segoe UI Historic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button2.ForeColor = SystemColors.ActiveCaptionText;
-            button2.Location = new Point(26, 162);
-            button2.Margin = new Padding(2);
-            button2.Name = "button2";
-            button2.Size = new Size(130, 29);
-            button2.TabIndex = 9;
-            button2.Text = "Mostrar";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += boton_MostarDatos;
+            btn_DatosAviones.Font = new Font("Segoe UI Historic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btn_DatosAviones.ForeColor = SystemColors.ActiveCaptionText;
+            btn_DatosAviones.Location = new Point(26, 162);
+            btn_DatosAviones.Margin = new Padding(2);
+            btn_DatosAviones.Name = "btn_DatosAviones";
+            btn_DatosAviones.Size = new Size(130, 29);
+            btn_DatosAviones.TabIndex = 9;
+            btn_DatosAviones.Text = "Mostrar";
+            btn_DatosAviones.UseVisualStyleBackColor = true;
+            btn_DatosAviones.Click += btn_DatosAviones_Click;
             // 
             // label6
             // 
@@ -287,20 +286,20 @@
         }
 
         #endregion
-        private Button button1;
+        private Button btn_UnCiclo;
         private Panel PanelSimulacion;
         private Label label1;
         private Label label2;
         private Label label3;
         private Label label4;
-        private Button Automático;
+        private Button btn_AutoCiclo;
         private System.Windows.Forms.Timer TimerSimulación;
         private GroupBox groupBox1;
         private Label label5;
         private Label label6;
-        private Button button2;
+        private Button btn_DatosAviones;
         private Label labelAlarma;
-        private Button boton_PredecirConflictos;
+        private Button btn_PredecirConflictos;
         private Label label7;
         private Button cerrarBtn;
         private Button button3;
