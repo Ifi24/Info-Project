@@ -21,6 +21,7 @@ namespace Interfaz
             labelX.Text = "Posición X: " + posicion.GetX().ToString("N2");
             labelY.Text = "Posición Y: " + posicion.GetY().ToString("N2");
             labelVelocidad.Text = "Velocidad: " + vueloSeleccionado.GetVelocidad().ToString("N2");
+            labelAerolinia.Text = "Aerolinia: " + vueloSeleccionado.GetAerolinia();
         }
 
         private void cerrarBtn_Click(object sender, EventArgs e)

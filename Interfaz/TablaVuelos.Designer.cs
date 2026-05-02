@@ -44,8 +44,7 @@
             dgvVuelos.BackgroundColor = SystemColors.Desktop;
             dgvVuelos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvVuelos.Columns.AddRange(new DataGridViewColumn[] { ColumnID, PosX, PosY, ColumnSpeed });
-            dgvVuelos.Location = new Point(10, 10);
-            dgvVuelos.Margin = new Padding(2);
+            dgvVuelos.Location = new Point(16, 16);
             dgvVuelos.Name = "dgvVuelos";
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = SystemColors.Desktop;
@@ -56,7 +55,7 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dgvVuelos.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvVuelos.RowHeadersWidth = 82;
-            dgvVuelos.Size = new Size(500, 200);
+            dgvVuelos.Size = new Size(812, 320);
             dgvVuelos.TabIndex = 0;
             dgvVuelos.CellContentClick += dgvVuelos_CellContentClick;
             // 
@@ -90,9 +89,10 @@
             // 
             // cerrarBtn
             // 
-            cerrarBtn.Location = new Point(230, 220);
+            cerrarBtn.Location = new Point(374, 352);
+            cerrarBtn.Margin = new Padding(5, 5, 5, 5);
             cerrarBtn.Name = "cerrarBtn";
-            cerrarBtn.Size = new Size(94, 29);
+            cerrarBtn.Size = new Size(153, 46);
             cerrarBtn.TabIndex = 1;
             cerrarBtn.Text = "Cerrar";
             cerrarBtn.UseVisualStyleBackColor = true;
@@ -100,9 +100,10 @@
             // 
             // button1
             // 
-            button1.Location = new Point(416, 220);
+            button1.Location = new Point(676, 352);
+            button1.Margin = new Padding(5, 5, 5, 5);
             button1.Name = "button1";
-            button1.Size = new Size(94, 29);
+            button1.Size = new Size(153, 46);
             button1.TabIndex = 2;
             button1.Text = "Cambiar";
             button1.UseVisualStyleBackColor = true;
@@ -110,14 +111,13 @@
             // 
             // TablaVuelos
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Desktop;
-            ClientSize = new Size(522, 263);
+            ClientSize = new Size(848, 421);
             Controls.Add(button1);
             Controls.Add(cerrarBtn);
             Controls.Add(dgvVuelos);
-            Margin = new Padding(2);
             Name = "TablaVuelos";
             Text = "DatosGridVuelos";
             Load += TablaVuelos_Load;

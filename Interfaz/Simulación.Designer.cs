@@ -39,6 +39,8 @@
             btn_AutoCiclo = new Button();
             TimerSimulación = new System.Windows.Forms.Timer(components);
             groupBox1 = new GroupBox();
+            label9 = new Label();
+            btn_Deshacer = new Button();
             label8 = new Label();
             button3 = new Button();
             cerrarBtn = new Button();
@@ -55,10 +57,9 @@
             // 
             btn_UnCiclo.Font = new Font("Segoe UI Historic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btn_UnCiclo.ForeColor = SystemColors.ActiveCaptionText;
-            btn_UnCiclo.Location = new Point(26, 34);
-            btn_UnCiclo.Margin = new Padding(2);
+            btn_UnCiclo.Location = new Point(42, 54);
             btn_UnCiclo.Name = "btn_UnCiclo";
-            btn_UnCiclo.Size = new Size(130, 29);
+            btn_UnCiclo.Size = new Size(211, 46);
             btn_UnCiclo.TabIndex = 1;
             btn_UnCiclo.Text = "Avanzar un Ciclo";
             btn_UnCiclo.UseVisualStyleBackColor = true;
@@ -71,9 +72,10 @@
             PanelSimulacion.Controls.Add(labelAlarma);
             PanelSimulacion.Controls.Add(label2);
             PanelSimulacion.Controls.Add(label1);
-            PanelSimulacion.Location = new Point(199, 12);
+            PanelSimulacion.Location = new Point(323, 19);
+            PanelSimulacion.Margin = new Padding(5);
             PanelSimulacion.Name = "PanelSimulacion";
-            PanelSimulacion.Size = new Size(800, 600);
+            PanelSimulacion.Size = new Size(1299, 959);
             PanelSimulacion.TabIndex = 0;
             PanelSimulacion.Paint += PanelSimulacion_Paint;
             // 
@@ -84,10 +86,9 @@
             labelAlarma.Enabled = false;
             labelAlarma.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             labelAlarma.ForeColor = Color.LightCoral;
-            labelAlarma.Location = new Point(186, 9);
-            labelAlarma.Margin = new Padding(2, 0, 2, 0);
+            labelAlarma.Location = new Point(302, 14);
             labelAlarma.Name = "labelAlarma";
-            labelAlarma.Size = new Size(0, 28);
+            labelAlarma.Size = new Size(0, 45);
             labelAlarma.TabIndex = 0;
             labelAlarma.TextAlign = ContentAlignment.MiddleCenter;
             // 
@@ -96,9 +97,10 @@
             label2.AutoSize = true;
             label2.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.ForeColor = SystemColors.Control;
-            label2.Location = new Point(781, -1);
+            label2.Location = new Point(1269, -2);
+            label2.Margin = new Padding(5, 0, 5, 0);
             label2.Name = "label2";
-            label2.Size = new Size(18, 18);
+            label2.Size = new Size(28, 29);
             label2.TabIndex = 3;
             label2.Text = "0";
             // 
@@ -107,9 +109,10 @@
             label1.AutoSize = true;
             label1.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = SystemColors.Control;
-            label1.Location = new Point(-1, 581);
+            label1.Location = new Point(-2, 930);
+            label1.Margin = new Padding(5, 0, 5, 0);
             label1.Name = "label1";
-            label1.Size = new Size(18, 18);
+            label1.Size = new Size(28, 29);
             label1.TabIndex = 2;
             label1.Text = "0";
             // 
@@ -118,9 +121,10 @@
             label3.AutoSize = true;
             label3.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = SystemColors.Control;
-            label3.Location = new Point(1005, 585);
+            label3.Location = new Point(1633, 936);
+            label3.Margin = new Padding(5, 0, 5, 0);
             label3.Name = "label3";
-            label3.Size = new Size(38, 18);
+            label3.Size = new Size(58, 29);
             label3.TabIndex = 4;
             label3.Text = "600";
             // 
@@ -129,9 +133,10 @@
             label4.AutoSize = true;
             label4.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label4.ForeColor = SystemColors.Control;
-            label4.Location = new Point(957, 615);
+            label4.Location = new Point(1555, 984);
+            label4.Margin = new Padding(5, 0, 5, 0);
             label4.Name = "label4";
-            label4.Size = new Size(38, 18);
+            label4.Size = new Size(58, 29);
             label4.TabIndex = 0;
             label4.Text = "800";
             // 
@@ -139,9 +144,10 @@
             // 
             btn_AutoCiclo.Font = new Font("Segoe UI Historic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btn_AutoCiclo.ForeColor = SystemColors.ActiveCaptionText;
-            btn_AutoCiclo.Location = new Point(26, 102);
+            btn_AutoCiclo.Location = new Point(42, 163);
+            btn_AutoCiclo.Margin = new Padding(5);
             btn_AutoCiclo.Name = "btn_AutoCiclo";
-            btn_AutoCiclo.Size = new Size(130, 29);
+            btn_AutoCiclo.Size = new Size(211, 46);
             btn_AutoCiclo.TabIndex = 6;
             btn_AutoCiclo.Text = "Iniciar";
             btn_AutoCiclo.UseVisualStyleBackColor = true;
@@ -154,6 +160,8 @@
             // groupBox1
             // 
             groupBox1.BackColor = Color.DarkSlateGray;
+            groupBox1.Controls.Add(label9);
+            groupBox1.Controls.Add(btn_Deshacer);
             groupBox1.Controls.Add(label8);
             groupBox1.Controls.Add(button3);
             groupBox1.Controls.Add(cerrarBtn);
@@ -166,20 +174,47 @@
             groupBox1.Controls.Add(btn_AutoCiclo);
             groupBox1.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox1.ForeColor = SystemColors.Control;
-            groupBox1.Location = new Point(12, 12);
+            groupBox1.Location = new Point(20, 19);
+            groupBox1.Margin = new Padding(5);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(181, 600);
+            groupBox1.Padding = new Padding(5);
+            groupBox1.Size = new Size(294, 960);
             groupBox1.TabIndex = 7;
             groupBox1.TabStop = false;
             groupBox1.Text = "Panel de Simulación";
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label9.Location = new Point(10, 517);
+            label9.Margin = new Padding(5, 0, 5, 0);
+            label9.Name = "label9";
+            label9.Size = new Size(250, 29);
+            label9.TabIndex = 16;
+            label9.Text = "Deshacer último paso:";
+            // 
+            // btn_Deshacer
+            // 
+            btn_Deshacer.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btn_Deshacer.ForeColor = SystemColors.ActiveCaptionText;
+            btn_Deshacer.Location = new Point(42, 551);
+            btn_Deshacer.Margin = new Padding(5);
+            btn_Deshacer.Name = "btn_Deshacer";
+            btn_Deshacer.Size = new Size(211, 46);
+            btn_Deshacer.TabIndex = 15;
+            btn_Deshacer.Text = "Deshacer";
+            btn_Deshacer.UseVisualStyleBackColor = true;
+            btn_Deshacer.Click += btn_Deshacer_Click;
             // 
             // label8
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label8.Location = new Point(6, 262);
+            label8.Location = new Point(10, 419);
+            label8.Margin = new Padding(5, 0, 5, 0);
             label8.Name = "label8";
-            label8.Size = new Size(149, 18);
+            label8.Size = new Size(253, 29);
             label8.TabIndex = 14;
             label8.Text = "Reiniciar la simulación:";
             // 
@@ -187,9 +222,10 @@
             // 
             button3.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             button3.ForeColor = SystemColors.ActiveCaptionText;
-            button3.Location = new Point(26, 283);
+            button3.Location = new Point(42, 453);
+            button3.Margin = new Padding(5);
             button3.Name = "button3";
-            button3.Size = new Size(130, 29);
+            button3.Size = new Size(211, 46);
             button3.TabIndex = 13;
             button3.Text = "Reiniciar";
             button3.UseVisualStyleBackColor = true;
@@ -199,9 +235,10 @@
             // 
             cerrarBtn.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cerrarBtn.ForeColor = SystemColors.ActiveCaptionText;
-            cerrarBtn.Location = new Point(40, 553);
+            cerrarBtn.Location = new Point(65, 885);
+            cerrarBtn.Margin = new Padding(5);
             cerrarBtn.Name = "cerrarBtn";
-            cerrarBtn.Size = new Size(94, 29);
+            cerrarBtn.Size = new Size(153, 46);
             cerrarBtn.TabIndex = 12;
             cerrarBtn.Text = "Cerrar";
             cerrarBtn.UseVisualStyleBackColor = true;
@@ -211,10 +248,9 @@
             // 
             btn_PredecirConflictos.Font = new Font("Tahoma", 9F);
             btn_PredecirConflictos.ForeColor = SystemColors.ActiveCaptionText;
-            btn_PredecirConflictos.Location = new Point(26, 222);
-            btn_PredecirConflictos.Margin = new Padding(2);
+            btn_PredecirConflictos.Location = new Point(42, 355);
             btn_PredecirConflictos.Name = "btn_PredecirConflictos";
-            btn_PredecirConflictos.Size = new Size(130, 29);
+            btn_PredecirConflictos.Size = new Size(211, 46);
             btn_PredecirConflictos.TabIndex = 11;
             btn_PredecirConflictos.Text = "Predecir";
             btn_PredecirConflictos.UseVisualStyleBackColor = true;
@@ -223,10 +259,9 @@
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label7.Location = new Point(6, 202);
-            label7.Margin = new Padding(2, 0, 2, 0);
+            label7.Location = new Point(10, 323);
             label7.Name = "label7";
-            label7.Size = new Size(128, 18);
+            label7.Size = new Size(213, 29);
             label7.TabIndex = 10;
             label7.Text = "Predecir conflictos:";
             // 
@@ -234,10 +269,9 @@
             // 
             btn_DatosAviones.Font = new Font("Segoe UI Historic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btn_DatosAviones.ForeColor = SystemColors.ActiveCaptionText;
-            btn_DatosAviones.Location = new Point(26, 162);
-            btn_DatosAviones.Margin = new Padding(2);
+            btn_DatosAviones.Location = new Point(42, 259);
             btn_DatosAviones.Name = "btn_DatosAviones";
-            btn_DatosAviones.Size = new Size(130, 29);
+            btn_DatosAviones.Size = new Size(211, 46);
             btn_DatosAviones.TabIndex = 9;
             btn_DatosAviones.Text = "Mostrar";
             btn_DatosAviones.UseVisualStyleBackColor = true;
@@ -247,10 +281,9 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label6.Location = new Point(6, 142);
-            label6.Margin = new Padding(2, 0, 2, 0);
+            label6.Location = new Point(10, 227);
             label6.Name = "label6";
-            label6.Size = new Size(167, 18);
+            label6.Size = new Size(272, 29);
             label6.TabIndex = 8;
             label6.Text = "Mostrar todos los datos:";
             // 
@@ -258,22 +291,24 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.Location = new Point(6, 81);
+            label5.Location = new Point(10, 130);
+            label5.Margin = new Padding(5, 0, 5, 0);
             label5.Name = "label5";
-            label5.Size = new Size(138, 18);
+            label5.Size = new Size(222, 29);
             label5.TabIndex = 7;
             label5.Text = "Avance automático:";
             // 
             // Simulación
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaptionText;
-            ClientSize = new Size(1045, 646);
+            ClientSize = new Size(1698, 1034);
             Controls.Add(groupBox1);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(PanelSimulacion);
+            Margin = new Padding(5);
             Name = "Simulación";
             Text = "Simulación";
             Load += Simulación_Load;
@@ -304,5 +339,7 @@
         private Button cerrarBtn;
         private Button button3;
         private Label label8;
+        private Label label9;
+        private Button btn_Deshacer;
     }
 }

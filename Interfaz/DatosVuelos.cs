@@ -75,8 +75,9 @@ namespace Interfaz
                 double yi1 = Convert.ToDouble(TextBoxYI1.Text);
                 double xf1 = Convert.ToDouble(TextBoxXF1.Text);
                 double yf1 = Convert.ToDouble(TextBoxYF1.Text);
+                string al1 = TextBoxAerolinia1.Text; //AL = aerolinia
 
-                misAviones.CrearVuelo(id1, xi1, yi1, xi1, yi1, xf1, yf1, v1);
+                misAviones.CrearVuelo(id1, xi1, yi1, xi1, yi1, xf1, yf1, v1, al1);
 
                 //Datos avión 2:
                 string id2 = TextBoxID2.Text;
@@ -85,8 +86,9 @@ namespace Interfaz
                 double yi2 = Convert.ToDouble(TextBoxYI2.Text);
                 double xf2 = Convert.ToDouble(TextBoxXF2.Text);
                 double yf2 = Convert.ToDouble(TextBoxYF2.Text);
+                string al2 = TextBoxAerolinia2.Text;
 
-                misAviones.CrearVuelo(id2, xi2, yi2, xi2, yi2, xf2, yf2, v2);
+                misAviones.CrearVuelo(id2, xi2, yi2, xi2, yi2, xf2, yf2, v2, al2);
                 MessageBox.Show("Pareja de planes de vuelos cargados correctamente.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ProponerMasDatos();
             }
@@ -113,8 +115,9 @@ namespace Interfaz
                 double yi1 = random.Next(0, 400);
                 double xf1 = random.Next(0, 600);
                 double yf1 = random.Next(0, 400);
+                string al1 = "EETAC Air";
 
-                misAviones.CrearVuelo(id1, xi1, yi1, xi1, yi1, xf1, yf1, v1);
+                misAviones.CrearVuelo(id1, xi1, yi1, xi1, yi1, xf1, yf1, v1, al1);
 
                 //Datos avión 2:
                 string id2 = Convert.ToString(numVuelos + 2);
@@ -123,8 +126,9 @@ namespace Interfaz
                 double yi2 = random.Next(0, 400);
                 double xf2 = random.Next(0, 600);
                 double yf2 = random.Next(0, 400);
+                string al2 = "UPC Airlines";
 
-                misAviones.CrearVuelo(id2, xi2, yi2, xi2, yi2, xf2, yf2, v2);
+                misAviones.CrearVuelo(id2, xi2, yi2, xi2, yi2, xf2, yf2, v2, al2);
 
                 string info = "Se han autorellenado los vuelos con los siguientes datos:\n" +
                       "AVIÓN 1: " + id1 + "\n" +

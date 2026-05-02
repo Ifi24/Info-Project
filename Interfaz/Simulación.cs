@@ -39,7 +39,7 @@ namespace Interfaz
         {
             misPics.Clear();
             misLabels.Clear();
-            
+
             for (int i = 0; i < listaVuelos.GetNumAviones(); i++)
             {
                 FlightPlan fp = listaVuelos.GetFlightPlan(i);
@@ -128,6 +128,59 @@ namespace Interfaz
             }
         }
 
+        // Método para deshacer un ciclo:
+        private void DeshacerCiclo()
+        {
+            // Movemos hacia atras los vuelos
+            listaVuelos.MoverAtras(this.tiemp);
+            labelAlarma.Visible = false;
+
+            //Loop para actualizar posiciones:
+            for (int i = 0; i < misPics.Count; i++)
+            {
+                FlightPlan fp = listaVuelos.GetFlightPlan(i);
+                if (fp == null) continue;
+
+                int x = (int)Math.Round(fp.GetCurrentPosition().GetX()); //Redondeamos porque no se puede dibujar entre píxeles.
+                int y = (int)Math.Round(fp.GetCurrentPosition().GetY());
+
+                //Actualizaciones:
+                misPics[i].Location = new Point(x - 4, y - 4); // Movemos el cuadrito existente
+                misLabels[i].Location = new Point(x + 6, y - 6);
+                //Reseteamos el color por si antes estaba en amarillo por conflicto y ya no lo están.
+                misPics[i].BackColor = Color.Red;
+            }
+
+            // Detectamos y mostramos si hay conflictos
+            var conflictosDetectados = listaVuelos.GetConflictos(this.dist);
+
+            if (conflictosDetectados.Count > 0)
+            {
+                string idsConflicto = "";
+
+                foreach (FlightPlan[] pareja in conflictosDetectados)
+                {
+                    // Guardamos los ids en conflicto
+                    idsConflicto += $"{pareja[0].GetId()} y {pareja[1].GetId()}, ";
+
+                    // Pintamos de amarillo los aviones en conflicto
+                    for (int i = 0; i < listaVuelos.GetNumAviones(); i++)
+                    {
+                        FlightPlan fp = listaVuelos.GetFlightPlan(i);
+                        if (fp == pareja[0] || fp == pareja[1])
+                        {
+                            misPics[i].BackColor = Color.Yellow;
+                        }
+                    }
+                }
+
+                labelAlarma.Text = $"¡Conflicto entre: {idsConflicto.TrimEnd(',', ' ')}!";
+                labelAlarma.Visible = true;
+
+                PanelSimulacion.Invalidate(); //Borra elipses y linias anteriores y dibuja las nuevas.
+            }
+        }
+
         // Método que dibuja una línia entre la posición inicial y final (trayectoria) y elipses de distancia de seguridad:
         private void PanelSimulacion_Paint(object sender, PaintEventArgs e)
         // Utilizaremos e.Graphics ya que es la única manera de dibujar línias.
@@ -138,7 +191,7 @@ namespace Interfaz
 
                 for (int i = 0; i < listaVuelos.GetNumAviones(); i++) // Dibujamos uno por uno.
                 {
-                    FlightPlan fp = listaVuelos.GetFlightPlan(i); 
+                    FlightPlan fp = listaVuelos.GetFlightPlan(i);
 
                     int xi = (int)fp.GetInitialPosition().GetX();
                     int yi = (int)fp.GetInitialPosition().GetY();
@@ -263,7 +316,7 @@ namespace Interfaz
             string informe = listaVuelos.InformeConflictos(this.dist);
 
             if (string.IsNullOrEmpty(informe))
-                MessageBox.Show("No se han detectado conflictos futuros. Ruta segura.","Predicción", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("No se han detectado conflictos futuros. Ruta segura.", "Predicción", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else
                 MessageBox.Show("¡CONFLICTO DE SEPARACIÓN!\nDetectado en trayectoria entre:\n" + informe, "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
@@ -300,6 +353,11 @@ namespace Interfaz
         private void btnReinicio_Click(object sender, EventArgs e)
         {
             ReiniciarSimulacion();
+        }
+
+        private void btn_Deshacer_Click(object sender, EventArgs e)
+        {
+            DeshacerCiclo();
         }
     }
 }

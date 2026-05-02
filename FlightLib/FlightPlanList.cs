@@ -33,6 +33,15 @@ namespace FlightLib
                 vuelo.Mover(tiempo);
             }
         }
+
+        public void MoverAtras(double tiempo)
+        {
+            foreach (FlightPlan vuelo in listaVuelos)
+            {
+                vuelo.MoverAtras(tiempo);
+            }
+        }
+
         public void EscribeConsola()
         {
             foreach (FlightPlan vuelo in listaVuelos)
@@ -42,7 +51,7 @@ namespace FlightLib
         }
 
         // Método que crea los vuelos segun datos proporcionados:
-        public void CrearVuelo(string id, double xi, double yi, double cx, double cy, double xf, double yf, double v)
+        public void CrearVuelo(string id, double xi, double yi, double cx, double cy, double xf, double yf, double v, string aerolinia)
         {
             // Comprobamos que los datos se pueden mostrar:
             if (xi < 0 || xi > 800 || yi < 0 || yi > 600 || xf < 0 || xf > 800 || yf < 0 || yf > 600)
@@ -50,15 +59,15 @@ namespace FlightLib
                 throw new Exception($"Coordenadas fuera de límites para el avión con ID: {id}"); // Comunica error.
             }
 
-            FlightPlan avion = new FlightPlan(id, xi, yi, cx, cy, xf, yf, v);
+            FlightPlan avion = new FlightPlan(id, xi, yi, cx, cy, xf, yf, v, aerolinia);
             this.AddFlightPlan(avion);
         }
 
         //Método para generar aviones en conflicto:
         public void GenerarConflicto()
         {
-            FlightPlan conflicto1 = new FlightPlan("123", 0, 0, 0, 0, 800, 600, 10);
-            FlightPlan conflicto2 = new FlightPlan("321", 800, 0, 800, 0, 0, 600, 10);
+            FlightPlan conflicto1 = new FlightPlan("123", 0, 0, 0, 0, 800, 600, 10, "EETAC Air");
+            FlightPlan conflicto2 = new FlightPlan("321", 800, 0, 800, 0, 0, 600, 10, "UPC Airlines");
             this.AddFlightPlan(conflicto1);
             this.AddFlightPlan(conflicto2);
         }

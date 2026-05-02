@@ -34,6 +34,7 @@ namespace Interfaz
             dgvVuelos.Columns[1].Name = "Posición X";
             dgvVuelos.Columns[2].Name = "Posición Y";
             dgvVuelos.Columns[3].Name = "Velocidad";
+            dgvVuelos.Columns[4].Name = "Aerolinia";
             dgvVuelos.RowHeadersVisible = false;
             dgvVuelos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvVuelos.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
@@ -49,8 +50,9 @@ namespace Interfaz
                 double x = fp.GetCurrentPosition().GetX();
                 double y = fp.GetCurrentPosition().GetY();
                 double speed = fp.GetVelocidad();
+                string airline = fp.GetAerolinia();
 
-                dgvVuelos.Rows.Add(id, x, y, speed);
+                dgvVuelos.Rows.Add(id, x, y, speed, airline);
                 dgvVuelos.EditMode = DataGridViewEditMode.EditOnEnter;
             }
         }

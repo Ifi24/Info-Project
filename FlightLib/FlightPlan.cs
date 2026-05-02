@@ -14,15 +14,17 @@ namespace FlightLib
         Position currentPosition; 
         Position finalPosition; 
         double velocidad; //m/s
+        string aerolinia;
 
         // Constructor:
-        public FlightPlan(string id, double xi, double yi, double cx, double cy, double xf, double yf, double v)
+        public FlightPlan(string id, double xi, double yi, double cx, double cy, double xf, double yf, double v, string aerolinia)
         {
             this.id = id;
             this.initialPosition = new Position(xi, yi);
             this.currentPosition = new Position(cx, cy);
             this.finalPosition = new Position(xf, yf);
             this.velocidad = v;
+            this.aerolinia = aerolinia;
         }
 
         // Métodos:
@@ -88,6 +90,16 @@ namespace FlightLib
             return (this.finalPosition.GetY() - this.currentPosition.GetY()) / distTotal * this.velocidad;
         }
 
+        public void SetAerolinia(string aerolinia)
+        {
+            this.aerolinia = aerolinia;
+        }
+
+        public string GetAerolinia()
+        {
+            return aerolinia;
+        }
+
         // Método que mueve el vuelo a la posición correspondiente a viajar durante el tiempo que se recibe como parámetro.
         public void Mover(double tiempo)
         {
@@ -119,6 +131,36 @@ namespace FlightLib
                 currentPosition = finalPosition;
         }
 
+        // Método que mueve el vuelo hacia atrás en la posición correspondiente según el tiempo que se recibe de parámetro:
+        public void MoverAtras(double tiempo)
+        {
+            if (this.SigueEnOrigen())
+            {
+                currentPosition = initialPosition;
+                return;
+            }
+
+            // Calculamos la distancia recorrida en el tiempo dado
+            double distancia = tiempo * this.velocidad; //Tiempo en s
+
+            //Calculamos las razones trigonométricas
+            double hipotenusa = currentPosition.Distancia(finalPosition);
+            double coseno = (finalPosition.GetX() - currentPosition.GetX()) / hipotenusa;
+            double seno = (finalPosition.GetY() - currentPosition.GetY()) / hipotenusa;
+
+            //Calculamos la nueva posición del vuelo
+            double x = currentPosition.GetX() - (distancia * coseno);
+            double y = currentPosition.GetY() - (distancia * seno);
+
+            // Cambiamos el nombre porque la vamos a usar para saber si estamos todavía en el vuelo o si hemos llegado al final de este por lo que nos pararíamos
+            Position nextPosition = new Position(x, y);
+
+            if (Math.Abs(currentPosition.Distancia(nextPosition)) < hipotenusa) // Pongo valor absoluto para asegurarme de que no haya errores de calculo luego
+                currentPosition = nextPosition;
+            else
+                currentPosition = initialPosition;
+        }
+
         // Método que nos dice si un vuelo ha llegado a su destino o no.
         public bool HaLlegado()
         {
@@ -126,6 +168,14 @@ namespace FlightLib
             if (currentPosition.Distancia(finalPosition) < 0.1) //Corregido por pequeños errores
                 destino = true;
             return destino;
+        }
+
+        public bool SigueEnOrigen()
+        {
+            bool origen = false;
+            if (currentPosition.Distancia(initialPosition) < 0.1)
+                origen = true;
+            return origen;
         }
 
         // Método que devuelve al avión a su posición inicial.
