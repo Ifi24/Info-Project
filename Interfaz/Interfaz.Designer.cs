@@ -38,6 +38,7 @@
             label1 = new Label();
             label3 = new Label();
             label4 = new Label();
+            btnCerrar = new Button();
             menuStrip1.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             SuspendLayout();
@@ -147,12 +148,23 @@
             label4.TabIndex = 4;
             label4.Text = "Este es nuestro proyecto de informática II";
             // 
+            // btnCerrar
+            // 
+            btnCerrar.Location = new Point(494, 322);
+            btnCerrar.Name = "btnCerrar";
+            btnCerrar.Size = new Size(94, 29);
+            btnCerrar.TabIndex = 5;
+            btnCerrar.Text = "Cerrar";
+            btnCerrar.UseVisualStyleBackColor = true;
+            btnCerrar.Click += btnCerrar_Click;
+            // 
             // Principal
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Desktop;
             ClientSize = new Size(624, 390);
+            Controls.Add(btnCerrar);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(flowLayoutPanel1);
@@ -180,5 +192,6 @@
         private Label label1;
         private Label label3;
         private Label label4;
+        private Button btnCerrar;
     }
 }

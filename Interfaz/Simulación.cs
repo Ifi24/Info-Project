@@ -123,9 +123,8 @@ namespace Interfaz
 
                 labelAlarma.Text = $"¡Conflicto entre: {idsConflicto.TrimEnd(',', ' ')}!";
                 labelAlarma.Visible = true;
-
-                PanelSimulacion.Invalidate(); //Borra elipses y linias anteriores y dibuja las nuevas.
             }
+            PanelSimulacion.Refresh(); //Borra elipses y linias anteriores y dibuja las nuevas.
         }
 
         // Método para deshacer un ciclo:
@@ -176,9 +175,8 @@ namespace Interfaz
 
                 labelAlarma.Text = $"¡Conflicto entre: {idsConflicto.TrimEnd(',', ' ')}!";
                 labelAlarma.Visible = true;
-
-                PanelSimulacion.Invalidate(); //Borra elipses y linias anteriores y dibuja las nuevas.
             }
+            PanelSimulacion.Refresh(); //Borra elipses y linias anteriores y dibuja las nuevas.
         }
 
         // Método que dibuja una línia entre la posición inicial y final (trayectoria) y elipses de distancia de seguridad:
@@ -229,7 +227,7 @@ namespace Interfaz
             }
 
             labelAlarma.Visible = false;
-            PanelSimulacion.Invalidate();
+            PanelSimulacion.Refresh(); //Borra elipses y linias anteriores y dibuja las nuevas.;
         }
 
         // Botón que mueve un ciclo:

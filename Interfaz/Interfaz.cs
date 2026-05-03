@@ -3,20 +3,22 @@ using System.Collections.Generic;
 
 namespace Interfaz
 {
-    public partial class Principal : Form 
+    public partial class Principal : Form
     {
         FlightPlanList miLista = new FlightPlanList();
         List<PictureBox> misAviones = new List<PictureBox>();
 
         Simulación FormSimulación; //Para guardar el form de simulación.
+        string Usuario;
 
         //Variables predeterminadas:
         double distanciaSeguridad = 10;
         double tiempoCiclo = 1;
 
-        public Principal()
+        public Principal(string nombreUsuario)
         {
             InitializeComponent();
+            this.Usuario = nombreUsuario;
         }
         // Métodos:
         // Abre un form para añadir los datos de los vuelos:
@@ -47,9 +49,14 @@ namespace Interfaz
             else
                 MessageBox.Show("No hay conflictos previstos.", "Predicción de Conflictos", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-        // Abrimos el form.
-        Simulación FormSimulación = new Simulación(miLista, distanciaSeguridad, tiempoCiclo);
-        FormSimulación.ShowDialog();
+            // Abrimos el form.
+            Simulación FormSimulación = new Simulación(miLista, distanciaSeguridad, tiempoCiclo);
+            FormSimulación.ShowDialog();
+        }
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            Application.Exit(); //Como usamos .Hide() en el login, hay que forzar a cerrar todo.
         }
     }
 }

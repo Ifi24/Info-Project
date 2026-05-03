@@ -1,5 +1,4 @@
-
-namespace Interfaz
+namespace LoginForm
 {
     internal static class Program
     {
