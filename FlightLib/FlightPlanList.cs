@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -114,6 +115,19 @@ namespace FlightLib
             {
                 fp.Reseteo();
             }
+        }
+
+        public void GuardarFichero(string rutaArchivo, double distanciaSeguridad, double tiempoActual)
+        {
+            StreamWriter fichero = File.CreateText(rutaArchivo);
+            string cabecera = $"GLOBAL | {distanciaSeguridad} | {tiempoActual}";
+            fichero.WriteLine(cabecera);
+            foreach (FlightPlan fp in listaVuelos)
+            {
+                string datosVuelo = fp.DarDatosGuardado();
+                fichero.WriteLine(datosVuelo);
+            }
+            fichero.Close();
         }
     }
 }

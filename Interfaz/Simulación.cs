@@ -359,5 +359,30 @@ namespace Interfaz
         {
             DeshacerCiclo();
         }
+
+        private void btn_GuardarSimulacion_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog ventanaGuardar = new SaveFileDialog();
+
+            ventanaGuardar.Filter = "Archivo de texto (*.txt)|*.txt|All files(*.*)|*.*"; //que alguien me diga si algo de esta parte le sale en ingles al ejecutar!
+            ventanaGuardar.Title = "Guardar estado actual de la simulación";
+
+            if (ventanaGuardar.ShowDialog() == DialogResult.OK)
+            {
+                string rutaArchivo = ventanaGuardar.FileName;
+
+                try
+                {
+                    listaVuelos.GuardarFichero(rutaArchivo, dist, tiemp);
+                    MessageBox.Show("Los datos de la simulación se han guardado correctamente.", 
+                        "¡Guardado exitoso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Hubo un error al intentar guardar el archivo:\n" + ex.Message,
+                        "Error al guardar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
     }
 }

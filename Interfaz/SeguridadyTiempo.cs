@@ -64,5 +64,11 @@ namespace Interfaz
                 MessageBox.Show("Error:\nDatos introducidos incorrectos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        // Para crear el formato al guardar:
+        public string GuardarSegTiempo()
+        {
+            return $"{dist} {tiempo}";
+        }
     }
 }

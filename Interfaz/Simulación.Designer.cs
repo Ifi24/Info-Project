@@ -49,8 +49,14 @@
             btn_DatosAviones = new Button();
             label6 = new Label();
             label5 = new Label();
+            groupBox2 = new GroupBox();
+            label10 = new Label();
+            btn_GuardarSimulacion = new Button();
+            label11 = new Label();
+            btn_CargarSimulacion = new Button();
             PanelSimulacion.SuspendLayout();
             groupBox1.SuspendLayout();
+            groupBox2.SuspendLayout();
             SuspendLayout();
             // 
             // btn_UnCiclo
@@ -160,6 +166,7 @@
             // groupBox1
             // 
             groupBox1.BackColor = Color.DarkSlateGray;
+            groupBox1.Controls.Add(groupBox2);
             groupBox1.Controls.Add(label9);
             groupBox1.Controls.Add(btn_Deshacer);
             groupBox1.Controls.Add(label8);
@@ -298,6 +305,71 @@
             label5.TabIndex = 7;
             label5.Text = "Avance automático:";
             // 
+            // groupBox2
+            // 
+            groupBox2.BackColor = Color.DarkSlateGray;
+            groupBox2.Controls.Add(label11);
+            groupBox2.Controls.Add(btn_CargarSimulacion);
+            groupBox2.Controls.Add(label10);
+            groupBox2.Controls.Add(btn_GuardarSimulacion);
+            groupBox2.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            groupBox2.ForeColor = SystemColors.Control;
+            groupBox2.Location = new Point(10, 612);
+            groupBox2.Margin = new Padding(5);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Padding = new Padding(5);
+            groupBox2.Size = new Size(272, 253);
+            groupBox2.TabIndex = 17;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Desde ficheros";
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label10.Location = new Point(12, 34);
+            label10.Margin = new Padding(5, 0, 5, 0);
+            label10.Name = "label10";
+            label10.Size = new Size(224, 29);
+            label10.TabIndex = 19;
+            label10.Text = "Guardar simulación:";
+            // 
+            // btn_GuardarSimulacion
+            // 
+            btn_GuardarSimulacion.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btn_GuardarSimulacion.ForeColor = SystemColors.ActiveCaptionText;
+            btn_GuardarSimulacion.Location = new Point(44, 68);
+            btn_GuardarSimulacion.Margin = new Padding(5);
+            btn_GuardarSimulacion.Name = "btn_GuardarSimulacion";
+            btn_GuardarSimulacion.Size = new Size(211, 46);
+            btn_GuardarSimulacion.TabIndex = 18;
+            btn_GuardarSimulacion.Text = "Guardar";
+            btn_GuardarSimulacion.UseVisualStyleBackColor = true;
+            btn_GuardarSimulacion.Click += btn_GuardarSimulacion_Click;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label11.Location = new Point(12, 132);
+            label11.Margin = new Padding(5, 0, 5, 0);
+            label11.Name = "label11";
+            label11.Size = new Size(209, 29);
+            label11.TabIndex = 21;
+            label11.Text = "Cargar simulación:";
+            // 
+            // btn_CargarSimulacion
+            // 
+            btn_CargarSimulacion.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btn_CargarSimulacion.ForeColor = SystemColors.ActiveCaptionText;
+            btn_CargarSimulacion.Location = new Point(44, 166);
+            btn_CargarSimulacion.Margin = new Padding(5);
+            btn_CargarSimulacion.Name = "btn_CargarSimulacion";
+            btn_CargarSimulacion.Size = new Size(211, 46);
+            btn_CargarSimulacion.TabIndex = 20;
+            btn_CargarSimulacion.Text = "Cargar";
+            btn_CargarSimulacion.UseVisualStyleBackColor = true;
+            // 
             // Simulación
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
@@ -316,6 +388,8 @@
             PanelSimulacion.PerformLayout();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -341,5 +415,10 @@
         private Label label8;
         private Label label9;
         private Button btn_Deshacer;
+        private GroupBox groupBox2;
+        private Label label11;
+        private Button btn_CargarSimulacion;
+        private Label label10;
+        private Button btn_GuardarSimulacion;
     }
 }

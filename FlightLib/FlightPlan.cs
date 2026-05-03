@@ -16,6 +16,11 @@ namespace FlightLib
         double velocidad; //m/s
         string aerolinia;
 
+        //Para guardar un historial de posiciones para hacer y deshacer:
+        Stack<Position> historialPosiciones = new Stack<Position>();
+        Stack<double> historialVelocidades = new Stack<double>();
+
+
         // Constructor:
         public FlightPlan(string id, double xi, double yi, double cx, double cy, double xf, double yf, double v, string aerolinia)
         {
@@ -25,6 +30,7 @@ namespace FlightLib
             this.finalPosition = new Position(xf, yf);
             this.velocidad = v;
             this.aerolinia = aerolinia;
+
         }
 
         // Métodos:
@@ -103,6 +109,10 @@ namespace FlightLib
         // Método que mueve el vuelo a la posición correspondiente a viajar durante el tiempo que se recibe como parámetro.
         public void Mover(double tiempo)
         {
+            // Guardamos el estado actual
+            historialPosiciones.Push(new Position(currentPosition.GetX(), currentPosition.GetY()));
+            historialVelocidades.Push(this.velocidad);
+
             // Comprobamos que aún no hemos llegado.
             if (this.HaLlegado())
             {
@@ -134,31 +144,15 @@ namespace FlightLib
         // Método que mueve el vuelo hacia atrás en la posición correspondiente según el tiempo que se recibe de parámetro:
         public void MoverAtras(double tiempo)
         {
-            if (this.SigueEnOrigen())
+            if (historialPosiciones.Count > 0)
             {
-                currentPosition = initialPosition;
-                return;
+                this.currentPosition = historialPosiciones.Pop();
+                this.velocidad = historialVelocidades.Pop();
             }
-
-            // Calculamos la distancia recorrida en el tiempo dado
-            double distancia = tiempo * this.velocidad; //Tiempo en s
-
-            //Calculamos las razones trigonométricas
-            double hipotenusa = currentPosition.Distancia(finalPosition);
-            double coseno = (finalPosition.GetX() - currentPosition.GetX()) / hipotenusa;
-            double seno = (finalPosition.GetY() - currentPosition.GetY()) / hipotenusa;
-
-            //Calculamos la nueva posición del vuelo
-            double x = currentPosition.GetX() - (distancia * coseno);
-            double y = currentPosition.GetY() - (distancia * seno);
-
-            // Cambiamos el nombre porque la vamos a usar para saber si estamos todavía en el vuelo o si hemos llegado al final de este por lo que nos pararíamos
-            Position nextPosition = new Position(x, y);
-
-            if (Math.Abs(currentPosition.Distancia(nextPosition)) < hipotenusa) // Pongo valor absoluto para asegurarme de que no haya errores de calculo luego
-                currentPosition = nextPosition;
             else
-                currentPosition = initialPosition;
+            {
+                this.Reseteo(); //si el historial esta vacío, significa que el avion ya esta en origen
+            }
         }
 
         // Método que nos dice si un vuelo ha llegado a su destino o no.
@@ -182,6 +176,9 @@ namespace FlightLib
         public void Reseteo()
         {
             currentPosition = initialPosition;
+
+            historialPosiciones.Clear();
+            historialVelocidades.Clear();
         }
 
         // Método que da la distancia que se ha movido el avion.
@@ -281,6 +278,49 @@ namespace FlightLib
             this.velocidad = velocidadOriginal;
             return false;
         }
+
+
+        // Para que nos formatee los datos para guardar
+        public string DarDatosGuardado()
+        {
+            string datosBasicos = $"{id} {initialPosition.GetX()} {initialPosition.GetY()} " +
+                $"{currentPosition.GetX()} {currentPosition.GetY()} " +
+                $"{finalPosition.GetX()} {finalPosition.GetY()} {velocidad} {aerolinia}\n";
+
+            List<double> listaVelocidades = historialVelocidades.ToList();
+            listaVelocidades.Reverse(); //ahora va del más antiguo al más reciente
+            string textoVelocidades = string.Join(";", listaVelocidades);
+
+            List<Position> listaPosPreliminar = historialPosiciones.ToList();
+            listaPosPreliminar.Reverse();
+            List<string> listaPosiciones = new List<string>();
+
+            foreach (Position p in listaPosPreliminar)
+            {
+                listaPosiciones.Add($"{p.GetX()},{p.GetX()}");
+            }
+
+            string textoPosiciones = string.Join(";", listaPosiciones);
+
+            string devolver = $"{datosBasicos} | {textoVelocidades} | {textoPosiciones}";
+
+            return devolver;
+        }
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         // Método para comprobar errores (se podría eliminar al final):
         public void EscribeConsola()
