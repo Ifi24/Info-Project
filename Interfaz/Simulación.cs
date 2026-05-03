@@ -374,7 +374,7 @@ namespace Interfaz
                 try
                 {
                     listaVuelos.GuardarFichero(rutaArchivo, dist, tiemp);
-                    MessageBox.Show("Los datos de la simulación se han guardado correctamente.", 
+                    MessageBox.Show("Los datos de la simulación se han guardado correctamente.",
                         "¡Guardado exitoso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
@@ -383,6 +383,62 @@ namespace Interfaz
                         "Error al guardar", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+
+        // Boton para cargar la simulación
+        // MENSAJE DE ADVERTENCIA DE QUE SE VA A BORRAR TODO --> PREGUNTAR SI DESEA GUARDAR ANTES
+        private void btn_CargarSimulacion_Click(object sender, EventArgs e)
+        {
+            DialogResult respuesta = MessageBox.Show(
+                "¿Estás seguro de que deseas cargar un nuevo archivo? Si lo haces, perderás todo el progreso actual de la simulación.",
+                "¡Advertencia!",
+                MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+            if (respuesta == DialogResult.OK)
+            {
+                OpenFileDialog ventanaAbrir = new OpenFileDialog();
+
+                ventanaAbrir.Filter = "Archivo de texto (*.txt)|*.txt|All files(*.*)|*.*";
+                ventanaAbrir.Title = "Importar simulación";
+
+                if (ventanaAbrir.ShowDialog() == DialogResult.OK)
+                {
+                    string rutaArchivo = ventanaAbrir.FileName;
+
+                    try
+                    {
+                        listaVuelos.AbrirFichero(rutaArchivo);
+                        MessageBox.Show("Los datos de la simulación se han importado correctamente.",
+                            "¡Importación exitosa!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        this.dist = listaVuelos.GetDistanciaCargada();
+                        this.tiemp = listaVuelos.GetTiempoCargado();
+                        this.TimerSimulación.Interval = (int)(this.tiemp * 1000);
+
+                        foreach (PictureBox pic in misPics)
+                        {
+                            PanelSimulacion.Controls.Remove(pic);
+                        }
+                        foreach (Label lab in misLabels)
+                        {
+                            PanelSimulacion.Controls.Remove(lab);
+                        }
+                        Simulación_Load(null, null);
+                        this.Invalidate();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Hubo un error al intentar importar el fichero:\n" + ex.Message,
+                            "Error al importar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else if (respuesta == DialogResult.Cancel)
+            {
+                return;
+            }
+            
+
         }
     }
 }

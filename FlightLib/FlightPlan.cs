@@ -106,6 +106,16 @@ namespace FlightLib
             return aerolinia;
         }
 
+        public void SetHistorialPosiciones(Stack<Position> historial)
+        {
+            this.historialPosiciones = historial;
+        }
+
+        public void SetHistorialVelocidades(Stack<double> historial)
+        {
+            this.historialVelocidades = historial;
+        }
+
         // Método que mueve el vuelo a la posición correspondiente a viajar durante el tiempo que se recibe como parámetro.
         public void Mover(double tiempo)
         {
@@ -285,7 +295,7 @@ namespace FlightLib
         {
             string datosBasicos = $"{id} {initialPosition.GetX()} {initialPosition.GetY()} " +
                 $"{currentPosition.GetX()} {currentPosition.GetY()} " +
-                $"{finalPosition.GetX()} {finalPosition.GetY()} {velocidad} {aerolinia}\n";
+                $"{finalPosition.GetX()} {finalPosition.GetY()} {velocidad} {aerolinia}";
 
             List<double> listaVelocidades = historialVelocidades.ToList();
             listaVelocidades.Reverse(); //ahora va del más antiguo al más reciente
@@ -297,15 +307,17 @@ namespace FlightLib
 
             foreach (Position p in listaPosPreliminar)
             {
-                listaPosiciones.Add($"{p.GetX()},{p.GetX()}");
+                listaPosiciones.Add($"{p.GetX()},{p.GetY()}");
             }
 
             string textoPosiciones = string.Join(";", listaPosiciones);
 
-            string devolver = $"{datosBasicos} | {textoVelocidades} | {textoPosiciones}";
+            string devolver = $"{datosBasicos}|{textoVelocidades}|{textoPosiciones}";
 
             return devolver;
         }
+
+        
 
         
 

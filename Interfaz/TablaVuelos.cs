@@ -29,7 +29,7 @@ namespace Interfaz
         }
         private void TablaVuelos_Load(object sender, EventArgs e)
         {
-            dgvVuelos.ColumnCount = 4;
+            dgvVuelos.ColumnCount = 5;
             dgvVuelos.Columns[0].Name = "ID";
             dgvVuelos.Columns[1].Name = "Posición X";
             dgvVuelos.Columns[2].Name = "Posición Y";
