@@ -7,21 +7,36 @@ using System.Threading.Tasks;
 
 namespace FlightLib
 {
+
+    // Clase FlightPlanList que gestiona la lista de planes de vuelo, la persistencia en ficheros y los algoritmos de detección de conflictos.
     public class FlightPlanList
     {
+        // Atributos
         List<FlightPlan> listaVuelos = new List<FlightPlan>();
         double distanciaSeguridadCargada; //si no añadia estos atributos, se me complicaba bastante todo
         double tiempoSimulacionCargado;
 
         // Métodos:
+
+        // Obtiene el número total de aviones en la lista.
+        // Parámetros: ninguno.
+        // Devuelve: cantidad de vuelos (int).
         public int GetNumAviones()
         {
             return listaVuelos.Count;
         }
+
+        // Añade un objeto FlightPlan a la lista.
+        // Parámetros: p (FlightPlan).
+        // Devuelve: Nada.
         public void AddFlightPlan(FlightPlan p)
         {
             listaVuelos.Add(p);
         }
+
+        // Obtiene un plan de vuelo específico.
+        // Parámetros: i (int) posición en la lista.
+        // Devuelve: objeto FlightPlan o null si el índice está fuera de rango.
         public FlightPlan GetFlightPlan(int i)
         {
             if (i < 0 || i >= listaVuelos.Count)
@@ -30,16 +45,25 @@ namespace FlightLib
                 return listaVuelos[i];
         }
 
+        // Obtiene la distancia de seguridad que se guardó en el último fichero cargado.
+        // Parámetros: ninguno.
+        // Devuelve: distancia de seguridad (double).
         public double GetDistanciaCargada()
         {
             return distanciaSeguridadCargada;
         }
 
+        // Obtiene el tiempo de simulación que se guardó en el último fichero cargado.
+        // Parámetros: ninguno.
+        // DEVUELVE: tiempo de simulación (double).
         public double GetTiempoCargado()
         {
             return tiempoSimulacionCargado;
         }
 
+        // Ordena a todos los aviones de la lista que avancen un paso de tiempo.
+        // Parámetros: tiempo (double) diferencial de tiempo.
+        // Devuelve: nada.
         public void Mover(double tiempo) //Avisa para activar movimiento
         {
             foreach (FlightPlan vuelo in listaVuelos)
@@ -48,6 +72,9 @@ namespace FlightLib
             }
         }
 
+        // Ordena a todos los aviones que retrocedan un paso en su historial.
+        // Parámetros: tiempo (double) (mantenido por consistencia).
+        // Devuelve: nada.
         public void MoverAtras(double tiempo)
         {
             foreach (FlightPlan vuelo in listaVuelos)
@@ -122,6 +149,8 @@ namespace FlightLib
             return conflictos;
         }
         //Método para reiniciar vuelos:
+        // Parámetros: ninguno.
+        // Devuelve: nada.
         public void ReiniciarVuelos()
         {
             foreach (FlightPlan fp in listaVuelos)
