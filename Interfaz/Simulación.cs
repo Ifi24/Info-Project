@@ -99,7 +99,7 @@ namespace Interfaz
             }
 
             // Detectamos y mostramos si hay conflictos
-            var conflictosDetectados = listaVuelos.GetConflictos(this.dist);
+            List<FlightPlan[]> conflictosDetectados = listaVuelos.GetConflictos(this.dist);
 
             if (conflictosDetectados.Count > 0)
             {
@@ -151,7 +151,7 @@ namespace Interfaz
             }
 
             // Detectamos y mostramos si hay conflictos
-            var conflictosDetectados = listaVuelos.GetConflictos(this.dist);
+            List<FlightPlan[]> conflictosDetectados = listaVuelos.GetConflictos(this.dist);
 
             if (conflictosDetectados.Count > 0)
             {
