@@ -75,26 +75,40 @@ namespace Interfaz
         //FASE 1.6: Pongo un botón para aplicar los cambios
         private void btnAplicar_Click(object sender, EventArgs e)
         {
+            bool algunError = false; // Para saber si algún avión tuvo velocidad incorrecta
             for (int i = 0; i < listaVuelos.GetNumAviones(); i++)
             {
                 try
                 {
                     double nuevaVelocidad = Convert.ToDouble(dgvVuelos.Rows[i].Cells[3].Value); //Leemos nueva velocidad
-
+                    if (nuevaVelocidad <= 0)
+                    {
+                        string idAvion = dgvVuelos.Rows[i].Cells[0].Value.ToString();
+                        MessageBox.Show($"Error en el avión {idAvion}: La velocidad debe ser mayor que 0.", "Velocidad no válida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        algunError = true;
+                        continue; // Saltamos este avión y seguimos con el siguiente
+                    }
                     FlightPlan fp = listaVuelos.GetFlightPlan(i); //El avión real
-                    if (fp != null)
+                    if (fp != null && !algunError)
                     {
                         fp.SetVelocidad(nuevaVelocidad);
                     }
-                    //Actualizamos el fp
-                    MessageBox.Show("Velocidades actualizándose. Reiniciando simulación...", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information); //Informamos al usuario 
-                    this.Close();
-                    simulacion.ReiniciarSimulacion(); //Llamamos a la función que hemos creado en simulación
                 }
                 catch (FormatException)
                 {
                     MessageBox.Show("No se ha podido cambiar la velocidad por un error de formato.\nIntroduzca correctamente los datos de la velocidad", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    algunError = true;
                 }
+            }
+            if (!algunError)
+            {
+                MessageBox.Show("Velocidades actualizándose. Reiniciando simulación...", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information); //Informamos al usuario 
+                this.Close();
+                simulacion.ReiniciarSimulacion(); //Llamamos a la función que hemos creado en simulación
+            }
+            else
+            {
+                MessageBox.Show("Algunos cambios no se aplicaron debido a errores. Revise los valores marcados.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
