@@ -5,6 +5,7 @@ using System.Windows.Forms;
 
 namespace Interfaz
 {
+    // Clase Login (Formulario) que gestiona la autentificación de usuarios y la inicialización de la base de datos para el almacenamiento persistente de credenciales y datos de vuelo.
     public partial class Login : Form
     {
         private SQLiteConnection cnx;
@@ -15,6 +16,8 @@ namespace Interfaz
             if (!System.IO.File.Exists("LoginVuelos.db"))
                 SQLiteConnection.CreateFile("LoginVuelos.db");
         }
+
+        // Define la estructura de las tablas 'misUsuarios' y 'misDatosVuelos' si no existen.
         public void CrearTabla()
         {
             string sqlUsuarios = "CREATE TABLE IF NOT EXISTS misUsuarios " +

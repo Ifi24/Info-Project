@@ -3,8 +3,10 @@ using System.Collections.Generic;
 
 namespace Interfaz
 {
+    // Clase Principal (Formulario) que actúa como el centro de control de la aplicación, gestionando el acceso a la entrada de datos, la configuración de parámetros y el lanzamiento de la simulación.
     public partial class Principal : Form
     {
+        // Atributos: 
         FlightPlanList miLista = new FlightPlanList();
         List<PictureBox> misAviones = new List<PictureBox>();
 
@@ -15,6 +17,7 @@ namespace Interfaz
         double distanciaSeguridad = 10;
         double tiempoCiclo = 1;
 
+        // Constructor que inicializa el formulario principal con el nombre del usuario.
         public Principal(string nombreUsuario)
         {
             InitializeComponent();
@@ -54,6 +57,7 @@ namespace Interfaz
             FormSimulación.ShowDialog();
         }
 
+        // Botón que finaliza la ejecución de la aplicación.
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             Application.Exit(); //Como usamos .Hide() en el login, hay que forzar a cerrar todo.

@@ -16,7 +16,7 @@ namespace FlightLib
         double distanciaSeguridadCargada; //si no añadia estos atributos, se me complicaba bastante todo
         double tiempoSimulacionCargado;
 
-        // Métodos:
+        // Métodos de gestión de lista:
 
         // Obtiene el número total de aviones en la lista.
         // Parámetros: ninguno.
@@ -61,6 +61,8 @@ namespace FlightLib
             return tiempoSimulacionCargado;
         }
 
+        // Métodos de movimiento y control:
+
         // Ordena a todos los aviones de la lista que avancen un paso de tiempo.
         // Parámetros: tiempo (double) diferencial de tiempo.
         // Devuelve: nada.
@@ -83,6 +85,9 @@ namespace FlightLib
             }
         }
 
+        // Recorre la lista completa de vuelos y ejecuta el método de escritura en consola para cada uno.
+        // Parámetros: ninguno.
+        // Devuelve: nada.
         public void EscribeConsola()
         {
             foreach (FlightPlan vuelo in listaVuelos)
@@ -92,6 +97,8 @@ namespace FlightLib
         }
 
         // Método que crea los vuelos segun datos proporcionados:
+        // Parámetros: id (string), xi/yi (origen; double), cx/cy (actual; double), xf/yf (destino; double), v (velocidad; double) y aerolinia (string).
+        // Devuelve: nada. Lanza una excepción si los datos están fuera de los límites establecidos.
         public void CrearVuelo(string id, double xi, double yi, double cx, double cy, double xf, double yf, double v, string aerolinia)
         {
             // Comprobamos que los datos se pueden mostrar:
@@ -105,6 +112,8 @@ namespace FlightLib
         }
 
         //Método para generar aviones en conflicto:
+        // Parámetros: ninguno.
+        // Devuelve: nada.
         public void GenerarConflicto()
         {
             FlightPlan conflicto1 = new FlightPlan("123", 0, 0, 0, 0, 800, 600, 10, "EETAC Air");
@@ -114,6 +123,8 @@ namespace FlightLib
         }
 
         //Método para obtener informe de conflictos:
+        // Parámetros: distanciaSeguridad (double) mínima permitida entre aviones.
+        // Devuelve: un string con la lista de parejas de IDs en conflicto, separados por saltos de línea.
         public string InformeConflictos(double distanciaSeguridad)
         {
             string informe = "";
@@ -134,6 +145,8 @@ namespace FlightLib
         }
 
         //Método que detecte todos los conflictos:
+        // Parámetros: distSeguridad (double) que define el radio de alerta.
+        // Devuelve: una lista de arrays, donde cada array contiene la pareja de objetos FlightPlan que están en conflicto.
         public List<FlightPlan[]> GetConflictos(double distSeguridad)
         {
             List<FlightPlan[]> conflictos = new List<FlightPlan[]>();
@@ -148,6 +161,7 @@ namespace FlightLib
             }
             return conflictos;
         }
+
         //Método para reiniciar vuelos:
         // Parámetros: ninguno.
         // Devuelve: nada.
@@ -159,6 +173,9 @@ namespace FlightLib
             }
         }
 
+        // Exporta el estado actual de la simulación a un archivo de texto, incluyendo la configuración global y el historial de cada vuelo.
+        // Parámetros: rutaArchivo (string) donde se creará el fichero, distanciaSeguridad (double) y tiempoActual (double) de la simulación.
+        // Devuelve: nada.
         public void GuardarFichero(string rutaArchivo, double distanciaSeguridad, double tiempoActual)
         {
             StreamWriter fichero = File.CreateText(rutaArchivo);
@@ -173,6 +190,9 @@ namespace FlightLib
         }
 
         //HAY QUE HACER QUE SE RESETEE TODO!!!
+        // Carga los datos de una simulación desde un archivo, reconstruyendo la lista de vuelos, configuraciones globales e historiales de movimiento (Stack).
+        // Parámetros: rutaArchivo (string) con la ubicación del fichero a leer.
+        // Devuelve: nada.
         public void AbrirFichero(string rutaArchivo)
         {
             //Primero reseteamos y vaciamos

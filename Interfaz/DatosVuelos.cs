@@ -9,12 +9,15 @@ using System.Windows.Forms;
 
 namespace Interfaz
 {
+    // Clase DatosVuelos (Formulario) que proporciona una interfaz para que el usuario introduzca manualmente planes de vuelo, genere datos aleatorios o cree escenarios de conflicto.
     public partial class DatosVuelos : Form
     {
+        // Atributos
         FlightPlanList misAviones;
         Random random = new Random(); //Géneramos valores aleatorios para el autorrelleno.
 
-        // Constructor:
+        // Constructor que inicializa el formulario y vincula la lista de vuelos compartida:
+        // Parámetros: p (FlightPlanList).
         public DatosVuelos(FlightPlanList p)
         {
             InitializeComponent();
@@ -30,6 +33,8 @@ namespace Interfaz
         // Métodos:
 
         // Método para borrar los datos del form para que el usuario pueda escribir nuevos:
+        // Parámetros: ninguno.
+        // Devuelve: Nada.
         public void LimpiarFormulario()
         {
             TextBoxID1.Clear();
@@ -50,6 +55,8 @@ namespace Interfaz
         }
 
         // Método para preguntar si se quieren añadir más datos (para evitar repeticiones):
+        // Parámetros: ninguno.
+        // Devuelve: nada.
         public void ProponerMasDatos()
         {
             //Mensaje de éxito y proponemos al usuario añadir más datos o no.
@@ -148,11 +155,14 @@ namespace Interfaz
                 MessageBox.Show("Error:\nError al generar datos." + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        // Botón que cierra el formulario actual:
         private void cerrarBtn_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        // Botón que genera un conflicto:
         private void btnConflicto_Click(object sender, EventArgs e)
         {
             misAviones.GenerarConflicto();

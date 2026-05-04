@@ -8,11 +8,14 @@ using System.Windows.Forms;
 
 namespace Interfaz
 {
+    // Clase SeguridadyTiempo (Formulario) que permite ajustar los parámetros de la simulación: la distancia mínima de seguridad y el diferencial de tiempo por ciclo.
     public partial class SeguridadyTiempo : Form
     {
+        // Atributos: 
         double dist;
         double tiempo;
 
+        // Constructor que inicializa el formulario cargando los valores actuales en los campos de texto:
         public SeguridadyTiempo(double distActual, double tActual)
         {
             InitializeComponent();
