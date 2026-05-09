@@ -31,7 +31,6 @@
             components = new System.ComponentModel.Container();
             btn_UnCiclo = new Button();
             PanelSimulacion = new Panel();
-            labelAlarma = new Label();
             label2 = new Label();
             label1 = new Label();
             label3 = new Label();
@@ -39,6 +38,7 @@
             btn_AutoCiclo = new Button();
             TimerSimulación = new System.Windows.Forms.Timer(components);
             groupBox1 = new GroupBox();
+            label12 = new Label();
             groupBox2 = new GroupBox();
             label11 = new Label();
             btn_CargarSimulacion = new Button();
@@ -54,6 +54,11 @@
             btn_DatosAviones = new Button();
             label6 = new Label();
             label5 = new Label();
+            toolTip1 = new ToolTip(components);
+            btn_Ralentizar = new Button();
+            btn_Acelerar = new Button();
+            button4 = new Button();
+            label_VelVisual = new Label();
             PanelSimulacion.SuspendLayout();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -75,28 +80,14 @@
             // 
             PanelSimulacion.BackColor = Color.Black;
             PanelSimulacion.BorderStyle = BorderStyle.FixedSingle;
-            PanelSimulacion.Controls.Add(labelAlarma);
             PanelSimulacion.Controls.Add(label2);
             PanelSimulacion.Controls.Add(label1);
-            PanelSimulacion.Location = new Point(323, 19);
+            PanelSimulacion.Location = new Point(701, 19);
             PanelSimulacion.Margin = new Padding(5);
             PanelSimulacion.Name = "PanelSimulacion";
             PanelSimulacion.Size = new Size(1299, 959);
             PanelSimulacion.TabIndex = 0;
             PanelSimulacion.Paint += PanelSimulacion_Paint;
-            // 
-            // labelAlarma
-            // 
-            labelAlarma.AutoSize = true;
-            labelAlarma.BackColor = Color.Transparent;
-            labelAlarma.Enabled = false;
-            labelAlarma.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labelAlarma.ForeColor = Color.LightCoral;
-            labelAlarma.Location = new Point(302, 14);
-            labelAlarma.Name = "labelAlarma";
-            labelAlarma.Size = new Size(0, 45);
-            labelAlarma.TabIndex = 0;
-            labelAlarma.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label2
             // 
@@ -166,6 +157,11 @@
             // groupBox1
             // 
             groupBox1.BackColor = Color.DarkSlateGray;
+            groupBox1.Controls.Add(label_VelVisual);
+            groupBox1.Controls.Add(button4);
+            groupBox1.Controls.Add(btn_Acelerar);
+            groupBox1.Controls.Add(btn_Ralentizar);
+            groupBox1.Controls.Add(label12);
             groupBox1.Controls.Add(groupBox2);
             groupBox1.Controls.Add(label9);
             groupBox1.Controls.Add(btn_Deshacer);
@@ -185,10 +181,21 @@
             groupBox1.Margin = new Padding(5);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(5);
-            groupBox1.Size = new Size(294, 960);
+            groupBox1.Size = new Size(670, 960);
             groupBox1.TabIndex = 7;
             groupBox1.TabStop = false;
             groupBox1.Text = "Panel de Simulación";
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label12.Location = new Point(301, 130);
+            label12.Margin = new Padding(5, 0, 5, 0);
+            label12.Name = "label12";
+            label12.Size = new Size(222, 29);
+            label12.TabIndex = 19;
+            label12.Text = "Ralentizar/Acelerar:";
             // 
             // groupBox2
             // 
@@ -371,19 +378,60 @@
             label5.TabIndex = 7;
             label5.Text = "Avance automático:";
             // 
+            // btn_Ralentizar
+            // 
+            btn_Ralentizar.BackgroundImage = Properties.Resources.ralentizar;
+            btn_Ralentizar.BackgroundImageLayout = ImageLayout.Zoom;
+            btn_Ralentizar.Location = new Point(340, 163);
+            btn_Ralentizar.Name = "btn_Ralentizar";
+            btn_Ralentizar.Size = new Size(46, 46);
+            btn_Ralentizar.TabIndex = 20;
+            btn_Ralentizar.UseVisualStyleBackColor = true;
+            // 
+            // btn_Acelerar
+            // 
+            btn_Acelerar.BackgroundImage = Properties.Resources.acelerar;
+            btn_Acelerar.BackgroundImageLayout = ImageLayout.Zoom;
+            btn_Acelerar.Location = new Point(444, 163);
+            btn_Acelerar.Name = "btn_Acelerar";
+            btn_Acelerar.Size = new Size(46, 46);
+            btn_Acelerar.TabIndex = 21;
+            btn_Acelerar.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            button4.BackgroundImage = Properties.Resources.pausa;
+            button4.BackgroundImageLayout = ImageLayout.Zoom;
+            button4.Location = new Point(392, 163);
+            button4.Name = "button4";
+            button4.Size = new Size(46, 46);
+            button4.TabIndex = 22;
+            button4.UseVisualStyleBackColor = true;
+            // 
+            // label_VelVisual
+            // 
+            label_VelVisual.AutoSize = true;
+            label_VelVisual.Location = new Point(507, 172);
+            label_VelVisual.Name = "label_VelVisual";
+            label_VelVisual.Size = new Size(100, 29);
+            label_VelVisual.TabIndex = 23;
+            label_VelVisual.Text = "label13";
+            // 
             // Simulación
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaptionText;
-            ClientSize = new Size(1698, 1034);
+            ClientSize = new Size(2344, 1186);
             Controls.Add(groupBox1);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(PanelSimulacion);
             Margin = new Padding(5);
             Name = "Simulación";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Simulación";
+            WindowState = FormWindowState.Maximized;
             Load += Simulación_Load;
             PanelSimulacion.ResumeLayout(false);
             PanelSimulacion.PerformLayout();
@@ -408,7 +456,6 @@
         private Label label5;
         private Label label6;
         private Button btn_DatosAviones;
-        private Label labelAlarma;
         private Button btn_PredecirConflictos;
         private Label label7;
         private Button cerrarBtn;
@@ -421,5 +468,11 @@
         private Button btn_CargarSimulacion;
         private Label label10;
         private Button btn_GuardarSimulacion;
+        private Label label12;
+        private ToolTip toolTip1;
+        private Button btn_Ralentizar;
+        private Button button4;
+        private Button btn_Acelerar;
+        private Label label_VelVisual;
     }
 }

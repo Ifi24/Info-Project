@@ -124,6 +124,14 @@ namespace Interfaz
                 double yf1 = random.Next(0, 400);
                 string al1 = "EETAC Air";
 
+                TextBoxID1.Text = id1;
+                TextBoxV1.Text = Convert.ToString(v1);
+                TextBoxXI1.Text = Convert.ToString(xi1);
+                TextBoxYI1.Text = Convert.ToString(yi1);
+                TextBoxXF1.Text = Convert.ToString(xf1);
+                TextBoxYF1.Text = Convert.ToString(yf1);
+                TextBoxAerolinia1.Text = al1;
+
                 misAviones.CrearVuelo(id1, xi1, yi1, xi1, yi1, xf1, yf1, v1, al1);
 
                 //Datos avión 2:
@@ -134,6 +142,14 @@ namespace Interfaz
                 double xf2 = random.Next(0, 600);
                 double yf2 = random.Next(0, 400);
                 string al2 = "UPC Airlines";
+
+                TextBoxID2.Text = id2;
+                TextBoxV2.Text = Convert.ToString(v2);
+                TextBoxXI2.Text = Convert.ToString(xi2);
+                TextBoxYI2.Text = Convert.ToString(yi2);
+                TextBoxXF2.Text = Convert.ToString(xf2);
+                TextBoxYF2.Text = Convert.ToString(yf2);
+                TextBoxAerolinia2.Text = al2;
 
                 misAviones.CrearVuelo(id2, xi2, yi2, xi2, yi2, xf2, yf2, v2, al2);
 

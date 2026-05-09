@@ -55,7 +55,11 @@
             label14 = new Label();
             Guardar = new Button();
             groupBox1 = new GroupBox();
+            TextBoxAerolinia1 = new TextBox();
+            label22 = new Label();
             groupBox2 = new GroupBox();
+            TextBoxAerolinia2 = new TextBox();
+            label21 = new Label();
             label1 = new Label();
             label2 = new Label();
             label15 = new Label();
@@ -67,10 +71,6 @@
             btnAutorellenar = new Button();
             cerrarBtn = new Button();
             btnConflicto = new Button();
-            label21 = new Label();
-            TextBoxAerolinia2 = new TextBox();
-            TextBoxAerolinia1 = new TextBox();
-            label22 = new Label();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             SuspendLayout();
@@ -89,7 +89,7 @@
             // 
             TextBoxV1.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TextBoxV1.Location = new Point(159, 226);
-            TextBoxV1.Margin = new Padding(5, 5, 5, 5);
+            TextBoxV1.Margin = new Padding(5);
             TextBoxV1.Name = "TextBoxV1";
             TextBoxV1.Size = new Size(128, 36);
             TextBoxV1.TabIndex = 6;
@@ -98,7 +98,7 @@
             // 
             TextBoxYF1.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TextBoxYF1.Location = new Point(405, 163);
-            TextBoxYF1.Margin = new Padding(5, 5, 5, 5);
+            TextBoxYF1.Margin = new Padding(5);
             TextBoxYF1.Name = "TextBoxYF1";
             TextBoxYF1.Size = new Size(84, 36);
             TextBoxYF1.TabIndex = 5;
@@ -107,7 +107,7 @@
             // 
             TextBoxXF1.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TextBoxXF1.Location = new Point(260, 163);
-            TextBoxXF1.Margin = new Padding(5, 5, 5, 5);
+            TextBoxXF1.Margin = new Padding(5);
             TextBoxXF1.Name = "TextBoxXF1";
             TextBoxXF1.Size = new Size(84, 36);
             TextBoxXF1.TabIndex = 4;
@@ -116,7 +116,7 @@
             // 
             TextBoxYI1.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TextBoxYI1.Location = new Point(405, 112);
-            TextBoxYI1.Margin = new Padding(5, 5, 5, 5);
+            TextBoxYI1.Margin = new Padding(5);
             TextBoxYI1.Name = "TextBoxYI1";
             TextBoxYI1.Size = new Size(84, 36);
             TextBoxYI1.TabIndex = 3;
@@ -125,7 +125,7 @@
             // 
             TextBoxXI1.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TextBoxXI1.Location = new Point(260, 112);
-            TextBoxXI1.Margin = new Padding(5, 5, 5, 5);
+            TextBoxXI1.Margin = new Padding(5);
             TextBoxXI1.Name = "TextBoxXI1";
             TextBoxXI1.Size = new Size(84, 36);
             TextBoxXI1.TabIndex = 2;
@@ -135,7 +135,7 @@
             TextBoxID1.BackColor = SystemColors.Window;
             TextBoxID1.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TextBoxID1.Location = new Point(75, 48);
-            TextBoxID1.Margin = new Padding(5, 5, 5, 5);
+            TextBoxID1.Margin = new Padding(5);
             TextBoxID1.Name = "TextBoxID1";
             TextBoxID1.Size = new Size(266, 36);
             TextBoxID1.TabIndex = 0;
@@ -208,7 +208,7 @@
             // 
             TextBoxYF2.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TextBoxYF2.Location = new Point(405, 160);
-            TextBoxYF2.Margin = new Padding(5, 5, 5, 5);
+            TextBoxYF2.Margin = new Padding(5);
             TextBoxYF2.Name = "TextBoxYF2";
             TextBoxYF2.Size = new Size(84, 36);
             TextBoxYF2.TabIndex = 11;
@@ -217,7 +217,7 @@
             // 
             TextBoxXF2.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TextBoxXF2.Location = new Point(258, 163);
-            TextBoxXF2.Margin = new Padding(5, 5, 5, 5);
+            TextBoxXF2.Margin = new Padding(5);
             TextBoxXF2.Name = "TextBoxXF2";
             TextBoxXF2.Size = new Size(84, 36);
             TextBoxXF2.TabIndex = 10;
@@ -226,7 +226,7 @@
             // 
             TextBoxYI2.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TextBoxYI2.Location = new Point(405, 112);
-            TextBoxYI2.Margin = new Padding(5, 5, 5, 5);
+            TextBoxYI2.Margin = new Padding(5);
             TextBoxYI2.Name = "TextBoxYI2";
             TextBoxYI2.Size = new Size(84, 36);
             TextBoxYI2.TabIndex = 9;
@@ -235,7 +235,7 @@
             // 
             TextBoxXI2.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TextBoxXI2.Location = new Point(260, 112);
-            TextBoxXI2.Margin = new Padding(5, 5, 5, 5);
+            TextBoxXI2.Margin = new Padding(5);
             TextBoxXI2.Name = "TextBoxXI2";
             TextBoxXI2.Size = new Size(84, 36);
             TextBoxXI2.TabIndex = 8;
@@ -245,7 +245,7 @@
             TextBoxID2.BackColor = SystemColors.Window;
             TextBoxID2.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TextBoxID2.Location = new Point(75, 46);
-            TextBoxID2.Margin = new Padding(5, 5, 5, 5);
+            TextBoxID2.Margin = new Padding(5);
             TextBoxID2.Name = "TextBoxID2";
             TextBoxID2.Size = new Size(267, 36);
             TextBoxID2.TabIndex = 7;
@@ -254,7 +254,7 @@
             // 
             TextBoxV2.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TextBoxV2.Location = new Point(159, 226);
-            TextBoxV2.Margin = new Padding(5, 5, 5, 5);
+            TextBoxV2.Margin = new Padding(5);
             TextBoxV2.Name = "TextBoxV2";
             TextBoxV2.Size = new Size(129, 36);
             TextBoxV2.TabIndex = 12;
@@ -319,7 +319,7 @@
             // 
             Guardar.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Guardar.Location = new Point(589, 382);
-            Guardar.Margin = new Padding(5, 5, 5, 5);
+            Guardar.Margin = new Padding(5);
             Guardar.Name = "Guardar";
             Guardar.Size = new Size(153, 46);
             Guardar.TabIndex = 26;
@@ -349,13 +349,33 @@
             groupBox1.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox1.ForeColor = SystemColors.Control;
             groupBox1.Location = new Point(20, 70);
-            groupBox1.Margin = new Padding(5, 5, 5, 5);
+            groupBox1.Margin = new Padding(5);
             groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new Padding(5, 5, 5, 5);
+            groupBox1.Padding = new Padding(5);
             groupBox1.Size = new Size(642, 302);
             groupBox1.TabIndex = 27;
             groupBox1.TabStop = false;
             groupBox1.Text = "Avión 1";
+            // 
+            // TextBoxAerolinia1
+            // 
+            TextBoxAerolinia1.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            TextBoxAerolinia1.Location = new Point(448, 226);
+            TextBoxAerolinia1.Margin = new Padding(5);
+            TextBoxAerolinia1.Name = "TextBoxAerolinia1";
+            TextBoxAerolinia1.Size = new Size(129, 36);
+            TextBoxAerolinia1.TabIndex = 25;
+            // 
+            // label22
+            // 
+            label22.AutoSize = true;
+            label22.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label22.Location = new Point(327, 229);
+            label22.Margin = new Padding(5, 0, 5, 0);
+            label22.Name = "label22";
+            label22.Size = new Size(111, 32);
+            label22.TabIndex = 24;
+            label22.Text = "Aerolinia";
             // 
             // groupBox2
             // 
@@ -379,13 +399,33 @@
             groupBox2.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox2.ForeColor = SystemColors.Control;
             groupBox2.Location = new Point(672, 70);
-            groupBox2.Margin = new Padding(5, 5, 5, 5);
+            groupBox2.Margin = new Padding(5);
             groupBox2.Name = "groupBox2";
-            groupBox2.Padding = new Padding(5, 5, 5, 5);
+            groupBox2.Padding = new Padding(5);
             groupBox2.Size = new Size(642, 302);
             groupBox2.TabIndex = 28;
             groupBox2.TabStop = false;
             groupBox2.Text = "Avión 2";
+            // 
+            // TextBoxAerolinia2
+            // 
+            TextBoxAerolinia2.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            TextBoxAerolinia2.Location = new Point(445, 226);
+            TextBoxAerolinia2.Margin = new Padding(5);
+            TextBoxAerolinia2.Name = "TextBoxAerolinia2";
+            TextBoxAerolinia2.Size = new Size(129, 36);
+            TextBoxAerolinia2.TabIndex = 23;
+            // 
+            // label21
+            // 
+            label21.AutoSize = true;
+            label21.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label21.Location = new Point(324, 229);
+            label21.Margin = new Padding(5, 0, 5, 0);
+            label21.Name = "label21";
+            label21.Size = new Size(111, 32);
+            label21.TabIndex = 22;
+            label21.Text = "Aerolinia";
             // 
             // label1
             // 
@@ -474,7 +514,7 @@
             // btnAutorellenar
             // 
             btnAutorellenar.Location = new Point(425, 14);
-            btnAutorellenar.Margin = new Padding(5, 5, 5, 5);
+            btnAutorellenar.Margin = new Padding(5);
             btnAutorellenar.Name = "btnAutorellenar";
             btnAutorellenar.Size = new Size(236, 46);
             btnAutorellenar.TabIndex = 29;
@@ -485,7 +525,7 @@
             // cerrarBtn
             // 
             cerrarBtn.Location = new Point(1161, 382);
-            cerrarBtn.Margin = new Padding(5, 5, 5, 5);
+            cerrarBtn.Margin = new Padding(5);
             cerrarBtn.Name = "cerrarBtn";
             cerrarBtn.Size = new Size(153, 46);
             cerrarBtn.TabIndex = 30;
@@ -496,53 +536,13 @@
             // btnConflicto
             // 
             btnConflicto.Location = new Point(672, 14);
-            btnConflicto.Margin = new Padding(5, 5, 5, 5);
+            btnConflicto.Margin = new Padding(5);
             btnConflicto.Name = "btnConflicto";
             btnConflicto.Size = new Size(242, 46);
             btnConflicto.TabIndex = 31;
             btnConflicto.Text = "AutoConflictos";
             btnConflicto.UseVisualStyleBackColor = true;
             btnConflicto.Click += btnConflicto_Click;
-            // 
-            // label21
-            // 
-            label21.AutoSize = true;
-            label21.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label21.Location = new Point(324, 229);
-            label21.Margin = new Padding(5, 0, 5, 0);
-            label21.Name = "label21";
-            label21.Size = new Size(111, 32);
-            label21.TabIndex = 22;
-            label21.Text = "Aerolinia";
-            // 
-            // TextBoxAerolinia2
-            // 
-            TextBoxAerolinia2.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            TextBoxAerolinia2.Location = new Point(445, 226);
-            TextBoxAerolinia2.Margin = new Padding(5);
-            TextBoxAerolinia2.Name = "TextBoxAerolinia2";
-            TextBoxAerolinia2.Size = new Size(129, 36);
-            TextBoxAerolinia2.TabIndex = 23;
-            // 
-            // TextBoxAerolinia1
-            // 
-            TextBoxAerolinia1.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            TextBoxAerolinia1.Location = new Point(448, 226);
-            TextBoxAerolinia1.Margin = new Padding(5);
-            TextBoxAerolinia1.Name = "TextBoxAerolinia1";
-            TextBoxAerolinia1.Size = new Size(129, 36);
-            TextBoxAerolinia1.TabIndex = 25;
-            // 
-            // label22
-            // 
-            label22.AutoSize = true;
-            label22.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label22.Location = new Point(327, 229);
-            label22.Margin = new Padding(5, 0, 5, 0);
-            label22.Name = "label22";
-            label22.Size = new Size(111, 32);
-            label22.TabIndex = 24;
-            label22.Text = "Aerolinia";
             // 
             // DatosVuelos
             // 
@@ -561,7 +561,7 @@
             Controls.Add(label12);
             Controls.Add(label11);
             Controls.Add(Avion2);
-            Margin = new Padding(5, 5, 5, 5);
+            Margin = new Padding(5);
             Name = "DatosVuelos";
             Text = "DatosVuelos";
             groupBox1.ResumeLayout(false);
