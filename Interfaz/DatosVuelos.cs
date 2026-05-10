@@ -17,7 +17,6 @@ namespace Interfaz
         Random random = new Random(); //Géneramos valores aleatorios para el autorrelleno.
 
         // Constructor que inicializa el formulario y vincula la lista de vuelos compartida:
-        // Parámetros: p (FlightPlanList).
         public DatosVuelos(FlightPlanList p)
         {
             InitializeComponent();
@@ -33,8 +32,6 @@ namespace Interfaz
         // Métodos:
 
         // Método para borrar los datos del form para que el usuario pueda escribir nuevos:
-        // Parámetros: ninguno.
-        // Devuelve: Nada.
         public void LimpiarFormulario()
         {
             TextBoxID1.Clear();
@@ -55,8 +52,6 @@ namespace Interfaz
         }
 
         // Método para preguntar si se quieren añadir más datos (para evitar repeticiones):
-        // Parámetros: ninguno.
-        // Devuelve: nada.
         public void ProponerMasDatos()
         {
             //Mensaje de éxito y proponemos al usuario añadir más datos o no.
@@ -118,10 +113,10 @@ namespace Interfaz
                 //Datos avión 1:
                 string id1 = Convert.ToString(numVuelos + 1); //Empezamos con ID = 1
                 double v1 = random.Next(1, 10); //Máximo subjetivo (se puede cambiar)
-                double xi1 = random.Next(0, 600);
-                double yi1 = random.Next(0, 400);
-                double xf1 = random.Next(0, 600);
-                double yf1 = random.Next(0, 400);
+                double xi1 = random.Next(0, 1400);
+                double yi1 = random.Next(0, 900);
+                double xf1 = random.Next(0, 1400);
+                double yf1 = random.Next(0, 900);
                 string al1 = "EETAC Air";
 
                 TextBoxID1.Text = id1;
@@ -137,10 +132,10 @@ namespace Interfaz
                 //Datos avión 2:
                 string id2 = Convert.ToString(numVuelos + 2);
                 double v2 = random.Next(1, 10);
-                double xi2 = random.Next(0, 600);
-                double yi2 = random.Next(0, 400);
-                double xf2 = random.Next(0, 600);
-                double yf2 = random.Next(0, 400);
+                double xi2 = random.Next(0, 1400);
+                double yi2 = random.Next(0, 900);
+                double xf2 = random.Next(0, 1400);
+                double yf2 = random.Next(0, 900);
                 string al2 = "UPC Airlines";
 
                 TextBoxID2.Text = id2;

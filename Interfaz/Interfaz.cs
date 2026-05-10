@@ -21,6 +21,11 @@ namespace Interfaz
         public Principal(string nombreUsuario)
         {
             InitializeComponent();
+
+            this.FormBorderStyle = FormBorderStyle.None; //Quita las opciones de arriba de la ventana.
+            this.WindowState = FormWindowState.Maximized; //Se abre en modo Fullscreen.
+            this.TopMost = true; //Por encima de la barra de tareas.
+
             this.Usuario = nombreUsuario;
         }
         // Métodos:

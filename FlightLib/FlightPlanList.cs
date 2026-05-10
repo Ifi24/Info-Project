@@ -19,24 +19,18 @@ namespace FlightLib
         // Métodos de gestión de lista:
 
         // Obtiene el número total de aviones en la lista.
-        // Parámetros: ninguno.
-        // Devuelve: cantidad de vuelos (int).
         public int GetNumAviones()
         {
             return listaVuelos.Count;
         }
 
         // Añade un objeto FlightPlan a la lista.
-        // Parámetros: p (FlightPlan).
-        // Devuelve: Nada.
         public void AddFlightPlan(FlightPlan p)
         {
             listaVuelos.Add(p);
         }
 
         // Obtiene un plan de vuelo específico.
-        // Parámetros: i (int) posición en la lista.
-        // Devuelve: objeto FlightPlan o null si el índice está fuera de rango.
         public FlightPlan GetFlightPlan(int i)
         {
             if (i < 0 || i >= listaVuelos.Count)
@@ -46,16 +40,12 @@ namespace FlightLib
         }
 
         // Obtiene la distancia de seguridad que se guardó en el último fichero cargado.
-        // Parámetros: ninguno.
-        // Devuelve: distancia de seguridad (double).
         public double GetDistanciaCargada()
         {
             return distanciaSeguridadCargada;
         }
 
         // Obtiene el tiempo de simulación que se guardó en el último fichero cargado.
-        // Parámetros: ninguno.
-        // DEVUELVE: tiempo de simulación (double).
         public double GetTiempoCargado()
         {
             return tiempoSimulacionCargado;
@@ -64,8 +54,6 @@ namespace FlightLib
         // Métodos de movimiento y control:
 
         // Ordena a todos los aviones de la lista que avancen un paso de tiempo.
-        // Parámetros: tiempo (double) diferencial de tiempo.
-        // Devuelve: nada.
         public void Mover(double tiempo) //Avisa para activar movimiento
         {
             foreach (FlightPlan vuelo in listaVuelos)
@@ -74,20 +62,7 @@ namespace FlightLib
             }
         }
 
-        // Ordena a todos los aviones que retrocedan un paso en su historial.
-        // Parámetros: tiempo (double) (mantenido por consistencia).
-        // Devuelve: nada.
-        public void MoverAtras(double tiempo)
-        {
-            foreach (FlightPlan vuelo in listaVuelos)
-            {
-                vuelo.MoverAtras(tiempo);
-            }
-        }
-
         // Recorre la lista completa de vuelos y ejecuta el método de escritura en consola para cada uno.
-        // Parámetros: ninguno.
-        // Devuelve: nada.
         public void EscribeConsola()
         {
             foreach (FlightPlan vuelo in listaVuelos)
@@ -97,12 +72,10 @@ namespace FlightLib
         }
 
         // Método que crea los vuelos segun datos proporcionados:
-        // Parámetros: id (string), xi/yi (origen; double), cx/cy (actual; double), xf/yf (destino; double), v (velocidad; double) y aerolinia (string).
-        // Devuelve: nada. Lanza una excepción si los datos están fuera de los límites establecidos.
         public void CrearVuelo(string id, double xi, double yi, double cx, double cy, double xf, double yf, double v, string aerolinia)
         {
             // Comprobamos que los datos se pueden mostrar:
-            if (xi < 0 || xi > 800 || yi < 0 || yi > 600 || xf < 0 || xf > 800 || yf < 0 || yf > 600)
+            if (xi < 0 || xi > 1400 || yi < 0 || yi > 900 || xf < 0 || xf > 1400 || yf < 0 || yf > 900)
             {
                 throw new Exception($"Coordenadas fuera de límites para el avión con ID: {id}"); // Comunica error.
             }
@@ -112,8 +85,6 @@ namespace FlightLib
         }
 
         //Método para generar aviones en conflicto:
-        // Parámetros: ninguno.
-        // Devuelve: nada.
         public void GenerarConflicto()
         {
             FlightPlan conflicto1 = new FlightPlan("123", 0, 0, 0, 0, 800, 600, 10, "EETAC Air");
@@ -123,8 +94,6 @@ namespace FlightLib
         }
 
         //Método para obtener informe de conflictos:
-        // Parámetros: distanciaSeguridad (double) mínima permitida entre aviones.
-        // Devuelve: un string con la lista de parejas de IDs en conflicto, separados por saltos de línea.
         public string InformeConflictos(double distanciaSeguridad)
         {
             string informe = "";
@@ -145,8 +114,6 @@ namespace FlightLib
         }
 
         //Método que detecte todos los conflictos:
-        // Parámetros: distSeguridad (double) que define el radio de alerta.
-        // Devuelve: una lista de arrays, donde cada array contiene la pareja de objetos FlightPlan que están en conflicto.
         public List<FlightPlan[]> GetConflictos(double distSeguridad)
         {
             List<FlightPlan[]> conflictos = new List<FlightPlan[]>();
@@ -163,8 +130,6 @@ namespace FlightLib
         }
 
         //Método para reiniciar vuelos:
-        // Parámetros: ninguno.
-        // Devuelve: nada.
         public void ReiniciarVuelos()
         {
             foreach (FlightPlan fp in listaVuelos)
@@ -173,9 +138,16 @@ namespace FlightLib
             }
         }
 
+        // Método para retroceder la simulación:
+        public void RetrocederSimulación()
+        {
+            foreach(FlightPlan vuelo in listaVuelos)
+            {
+                vuelo.MoverAtras();
+            }
+        }
+
         // Exporta el estado actual de la simulación a un archivo de texto, incluyendo la configuración global y el historial de cada vuelo.
-        // Parámetros: rutaArchivo (string) donde se creará el fichero, distanciaSeguridad (double) y tiempoActual (double) de la simulación.
-        // Devuelve: nada.
         public void GuardarFichero(string rutaArchivo, double distanciaSeguridad, double tiempoActual)
         {
             StreamWriter fichero = File.CreateText(rutaArchivo);
@@ -189,10 +161,8 @@ namespace FlightLib
             fichero.Close();
         }
 
-        //HAY QUE HACER QUE SE RESETEE TODO!!!
+        // HAY QUE HACER QUE SE RESETEE TODO!!!
         // Carga los datos de una simulación desde un archivo, reconstruyendo la lista de vuelos, configuraciones globales e historiales de movimiento (Stack).
-        // Parámetros: rutaArchivo (string) con la ubicación del fichero a leer.
-        // Devuelve: nada.
         public void AbrirFichero(string rutaArchivo)
         {
             //Primero reseteamos y vaciamos

@@ -24,6 +24,10 @@ namespace Interfaz
         {
             InitializeComponent();
 
+            this.FormBorderStyle = FormBorderStyle.None; //Quita las opciones de arriba de la ventana.
+            this.WindowState = FormWindowState.Maximized; //Se abre en modo Fullscreen.
+            this.TopMost = true; //Por encima de la barra de tareas.
+
             this.listaVuelos = miLista;
             this.dist = distSeguridad;
             this.tiemp = tiempoCiclo;
@@ -75,12 +79,11 @@ namespace Interfaz
             }
         }
 
-        // Método para mover los aviones un ciclo:
-        private void MoverCiclo()
+        // Método para actualizar cambios en la simulación:
+        private void ActualizarInterfaz()
         {
-            //Movemos todos los aviones
-            listaVuelos.Mover(this.tiemp);
             labelAlarma.Visible = false;
+            string idsConflicto = "";
 
             //Loop para actualizar posiciones:
             for (int i = 0; i < misPics.Count; i++)
@@ -100,17 +103,13 @@ namespace Interfaz
 
             // Detectamos y mostramos si hay conflictos
             List<FlightPlan[]> conflictosDetectados = listaVuelos.GetConflictos(this.dist);
-
             if (conflictosDetectados.Count > 0)
             {
-                string idsConflicto = "";
-
                 foreach (FlightPlan[] pareja in conflictosDetectados)
                 {
-                    // Guardamos los ids en conflicto
                     idsConflicto += $"{pareja[0].GetId()} y {pareja[1].GetId()}, ";
 
-                    // Pintamos de amarillo los aviones en conflicto
+                    // Pintamos de amarillo los aviones involucrados
                     for (int i = 0; i < listaVuelos.GetNumAviones(); i++)
                     {
                         FlightPlan fp = listaVuelos.GetFlightPlan(i);
@@ -121,59 +120,7 @@ namespace Interfaz
                     }
                 }
 
-                labelAlarma.Text = $"¡Conflicto entre: {idsConflicto.TrimEnd(',', ' ')}!";
-                labelAlarma.Visible = true;
-            }
-            PanelSimulacion.Refresh(); //Borra elipses y linias anteriores y dibuja las nuevas.
-        }
-
-        // Método para deshacer un ciclo:
-        private void DeshacerCiclo()
-        {
-            // Movemos hacia atras los vuelos
-            listaVuelos.MoverAtras(this.tiemp);
-            labelAlarma.Visible = false;
-
-            //Loop para actualizar posiciones:
-            for (int i = 0; i < misPics.Count; i++)
-            {
-                FlightPlan fp = listaVuelos.GetFlightPlan(i);
-                if (fp == null) continue;
-
-                int x = (int)Math.Round(fp.GetCurrentPosition().GetX()); //Redondeamos porque no se puede dibujar entre píxeles.
-                int y = (int)Math.Round(fp.GetCurrentPosition().GetY());
-
-                //Actualizaciones:
-                misPics[i].Location = new Point(x - 4, y - 4); // Movemos el cuadrito existente
-                misLabels[i].Location = new Point(x + 6, y - 6);
-                //Reseteamos el color por si antes estaba en amarillo por conflicto y ya no lo están.
-                misPics[i].BackColor = Color.Red;
-            }
-
-            // Detectamos y mostramos si hay conflictos
-            List<FlightPlan[]> conflictosDetectados = listaVuelos.GetConflictos(this.dist);
-
-            if (conflictosDetectados.Count > 0)
-            {
-                string idsConflicto = "";
-
-                foreach (FlightPlan[] pareja in conflictosDetectados)
-                {
-                    // Guardamos los ids en conflicto
-                    idsConflicto += $"{pareja[0].GetId()} y {pareja[1].GetId()}, ";
-
-                    // Pintamos de amarillo los aviones en conflicto
-                    for (int i = 0; i < listaVuelos.GetNumAviones(); i++)
-                    {
-                        FlightPlan fp = listaVuelos.GetFlightPlan(i);
-                        if (fp == pareja[0] || fp == pareja[1])
-                        {
-                            misPics[i].BackColor = Color.Yellow;
-                        }
-                    }
-                }
-
-                labelAlarma.Text = $"¡Conflicto entre: {idsConflicto.TrimEnd(',', ' ')}!";
+                labelAlarma.Text = $"Conflicto entre: {idsConflicto.TrimEnd(',', ' ')}";
                 labelAlarma.Visible = true;
             }
             PanelSimulacion.Refresh(); //Borra elipses y linias anteriores y dibuja las nuevas.
@@ -206,28 +153,28 @@ namespace Interfaz
                 }
         }
 
+        // Método para mover los aviones un ciclo:
+        private void MoverCiclo()
+        {
+            //Movemos todos los aviones
+            listaVuelos.Mover(this.tiemp);
+            ActualizarInterfaz();
+        }
+
+        // Método para retroceder un ciclo la simulación:
+        private void DeshacerCiclo()
+        {
+            listaVuelos.RetrocederSimulación();
+            ActualizarInterfaz();
+        }
+
         // Método que reinicia la simulación:
         public void ReiniciarSimulacion()
         {
             TimerSimulación.Stop(); //Paramos el timer
-            btn_AutoCiclo.Text = "Iniciar";
 
             listaVuelos.ReiniciarVuelos();
-
-            // Actualizamos la posición en el panel:
-            for (int i = 0; i < listaVuelos.GetNumAviones(); i++)
-            {
-                FlightPlan fp = listaVuelos.GetFlightPlan(i);
-                int x = (int)fp.GetCurrentPosition().GetX();
-                int y = (int)fp.GetCurrentPosition().GetY();
-
-                misPics[i].Location = new Point(x - 4, y - 4);
-                misPics[i].BackColor = Color.Red;
-                misLabels[i].Location = new Point(x + 6, y - 6);
-            }
-
-            labelAlarma.Visible = false;
-            PanelSimulacion.Refresh(); //Borra elipses y linias anteriores y dibuja las nuevas.;
+            ActualizarInterfaz();
         }
 
         // Botón que mueve un ciclo:
@@ -249,7 +196,6 @@ namespace Interfaz
             {
                 //Si ya esta funcionando, lo paramos.
                 TimerSimulación.Stop();
-                btn_AutoCiclo.Text = "Iniciar";
             }
             else //Si queremos que funcione:
             {
@@ -280,7 +226,6 @@ namespace Interfaz
                 }
                 // Una vez revisados todos, arrancamos
                 TimerSimulación.Start();
-                btn_AutoCiclo.Text = "Detener";
             }
         }
 
@@ -323,21 +268,8 @@ namespace Interfaz
         {
             // Paramos simulación
             TimerSimulación.Stop();
-            for (int i = 0; i < listaVuelos.GetNumAviones(); i++) //Reiniciar todos los vuelos
-            {
-                FlightPlan fp = listaVuelos.GetFlightPlan(i);
-                fp.Reseteo();
-            }
-            for (int i = 0; i < listaVuelos.GetNumAviones(); i++) //Iconos
-            {
-                FlightPlan fp = listaVuelos.GetFlightPlan(i);
-
-                int x = (int)fp.GetCurrentPosition().GetX();
-                int y = (int)fp.GetCurrentPosition().GetY();
-
-                misPics[i].Location = new Point(x - 4, y - 4);
-                misPics[i].BackColor = Color.Red;
-            }
+            listaVuelos.ReiniciarVuelos();
+            ActualizarInterfaz();
             TimerSimulación.Start(); //Renaudar simulación
 
             MessageBox.Show("Simulación reiniciada correctamente.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -435,8 +367,45 @@ namespace Interfaz
             {
                 return;
             }
+        }
 
+        private void btnPause_Click(object sender, EventArgs e)
+        {
+            if (TimerSimulación.Enabled)
+            {
+                //Si ya esta funcionando, lo paramos.
+                TimerSimulación.Stop();
+            }
+            else //Si queremos que funcione:
+            {
+                for (int i = 0; i < listaVuelos.GetNumAviones(); i++)
+                {
+                    for (int j = i + 1; j < listaVuelos.GetNumAviones(); j++)
+                    {
+                        FlightPlan v1 = listaVuelos.GetFlightPlan(i);
+                        FlightPlan v2 = listaVuelos.GetFlightPlan(j);
 
+                        if (v1.PrediccionConflicto(v2, this.dist)) // Si se detecta conflicto...
+                        {
+                            //Avisamos al usuario y le preguntamos si quiere resolverlo:
+                            DialogResult respuesta = MessageBox.Show("¡Conflicto futuro detectado entre " + v1.GetId() + " y " + v2.GetId() + " ¿Desea resolverlo?", "Resolución Automática", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                            if (respuesta == DialogResult.Yes)
+                            {
+                                // Intentamos resolverlo cambiando la velocidad de uno de ellos (v2)
+                                bool logrado = v2.ResolverConflicto(v1, this.dist);
+
+                                if (logrado)
+                                    MessageBox.Show("Conflicto resuelto. " + v2.GetId() + " ha cambiado su velocidad.", "Resolución Conflicto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                else
+                                    MessageBox.Show("No se pudo encontrar solución para el conflicto entre " + v1.GetId() + " y " + v2.GetId(), "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                        }
+                    }
+                }
+                // Una vez revisados todos, arrancamos
+                TimerSimulación.Start();
+            }
         }
     }
 }

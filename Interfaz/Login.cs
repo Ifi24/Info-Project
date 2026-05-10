@@ -71,6 +71,13 @@ namespace Interfaz
         // Botón para iniciar sesión:
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(Usuariotxt.Text) || string.IsNullOrWhiteSpace(Contraseñatxt.Text))
+            {
+                MessageBox.Show("Por favor, rellene todos los campos. No se permiten espacios en blanco.",
+                                "Campos incompletos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return; // Salimos del método para que no ejecute el SQL
+            }
+
             try
             {
                 string sql = "SELECT * FROM misUsuarios WHERE Username = '" + Usuariotxt.Text + "' AND Password = '" + Contraseñatxt.Text + "'";
@@ -98,6 +105,13 @@ namespace Interfaz
         // Botón para registrarse como usuario:
         private void btnRegister_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(Usuariotxt.Text) || string.IsNullOrWhiteSpace(Contraseñatxt.Text))
+            {
+                MessageBox.Show("Por favor, rellene todos los campos. No se permiten espacios en blanco.",
+                                "Campos incompletos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return; // Salimos del método para que no ejecute el SQL
+            }
+
             try
             {
                 string sql = "INSERT INTO misUsuarios (Username, Password) VALUES ('" + Usuariotxt.Text + "','" + Contraseñatxt.Text + "')";

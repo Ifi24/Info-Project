@@ -22,7 +22,6 @@ namespace FlightLib
 
 
         // Constructor que inicializa un nuevo plan de vuelo con sus posiciones y velocidad:
-        // Parámetros: id (string), coordenadas iniciales; xi, yi (double), actuales; cx, cy (double), finales; xf, yf (double), velocidad; v (double) y aerolínea; aerolinia (string).
         public FlightPlan(string id, double xi, double yi, double cx, double cy, double xf, double yf, double v, string aerolinia)
         {
             this.id = id;
@@ -38,88 +37,66 @@ namespace FlightLib
         // Gets y Sets:
 
         // Obtiene el id del vuelo
-        // Parámetros: ninguno.
-        // Devuelve: id (string).
         public string GetId()
         {
             return id;
         }
 
         // Asigna un nuevo identificador al vuelo.
-        // Parámetros: id (string).
-        // Devuelve: nada.
         public void SetId(string id)
         {
             this.id = id;
         }
 
         // Obtiene la posición inicial de origen del vuelo.
-        // Parámetros: ninguno.
-        // Devuelve: objeto Position con las coordenadas de origen.
         public Position GetInitialPosition()
         {
             return initialPosition;
         }
 
         // Establece una nueva posición inicial para el vuelo.
-        // Parámetros: initialPosition (Position).
-        // Devuelve: nada.
         public void SetInitialPosition(Position initialPosition)
         {
             this.initialPosition = initialPosition;
         }
 
         // Obtiene la posición actual en la que se encuentra el avión.
-        // Parámetros: ninguno.
-        // Devuelve: objeto Position con las coordenadas actuales.
         public Position GetCurrentPosition()
         {
             return currentPosition;
         }
 
         // Actualiza la posición actual del avión manualmente.
-        // Parámetros: currentPosition (Position).
-        // Devuelve: nada.
         public void SetCurrentPosition(Position currentPosition)
         {
             this.currentPosition = currentPosition;
         }
 
         // Obtiene la posición de destino final del vuelo.
-        // Parámetros: ninguno.
-        // Devuelve: objeto Position con las coordenadas de destino.
         public Position GetFinalPosition()
         {
             return finalPosition;
         }
 
         // Establece una nueva posición final de destino.
-        // Parámetros: finalPosition (Position).
-        // Devuelve: nada.
         public void SetFinalPosition(Position finalPosition)
         {
             this.finalPosition = finalPosition;
         }
 
         // Obtiene el valor de la velocidad escalar del avión.
-        // Parámetros: ninguno.
-        // Devuelve: velocidad (double).
         public double GetVelocidad()
         {
             return velocidad;
         }
 
         // Asigna una nueva velocidad al plan de vuelo.
-        // Parámetros: velocidad (double).
-        // Devuelve: nada.
         public void SetVelocidad(double velocidad)
         {
             this.velocidad = velocidad;
         }
 
         // Calcula la componente X de la velocidad actual.
-        // Parámetros: ninguno.
-        // Devuelve: velocidad en el eje X (double).
         public double GetVelocidadX()
         {
             double distTotal = this.currentPosition.Distancia(this.finalPosition);
@@ -129,8 +106,6 @@ namespace FlightLib
         }
 
         // Calcula la componente Y de la velocidad actual.
-        // Parámetros: ninguno.
-        // Devuelve: velocidad en el eje Y (double).
         public double GetVelocidadY()
         {
             double distTotal = this.currentPosition.Distancia(this.finalPosition);
@@ -140,32 +115,24 @@ namespace FlightLib
         }
 
         // Asigna el nombre de la aerolínea a la que pertenece el avión.
-        // Parámetros: aerolinia (string).
-        // Devuelve: nada.
         public void SetAerolinia(string aerolinia)
         {
             this.aerolinia = aerolinia;
         }
 
         // Obtiene el nombre de la aerolínea propietaria del vuelo.
-        // Parámetros: ninguno.
-        // Devuelve: nombre de la aerolínea (string).
         public string GetAerolinia()
         {
             return aerolinia;
         }
 
         // Sobrescribe el historial de posiciones.
-        // Parámetros: historial (Stack de Position).
-        // Devuelve: nada.
         public void SetHistorialPosiciones(Stack<Position> historial)
         {
             this.historialPosiciones = historial;
         }
 
         // Sobrescribe el historial de velocidades.
-        // Parámetros: historial (Stack de double).
-        // Devuelve: nada.
         public void SetHistorialVelocidades(Stack<double> historial)
         {
             this.historialVelocidades = historial;
@@ -174,46 +141,45 @@ namespace FlightLib
         //Métodos de movimiento
 
         // Método que mueve el vuelo a la posición correspondiente a viajar durante el tiempo que se recibe como parámetro.
-        // Parámetros: tiempo (double) transcurrido en la simulación.
-        // Devuelve: nada.
         public void Mover(double tiempo)
         {
-            // Guardamos el estado actual
-            historialPosiciones.Push(new Position(currentPosition.GetX(), currentPosition.GetY()));
-            historialVelocidades.Push(this.velocidad);
-
-            // Comprobamos que aún no hemos llegado.
-            if (this.HaLlegado())
+            if (!this.HaLlegado()) //Para que no se guarde la posicion final muchas veces.
             {
-                currentPosition = finalPosition;
-                return; //Sale del loop
+                // Guardamos el estado actual
+                historialPosiciones.Push(new Position(currentPosition.GetX(), currentPosition.GetY()));
+                historialVelocidades.Push(this.velocidad);
+
+                // Comprobamos que aún no hemos llegado.
+                if (this.HaLlegado())
+                {
+                    currentPosition = finalPosition;
+                    return; //Sale del loop
+                }
+
+                // Calculamos la distancia recorrida en el tiempo dado
+                double distancia = tiempo * this.velocidad; //Tiempo en s
+
+                //Calculamos las razones trigonométricas
+                double hipotenusa = currentPosition.Distancia(finalPosition);
+                double coseno = (finalPosition.GetX() - currentPosition.GetX()) / hipotenusa;
+                double seno = (finalPosition.GetY() - currentPosition.GetY()) / hipotenusa;
+
+                //Calculamos la nueva posición del vuelo
+                double x = currentPosition.GetX() + distancia * coseno;
+                double y = currentPosition.GetY() + distancia * seno;
+
+                // Cambiamos el nombre porque la vamos a usar para saber si estamos todavía en el vuelo o si hemos llegado al final de este por lo que nos pararíamos
+                Position nextPosition = new Position(x, y);
+
+                if (currentPosition.Distancia(nextPosition) < hipotenusa)
+                    currentPosition = nextPosition;
+                else
+                    currentPosition = finalPosition;
             }
-
-            // Calculamos la distancia recorrida en el tiempo dado
-            double distancia = tiempo * this.velocidad; //Tiempo en s
-
-            //Calculamos las razones trigonométricas
-            double hipotenusa = currentPosition.Distancia(finalPosition);
-            double coseno = (finalPosition.GetX() - currentPosition.GetX()) / hipotenusa;
-            double seno = (finalPosition.GetY() - currentPosition.GetY()) / hipotenusa;
-
-            //Calculamos la nueva posición del vuelo
-            double x = currentPosition.GetX() + distancia * coseno;
-            double y = currentPosition.GetY() + distancia * seno;
-
-            // Cambiamos el nombre porque la vamos a usar para saber si estamos todavía en el vuelo o si hemos llegado al final de este por lo que nos pararíamos
-            Position nextPosition = new Position(x, y);
-
-            if (currentPosition.Distancia(nextPosition) < hipotenusa)
-                currentPosition = nextPosition;
-            else
-                currentPosition = finalPosition;
         }
 
         // Método que mueve el vuelo hacia atrás en la posición correspondiente según el tiempo que se recibe de parámetro:
-        // Parámetros: tiempo (double).
-        // Devuelve: nada.
-        public void MoverAtras(double tiempo)
+        public void MoverAtras()
         {
             if (historialPosiciones.Count > 0)
             {
@@ -229,8 +195,6 @@ namespace FlightLib
         // Métodos de estado y conflictos
 
         // Método que nos dice si un vuelo ha llegado a su destino o no.
-        // Parámetros: ninguno.
-        // Devuelve: true si ha llegado, false si no.
         public bool HaLlegado()
         {
             bool destino = false;
@@ -240,8 +204,6 @@ namespace FlightLib
         }
 
         // Comprueba si el avión se encuentra todavía en su posición inicial (origen).
-        // Parámetros: ninguno.
-        // Devuelve: true si está en el origen (con margen de error de 0.1), false en caso contrario.
         public bool SigueEnOrigen()
         {
             bool origen = false;
@@ -251,8 +213,6 @@ namespace FlightLib
         }
 
         // Método que devuelve al avión a su posición inicial.
-        // Parámetros: ninguno.
-        // Devuelve: nada.
         public void Reseteo()
         {
             currentPosition = initialPosition;
@@ -262,16 +222,12 @@ namespace FlightLib
         }
 
         // Método que da la distancia que se ha movido el avion.
-        // Parámetros: plan (FlightPlan) con el que se quiere comparar la distancia.
-        // Devuelve: distancia entre ambos aviones (double).
         public double DistanciaViajada(FlightPlan plan)
         {
             return this.currentPosition.Distancia(plan.currentPosition);
         }
 
         // Método que detecta si hay un conflicto según la distancia de seguridad proporcionada
-        // Parámetros: b (FlightPlan) a comparar, distanciaSeguridad (double) mínima permitida.
-        // Devuelve: true si la distancia es menor a la de seguridad, false si es una zona segura.
         public bool Conflicto(FlightPlan b, double distanciaSeguridad)
         {
             bool conflicto = false;
@@ -281,9 +237,6 @@ namespace FlightLib
         }
 
         //FASE 10: Predice si habrá un conflicto a lo largo de toda la trayectoria.
-        // Método que nos da las coordenadas del punto de conflicto.
-        // Parámetros: otroVuelo (FlightPlan), distSeguridad (double).
-        // Devuelve: objeto Position del conflicto o null si no hay colisión.
         public Position PuntoConflicto(FlightPlan otroVuelo, double distSeguridad)
         {
             // Utilizamos t = (-(dist*vel))/|vel|^2 = a/b
@@ -321,8 +274,6 @@ namespace FlightLib
 
         }
         // Método que predice si pasará el conflicto.
-        // Parámetros: otroVuelo (FlightPlan) a comparar, distSeguridad (double) de separación mínima.
-        // Devuelve: true si se detecta una colisión futura, false si las trayectorias son seguras.
         public bool PrediccionConflicto(FlightPlan otroVuelo, double distSeguridad)
         {
             if (PuntoConflicto(otroVuelo, distSeguridad) != null)
@@ -331,9 +282,7 @@ namespace FlightLib
                 return false;
         }
 
-        // FASE 11: Método para intentar cambiar la velocidad (bajándola) y evitar chocar con otro vuelo (otroVuelo)
-        // Parámetros: otroVuelo (FlightPlan), distanciaSeguridad (double).
-        // Devuelve: true si se encontró una velocidad segura, false si no.
+        // Método para intentar cambiar la velocidad (bajándola) y evitar chocar con otro vuelo (otroVuelo)
         public bool ResolverConflicto(FlightPlan otroVuelo, double distanciaSeguridad)
         {
             double velocidadOriginal = this.velocidad;
@@ -371,8 +320,6 @@ namespace FlightLib
 
 
         // Para que nos formatee los datos para guardar
-        // Parámetros: ninguno.
-        // Devuelve: string con datos básicos e historiales separados por '|'.
         public string DarDatosGuardado()
         {
             string datosBasicos = $"{id} {initialPosition.GetX()} {initialPosition.GetY()} " +
@@ -398,27 +345,8 @@ namespace FlightLib
 
             return devolver;
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         // Método para comprobar errores (se podría eliminar al final):
-        // Parámetros: Ninguno.
-        // Devuelve: Nada.
+
         public void EscribeConsola()
         // escribe en consola los datos del plan de vuelo
         {
