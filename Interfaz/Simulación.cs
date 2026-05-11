@@ -26,7 +26,6 @@ namespace Interfaz
 
             this.FormBorderStyle = FormBorderStyle.None; //Quita las opciones de arriba de la ventana.
             this.WindowState = FormWindowState.Maximized; //Se abre en modo Fullscreen.
-            this.TopMost = true; //Por encima de la barra de tareas.
 
             this.listaVuelos = miLista;
             this.dist = distSeguridad;
@@ -55,17 +54,12 @@ namespace Interfaz
                 pic.Tag = fp;
                 pic.Click += new EventHandler(Avion_Click);
 
-                int x = (int)fp.GetCurrentPosition().GetX();
-                int y = (int)fp.GetCurrentPosition().GetY();
-                pic.Location = new Point(x - 4, y - 4);
-
                 //Etiquetas para los aviones
                 Label lbl = new Label();
                 lbl.Text = fp.GetId();
                 lbl.AutoSize = true;
                 lbl.ForeColor = Color.White;
                 lbl.BackColor = Color.Transparent;
-                lbl.Location = new Point(x, y - 15);
 
                 // Añadimos ambos:
                 PanelSimulacion.Controls.Add(pic);
@@ -75,6 +69,7 @@ namespace Interfaz
                 pic.BringToFront(); //Para asegurarnos de que se dibujan bien.
                 lbl.BringToFront();
 
+                ActualizarInterfaz();
                 PanelSimulacion.Invalidate(); //Ejecute el evento Paint
             }
         }
@@ -123,7 +118,8 @@ namespace Interfaz
                 labelAlarma.Text = $"Conflicto entre: {idsConflicto.TrimEnd(',', ' ')}";
                 labelAlarma.Visible = true;
             }
-            PanelSimulacion.Refresh(); //Borra elipses y linias anteriores y dibuja las nuevas.
+            //Borra elipses y linias anteriores y dibuja las nuevas.
+            PanelSimulacion.Invalidate();
         }
 
         // Método que dibuja una línia entre la posición inicial y final (trayectoria) y elipses de distancia de seguridad:
