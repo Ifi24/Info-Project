@@ -64,7 +64,7 @@
             Opciones.ForeColor = SystemColors.Control;
             Opciones.Name = "Opciones";
             Opciones.Padding = new Padding(10, 10, 5, 0);
-            Opciones.Size = new Size(121, 38);
+            Opciones.Size = new Size(114, 38);
             Opciones.Text = "Opciones";
             // 
             // cargarListaDeVuelosToolStripMenuItem
@@ -72,7 +72,7 @@
             cargarListaDeVuelosToolStripMenuItem.BackColor = Color.DarkSlateGray;
             cargarListaDeVuelosToolStripMenuItem.ForeColor = SystemColors.Control;
             cargarListaDeVuelosToolStripMenuItem.Name = "cargarListaDeVuelosToolStripMenuItem";
-            cargarListaDeVuelosToolStripMenuItem.Size = new Size(454, 26);
+            cargarListaDeVuelosToolStripMenuItem.Size = new Size(590, 28);
             cargarListaDeVuelosToolStripMenuItem.Text = "Introducir Datos de Vuelo";
             cargarListaDeVuelosToolStripMenuItem.Click += cargarListaDeVuelosToolStripMenuItem_Click;
             // 
@@ -81,7 +81,7 @@
             introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem.BackColor = Color.DarkSlateGray;
             introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem.ForeColor = SystemColors.Control;
             introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem.Name = "introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem";
-            introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem.Size = new Size(454, 26);
+            introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem.Size = new Size(590, 28);
             introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem.Text = "Introducir Distancia Seguridad y Tiempo de Ciclo";
             introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem.Click += introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem_Click;
             // 
@@ -90,7 +90,7 @@
             verSimulaciónToolStripMenuItem.BackColor = Color.DarkSlateGray;
             verSimulaciónToolStripMenuItem.ForeColor = SystemColors.Control;
             verSimulaciónToolStripMenuItem.Name = "verSimulaciónToolStripMenuItem";
-            verSimulaciónToolStripMenuItem.Size = new Size(454, 26);
+            verSimulaciónToolStripMenuItem.Size = new Size(590, 28);
             verSimulaciónToolStripMenuItem.Text = "Ver Simulación";
             verSimulaciónToolStripMenuItem.Click += verSimulaciónToolStripMenuItem_Click;
             // 
@@ -134,7 +134,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Tahoma", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = SystemColors.Control;
-            label3.Location = new Point(152, 154);
+            label3.Location = new Point(152, 186);
             label3.Name = "label3";
             label3.Size = new Size(157, 28);
             label3.TabIndex = 3;
@@ -145,7 +145,7 @@
             label4.AutoSize = true;
             label4.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label4.ForeColor = SystemColors.Control;
-            label4.Location = new Point(186, 195);
+            label4.Location = new Point(186, 214);
             label4.Name = "label4";
             label4.Size = new Size(384, 24);
             label4.TabIndex = 4;

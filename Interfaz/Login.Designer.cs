@@ -55,7 +55,9 @@
             // lblUsuario
             // 
             lblUsuario.AutoSize = true;
+            lblUsuario.BackColor = Color.Transparent;
             lblUsuario.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblUsuario.ForeColor = Color.White;
             lblUsuario.Location = new Point(130, 60);
             lblUsuario.Name = "lblUsuario";
             lblUsuario.Size = new Size(71, 18);
@@ -66,6 +68,7 @@
             // 
             lblContraseña.AutoSize = true;
             lblContraseña.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblContraseña.ForeColor = Color.White;
             lblContraseña.Location = new Point(130, 152);
             lblContraseña.Name = "lblContraseña";
             lblContraseña.Size = new Size(98, 18);
@@ -106,7 +109,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.Control;
+            BackColor = Color.Black;
             ClientSize = new Size(482, 403);
             Controls.Add(btnRegister);
             Controls.Add(btnCerrar);
