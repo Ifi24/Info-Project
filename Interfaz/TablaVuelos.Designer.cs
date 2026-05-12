@@ -36,6 +36,8 @@
             ColumnSpeed = new DataGridViewTextBoxColumn();
             cerrarBtn = new Button();
             button1 = new Button();
+            label1 = new Label();
+            label2 = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvVuelos).BeginInit();
             SuspendLayout();
             // 
@@ -58,6 +60,7 @@
             dgvVuelos.Size = new Size(812, 320);
             dgvVuelos.TabIndex = 0;
             dgvVuelos.CellContentClick += dgvVuelos_CellContentClick;
+            dgvVuelos.CellDoubleClick += dgvVuelos_CellDoubleClick;
             // 
             // ColumnID
             // 
@@ -90,7 +93,7 @@
             // cerrarBtn
             // 
             cerrarBtn.Location = new Point(374, 352);
-            cerrarBtn.Margin = new Padding(5, 5, 5, 5);
+            cerrarBtn.Margin = new Padding(5);
             cerrarBtn.Name = "cerrarBtn";
             cerrarBtn.Size = new Size(153, 46);
             cerrarBtn.TabIndex = 1;
@@ -101,7 +104,7 @@
             // button1
             // 
             button1.Location = new Point(676, 352);
-            button1.Margin = new Padding(5, 5, 5, 5);
+            button1.Margin = new Padding(5);
             button1.Name = "button1";
             button1.Size = new Size(153, 46);
             button1.TabIndex = 2;
@@ -109,12 +112,34 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += btnAplicar_Click;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.ForeColor = SystemColors.ButtonHighlight;
+            label1.Location = new Point(16, 339);
+            label1.Name = "label1";
+            label1.Size = new Size(311, 32);
+            label1.TabIndex = 3;
+            label1.Text = "Un click: para cambiar datos";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.ForeColor = SystemColors.ButtonHighlight;
+            label2.Location = new Point(16, 371);
+            label2.Name = "label2";
+            label2.Size = new Size(334, 32);
+            label2.TabIndex = 4;
+            label2.Text = "Doble click: mostrar distancias";
+            // 
             // TablaVuelos
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Desktop;
-            ClientSize = new Size(848, 421);
+            ClientSize = new Size(847, 444);
+            Controls.Add(label2);
+            Controls.Add(label1);
             Controls.Add(button1);
             Controls.Add(cerrarBtn);
             Controls.Add(dgvVuelos);
@@ -123,6 +148,7 @@
             Load += TablaVuelos_Load;
             ((System.ComponentModel.ISupportInitialize)dgvVuelos).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -134,5 +160,7 @@
         private DataGridViewTextBoxColumn ColumnSpeed;
         private Button cerrarBtn;
         private Button button1;
+        private Label label1;
+        private Label label2;
     }
 }

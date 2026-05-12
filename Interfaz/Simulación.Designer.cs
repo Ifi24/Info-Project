@@ -56,6 +56,8 @@
             btn_Acelerar = new Button();
             btn_Ralentizar = new Button();
             toolTip1 = new ToolTip(components);
+            label5 = new Label();
+            button1 = new Button();
             PanelSimulacion.SuspendLayout();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -151,6 +153,8 @@
             // groupBox1
             // 
             groupBox1.BackColor = Color.DarkSlateGray;
+            groupBox1.Controls.Add(label5);
+            groupBox1.Controls.Add(button1);
             groupBox1.Controls.Add(groupBox2);
             groupBox1.Controls.Add(label9);
             groupBox1.Controls.Add(btn_Deshacer);
@@ -376,6 +380,30 @@
             btn_Ralentizar.UseVisualStyleBackColor = true;
             btn_Ralentizar.Visible = false;
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label5.Location = new Point(27, 570);
+            label5.Margin = new Padding(5, 0, 5, 0);
+            label5.Name = "label5";
+            label5.Size = new Size(453, 29);
+            label5.TabIndex = 19;
+            label5.Text = "Cambiar distancia de seguridad y tiempo:";
+            // 
+            // button1
+            // 
+            button1.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button1.ForeColor = SystemColors.ActiveCaptionText;
+            button1.Location = new Point(45, 619);
+            button1.Margin = new Padding(5);
+            button1.Name = "button1";
+            button1.Size = new Size(211, 46);
+            button1.TabIndex = 18;
+            button1.Text = "Cambiar";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // Simulación
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
@@ -436,5 +464,7 @@
         private Button btnPause;
         private Button btn_Acelerar;
         private Label labelAlarma;
+        private Label label5;
+        private Button button1;
     }
 }

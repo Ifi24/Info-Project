@@ -66,5 +66,38 @@ namespace Interfaz
         {
             Application.Exit(); //Como usamos .Hide() en el login, hay que forzar a cerrar todo.
         }
+
+        private void cargarSimulaciónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ventanaAbrir = new OpenFileDialog();
+
+            ventanaAbrir.Filter = "Archivo de texto (*.txt)|*.txt|All files(*.*)|*.*";
+            ventanaAbrir.Title = "Importar simulación";
+
+            if (ventanaAbrir.ShowDialog() == DialogResult.OK)
+            {
+                string rutaArchivo = ventanaAbrir.FileName;
+
+                try
+                {
+                    miLista.AbrirFichero(rutaArchivo);
+                    MessageBox.Show("Los datos de la simulación se han importado correctamente.",
+                        "¡Importación exitosa!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    this.distanciaSeguridad = miLista.GetDistanciaCargada();
+                    this.tiempoCiclo = miLista.GetTiempoCargado();
+
+                    Simulación FormSimulación = new Simulación(miLista, distanciaSeguridad, tiempoCiclo);
+                    FormSimulación.ShowDialog();
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Hubo un error al intentar importar el fichero:\n" + ex.Message,
+                        "Error al importar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+        }
     }
-}
+

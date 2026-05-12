@@ -56,7 +56,8 @@ namespace Interfaz
                 dgvVuelos.EditMode = DataGridViewEditMode.EditOnEnter;
             }
         }
-        public void dgvVuelos_CellClick(object sender, DataGridViewCellEventArgs e)
+
+        private void dgvVuelos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
@@ -113,6 +114,11 @@ namespace Interfaz
         }
 
         private void dgvVuelos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        public void dgvVuelos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

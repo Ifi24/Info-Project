@@ -406,5 +406,19 @@ namespace Interfaz
                 btnPause.BackgroundImage = Properties.Resources.pausa;
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            {
+                SeguridadyTiempo FormSeguridadyTiempo = new SeguridadyTiempo(this.dist, this.tiemp);
+                if (FormSeguridadyTiempo.ShowDialog() == DialogResult.OK)
+                {
+                    this.dist = FormSeguridadyTiempo.GetDistancia();
+                    this.tiemp = FormSeguridadyTiempo.GetTiempo();
+
+                    MessageBox.Show("Cambios aplicados correctamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
     }
 }
