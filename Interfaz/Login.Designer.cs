@@ -35,21 +35,24 @@
             btnLogin = new Button();
             btnCerrar = new Button();
             btnRegister = new Button();
+            label1 = new Label();
             SuspendLayout();
             // 
             // Usuariotxt
             // 
-            Usuariotxt.Location = new Point(130, 90);
+            Usuariotxt.Location = new Point(211, 144);
+            Usuariotxt.Margin = new Padding(5, 5, 5, 5);
             Usuariotxt.Name = "Usuariotxt";
-            Usuariotxt.Size = new Size(221, 27);
+            Usuariotxt.Size = new Size(357, 39);
             Usuariotxt.TabIndex = 0;
             // 
             // Contraseñatxt
             // 
-            Contraseñatxt.Location = new Point(130, 180);
+            Contraseñatxt.Location = new Point(211, 288);
+            Contraseñatxt.Margin = new Padding(5, 5, 5, 5);
             Contraseñatxt.Name = "Contraseñatxt";
             Contraseñatxt.PasswordChar = '*';
-            Contraseñatxt.Size = new Size(221, 27);
+            Contraseñatxt.Size = new Size(357, 39);
             Contraseñatxt.TabIndex = 1;
             // 
             // lblUsuario
@@ -58,9 +61,10 @@
             lblUsuario.BackColor = Color.Transparent;
             lblUsuario.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblUsuario.ForeColor = Color.White;
-            lblUsuario.Location = new Point(130, 60);
+            lblUsuario.Location = new Point(211, 96);
+            lblUsuario.Margin = new Padding(5, 0, 5, 0);
             lblUsuario.Name = "lblUsuario";
-            lblUsuario.Size = new Size(71, 18);
+            lblUsuario.Size = new Size(113, 29);
             lblUsuario.TabIndex = 2;
             lblUsuario.Text = "Usuario:";
             // 
@@ -69,17 +73,19 @@
             lblContraseña.AutoSize = true;
             lblContraseña.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblContraseña.ForeColor = Color.White;
-            lblContraseña.Location = new Point(130, 152);
+            lblContraseña.Location = new Point(211, 243);
+            lblContraseña.Margin = new Padding(5, 0, 5, 0);
             lblContraseña.Name = "lblContraseña";
-            lblContraseña.Size = new Size(98, 18);
+            lblContraseña.Size = new Size(157, 29);
             lblContraseña.TabIndex = 3;
             lblContraseña.Text = "Contraseña:";
             // 
             // btnLogin
             // 
-            btnLogin.Location = new Point(200, 240);
+            btnLogin.Location = new Point(325, 384);
+            btnLogin.Margin = new Padding(5, 5, 5, 5);
             btnLogin.Name = "btnLogin";
-            btnLogin.Size = new Size(70, 29);
+            btnLogin.Size = new Size(114, 46);
             btnLogin.TabIndex = 4;
             btnLogin.Text = "Login";
             btnLogin.UseVisualStyleBackColor = true;
@@ -87,9 +93,10 @@
             // 
             // btnCerrar
             // 
-            btnCerrar.Location = new Point(320, 320);
+            btnCerrar.Location = new Point(520, 512);
+            btnCerrar.Margin = new Padding(5, 5, 5, 5);
             btnCerrar.Name = "btnCerrar";
-            btnCerrar.Size = new Size(94, 29);
+            btnCerrar.Size = new Size(153, 46);
             btnCerrar.TabIndex = 5;
             btnCerrar.Text = "Salir";
             btnCerrar.UseVisualStyleBackColor = true;
@@ -97,20 +104,32 @@
             // 
             // btnRegister
             // 
-            btnRegister.Location = new Point(50, 320);
+            btnRegister.Location = new Point(81, 512);
+            btnRegister.Margin = new Padding(5, 5, 5, 5);
             btnRegister.Name = "btnRegister";
-            btnRegister.Size = new Size(94, 29);
+            btnRegister.Size = new Size(153, 46);
             btnRegister.TabIndex = 6;
             btnRegister.Text = "Registrarse";
             btnRegister.UseVisualStyleBackColor = true;
             btnRegister.Click += btnRegister_Click;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.ForeColor = SystemColors.ButtonHighlight;
+            label1.Location = new Point(26, 463);
+            label1.Name = "label1";
+            label1.Size = new Size(734, 32);
+            label1.TabIndex = 7;
+            label1.Text = "Si no estas registrado, introduzca sus datos y pulse en \"Registrarse\".";
+            // 
             // Login
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
-            ClientSize = new Size(482, 403);
+            ClientSize = new Size(783, 645);
+            Controls.Add(label1);
             Controls.Add(btnRegister);
             Controls.Add(btnCerrar);
             Controls.Add(btnLogin);
@@ -118,6 +137,7 @@
             Controls.Add(lblUsuario);
             Controls.Add(Contraseñatxt);
             Controls.Add(Usuariotxt);
+            Margin = new Padding(5, 5, 5, 5);
             Name = "Login";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Login";
@@ -134,5 +154,6 @@
         private Button btnLogin;
         private Button btnCerrar;
         private Button btnRegister;
+        private Label label1;
     }
 }

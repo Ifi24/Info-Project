@@ -371,9 +371,11 @@ namespace Interfaz
             {
                 //Si ya esta funcionando, lo paramos.
                 TimerSimulación.Stop();
+                btnPause.BackgroundImage = Properties.Resources.play;
             }
             else //Si queremos que funcione:
             {
+                btnPause.BackgroundImage = Properties.Resources.pausa;
                 for (int i = 0; i < listaVuelos.GetNumAviones(); i++)
                 {
                     for (int j = i + 1; j < listaVuelos.GetNumAviones(); j++)
@@ -401,6 +403,7 @@ namespace Interfaz
                 }
                 // Una vez revisados todos, arrancamos
                 TimerSimulación.Start();
+                btnPause.BackgroundImage = Properties.Resources.pausa;
             }
         }
     }
