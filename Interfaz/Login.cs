@@ -65,6 +65,10 @@ namespace Interfaz
         public Login()
         {
             InitializeComponent();
+
+            this.FormBorderStyle = FormBorderStyle.None; //Quita las opciones de arriba de la ventana.
+            this.WindowState = FormWindowState.Maximized; //Se abre en modo Fullscreen.
+
             PrepararBaseDatos();
         }
 
