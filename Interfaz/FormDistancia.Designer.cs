@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDistancia));
             labelDistancia = new Label();
             btnCerrar = new Button();
             SuspendLayout();
@@ -35,21 +36,22 @@
             // labelDistancia
             // 
             labelDistancia.AutoSize = true;
-            labelDistancia.BackColor = SystemColors.ButtonFace;
-            labelDistancia.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            labelDistancia.ForeColor = Color.DarkSlateGray;
+            labelDistancia.BackColor = Color.Transparent;
+            labelDistancia.Font = new Font("Myriad Pro", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelDistancia.ForeColor = Color.White;
             labelDistancia.Location = new Point(20, 20);
             labelDistancia.Margin = new Padding(2, 0, 2, 0);
             labelDistancia.Name = "labelDistancia";
-            labelDistancia.Size = new Size(23, 18);
+            labelDistancia.Size = new Size(17, 18);
             labelDistancia.TabIndex = 0;
             labelDistancia.Text = "...";
             // 
             // btnCerrar
             // 
-            btnCerrar.Location = new Point(100, 150);
+            btnCerrar.Font = new Font("Myriad Pro", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnCerrar.Location = new Point(132, 208);
             btnCerrar.Name = "btnCerrar";
-            btnCerrar.Size = new Size(94, 29);
+            btnCerrar.Size = new Size(94, 31);
             btnCerrar.TabIndex = 1;
             btnCerrar.Text = "Cerrar";
             btnCerrar.UseVisualStyleBackColor = true;
@@ -60,7 +62,8 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Desktop;
-            ClientSize = new Size(282, 203);
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            ClientSize = new Size(354, 265);
             Controls.Add(btnCerrar);
             Controls.Add(labelDistancia);
             Margin = new Padding(2);

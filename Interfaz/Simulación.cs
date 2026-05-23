@@ -16,6 +16,7 @@ namespace Interfaz
         FlightLib.FlightPlanList listaVuelos;
         double dist;
         double tiemp;
+        double multvelocidad = 1;
 
         List<PictureBox> misPics = new List<PictureBox>();
         List<Label> misLabels = new List<Label>();
@@ -26,6 +27,11 @@ namespace Interfaz
 
             this.FormBorderStyle = FormBorderStyle.None; //Quita las opciones de arriba de la ventana.
             this.WindowState = FormWindowState.Maximized; //Se abre en modo Fullscreen.
+            // Para evitar lag y que todo cargue a la vez
+            this.DoubleBuffered = true;
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
+            this.UpdateStyles();
+            typeof(Panel).InvokeMember("DoubleBuffered", System.Reflection.BindingFlags.SetProperty | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic, null, PanelSimulacion, new object[] { true });
 
             this.listaVuelos = miLista;
             this.dist = distSeguridad;
@@ -205,7 +211,9 @@ namespace Interfaz
                         if (v1.PrediccionConflicto(v2, this.dist)) // Si se detecta conflicto...
                         {
                             //Avisamos al usuario y le preguntamos si quiere resolverlo:
-                            DialogResult respuesta = MessageBox.Show("¡Conflicto futuro detectado entre " + v1.GetId() + " y " + v2.GetId() + " ¿Desea resolverlo?", "Resolución Automática", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                            MiMessageBox ventanaMensaje = new MiMessageBox();
+                            ventanaMensaje.ConfigurarMensaje("Conflicto detectado", "Futuro conflicto detectado entre " + v1.GetId() + " y " + v2.GetId() + ".\n¿Desea resolverlo?", "PREGUNTA");
+                            DialogResult respuesta = ventanaMensaje.ShowDialog();
 
                             if (respuesta == DialogResult.Yes)
                             {
@@ -213,9 +221,17 @@ namespace Interfaz
                                 bool logrado = v2.ResolverConflicto(v1, this.dist);
 
                                 if (logrado)
-                                    MessageBox.Show("Conflicto resuelto. " + v2.GetId() + " ha cambiado su velocidad.", "Resolución Conflicto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                {
+                                    MiMessageBox ventanaMensaje2 = new MiMessageBox();
+                                    ventanaMensaje2.ConfigurarMensaje("Conflicto resuelto", v2.GetId() + " ha cambiado su velocidad.", "INFO");
+                                    ventanaMensaje2.ShowDialog();
+                                }
                                 else
-                                    MessageBox.Show("No se pudo encontrar solución para el conflicto entre " + v1.GetId() + " y " + v2.GetId(), "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                {
+                                    MiMessageBox ventanaMensaje2 = new MiMessageBox();
+                                    ventanaMensaje2.ConfigurarMensaje("Conflicto sin resolver", "No se pudo encontrar una solución para el conflicto entre " + v1.GetId() + " y " + v2.GetId(), "INFO");
+                                    ventanaMensaje2.ShowDialog();
+                                }
                             }
                         }
                     }
@@ -232,8 +248,18 @@ namespace Interfaz
             {
                 if (pic.Tag is FlightPlan fp) //Comprueba si el Tag del PictureBox es un FlightPlan i se lo asigna a la variable fp.
                 {
-                    InfoAvion info = new InfoAvion(fp);
-                    info.ShowDialog();
+                    FlightLib.Position posicion = fp.GetCurrentPosition();
+
+                    string datosAvion = $"ID: {fp.GetId()}\n\n" +
+                                        $"Posición X: {posicion.GetX():N2}\n" +
+                                        $"Posición Y: {posicion.GetY():N2}\n\n" +
+                                        $"Velocidad: {fp.GetVelocidad():N2}\n" +
+                                        $"Aerolínea: {fp.GetAerolinia()}";
+
+                    MiMessageBox ventanaInfo = new MiMessageBox();
+                    ventanaInfo.ConfigurarMensaje($"Información del avión: {fp.GetId()}", datosAvion, "INFO");
+                    ventanaInfo.Size = new Size(400, 300); //Cambiamos el tamaño para que quepa.
+                    ventanaInfo.ShowDialog();
                 }
                 else
                 {
@@ -255,9 +281,17 @@ namespace Interfaz
             string informe = listaVuelos.InformeConflictos(this.dist);
 
             if (string.IsNullOrEmpty(informe))
-                MessageBox.Show("No se han detectado conflictos futuros. Ruta segura.", "Predicción", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            {
+                MiMessageBox ventanaMensaje = new MiMessageBox();
+                ventanaMensaje.ConfigurarMensaje("Ruta segura", "No se han detectado conflictos futuros.", "INFO");
+                ventanaMensaje.ShowDialog();
+            }
             else
-                MessageBox.Show("¡CONFLICTO DE SEPARACIÓN!\nDetectado en trayectoria entre:\n" + informe, "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            {
+                MiMessageBox ventanaMensaje2 = new MiMessageBox();
+                ventanaMensaje2.ConfigurarMensaje("Conflicto encontrado", "Conflicto detectado en la trayectoria entre:\n" + informe, "INFO");
+                ventanaMensaje2.ShowDialog();
+            }
         }
 
         private void btnResolver_Click(object sender, EventArgs e)
@@ -268,7 +302,9 @@ namespace Interfaz
             ActualizarInterfaz();
             TimerSimulación.Start(); //Renaudar simulación
 
-            MessageBox.Show("Simulación reiniciada correctamente.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MiMessageBox ventanaMensaje2 = new MiMessageBox();
+            ventanaMensaje2.ConfigurarMensaje("Simulación reiniciada", "La simulación se ha reiniciado correctamente", "INFO");
+            ventanaMensaje2.ShowDialog();
         }
 
         private void cerrarBtn_Click(object sender, EventArgs e)
@@ -300,8 +336,9 @@ namespace Interfaz
                 try
                 {
                     listaVuelos.GuardarFichero(rutaArchivo, dist, tiemp);
-                    MessageBox.Show("Los datos de la simulación se han guardado correctamente.",
-                        "¡Guardado exitoso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MiMessageBox ventanaMensaje = new MiMessageBox();
+                    ventanaMensaje.ConfigurarMensaje("Guardado exitoso", "Los datos de la simulación se han guardado correctamente", "INFO");
+                    ventanaMensaje.ShowDialog();
                 }
                 catch (Exception ex)
                 {
@@ -315,10 +352,11 @@ namespace Interfaz
         // MENSAJE DE ADVERTENCIA DE QUE SE VA A BORRAR TODO --> PREGUNTAR SI DESEA GUARDAR ANTES
         private void btn_CargarSimulacion_Click(object sender, EventArgs e)
         {
-            DialogResult respuesta = MessageBox.Show(
-                "¿Estás seguro de que deseas cargar un nuevo archivo? Si lo haces, perderás todo el progreso actual de la simulación.",
-                "¡Advertencia!",
-                MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+
+            MiMessageBox ventanaMensaje = new MiMessageBox();
+            ventanaMensaje.ConfigurarMensaje("Atención", "¿Está seguro de querer cargar un nuevo archivo?\nSi lo hace, perderá todo el progreso actual de la simulación", "PREGUNTA");
+            DialogResult respuesta = ventanaMensaje.ShowDialog();
 
             if (respuesta == DialogResult.OK)
             {
@@ -334,8 +372,9 @@ namespace Interfaz
                     try
                     {
                         listaVuelos.AbrirFichero(rutaArchivo);
-                        MessageBox.Show("Los datos de la simulación se han importado correctamente.",
-                            "¡Importación exitosa!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MiMessageBox ventanaMensaje2 = new MiMessageBox();
+                        ventanaMensaje2.ConfigurarMensaje("Importación exitosa", "Los datos de la simulación se han importado correctamente", "INFO");
+                        ventanaMensaje2.ShowDialog();
 
                         this.dist = listaVuelos.GetDistanciaCargada();
                         this.tiemp = listaVuelos.GetTiempoCargado();
@@ -385,40 +424,80 @@ namespace Interfaz
 
                         if (v1.PrediccionConflicto(v2, this.dist)) // Si se detecta conflicto...
                         {
-                            //Avisamos al usuario y le preguntamos si quiere resolverlo:
-                            DialogResult respuesta = MessageBox.Show("¡Conflicto futuro detectado entre " + v1.GetId() + " y " + v2.GetId() + " ¿Desea resolverlo?", "Resolución Automática", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                            MiMessageBox ventanaPregunta = new MiMessageBox();
+                            ventanaPregunta.ConfigurarMensaje("Resolución Automática", "¡Conflicto futuro detectado entre " + v1.GetId() + " y " + v2.GetId() + "!\n¿Desea resolverlo?", "PREGUNTA");
+                            DialogResult respuesta = ventanaPregunta.ShowDialog();
 
                             if (respuesta == DialogResult.Yes)
                             {
                                 // Intentamos resolverlo cambiando la velocidad de uno de ellos (v2)
                                 bool logrado = v2.ResolverConflicto(v1, this.dist);
+                                MiMessageBox ventanaResultado = new MiMessageBox();
 
                                 if (logrado)
-                                    MessageBox.Show("Conflicto resuelto. " + v2.GetId() + " ha cambiado su velocidad.", "Resolución Conflicto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                {
+                                    ventanaResultado.ConfigurarMensaje("Conflicto resuelto", v2.GetId() + " ha cambiado su velocidad.", "INFO");
+                                }
                                 else
-                                    MessageBox.Show("No se pudo encontrar solución para el conflicto entre " + v1.GetId() + " y " + v2.GetId(), "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                {
+                                    ventanaResultado.ConfigurarMensaje("Atención", "No se pudo encontrar solución para el conflicto entre " + v1.GetId() + " y " + v2.GetId(), "ERROR");
+                                }
+                                ventanaResultado.ShowDialog();
                             }
                         }
                     }
+                    // Una vez revisados todos, arrancamos
+                    TimerSimulación.Start();
+                    btnPause.BackgroundImage = Properties.Resources.pausa;
                 }
-                // Una vez revisados todos, arrancamos
-                TimerSimulación.Start();
-                btnPause.BackgroundImage = Properties.Resources.pausa;
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            SeguridadyTiempo FormSeguridadyTiempo = new SeguridadyTiempo(this.dist, this.tiemp);
+            if (FormSeguridadyTiempo.ShowDialog() == DialogResult.OK)
             {
-                SeguridadyTiempo FormSeguridadyTiempo = new SeguridadyTiempo(this.dist, this.tiemp);
-                if (FormSeguridadyTiempo.ShowDialog() == DialogResult.OK)
-                {
-                    this.dist = FormSeguridadyTiempo.GetDistancia();
-                    this.tiemp = FormSeguridadyTiempo.GetTiempo();
+                this.dist = FormSeguridadyTiempo.GetDistancia();
+                this.tiemp = FormSeguridadyTiempo.GetTiempo();
 
-                    MessageBox.Show("Cambios aplicados correctamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+                ActualizarInterfaz();
+
+                this.TimerSimulación.Interval = (int)(this.tiemp * 1000);
+
+                // Reseteamos el indicador de velocidad porque el tiempo base ha cambiado
+                multvelocidad = 1;
+                lblVelocidad.Text = "x1";
+
+                MiMessageBox exitoMsg = new MiMessageBox();
+                exitoMsg.ConfigurarMensaje("Información", "Cambios aplicados correctamente.", "INFO");
+                exitoMsg.ShowDialog();
             }
+        }
+
+        private void btn_Acelerar_Click(object sender, EventArgs e)
+        {
+            if (TimerSimulación.Interval > 100)
+            {
+                TimerSimulación.Interval /= 2;
+                multvelocidad *= 2;
+                lblVelocidad.Text = $"x{multvelocidad}";
+            }
+        }
+
+        private void btn_Ralentizar_Click(object sender, EventArgs e)
+        {
+            if (TimerSimulación.Interval < 5000)
+            {
+                TimerSimulación.Interval *= 2;
+                multvelocidad /= 2;
+                lblVelocidad.Text = $"x{multvelocidad}";
+            }
+        }
+
+        private void PanelSimulacion_MouseMove(object sender, MouseEventArgs e)
+        {
+            lblCords.Text = $"X:  {e.X}  Y:  {e.Y}";
         }
     }
 }

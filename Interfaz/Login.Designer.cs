@@ -41,17 +41,23 @@
             // 
             // Usuariotxt
             // 
-            Usuariotxt.Location = new Point(1410, 546);
+            Usuariotxt.BackColor = Color.WhiteSmoke;
+            Usuariotxt.BorderStyle = BorderStyle.None;
+            Usuariotxt.Font = new Font("Myriad Pro", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Usuariotxt.Location = new Point(755, 594);
             Usuariotxt.Name = "Usuariotxt";
-            Usuariotxt.Size = new Size(347, 27);
+            Usuariotxt.Size = new Size(412, 24);
             Usuariotxt.TabIndex = 0;
             // 
             // Contraseñatxt
             // 
-            Contraseñatxt.Location = new Point(1410, 695);
+            Contraseñatxt.BackColor = Color.WhiteSmoke;
+            Contraseñatxt.BorderStyle = BorderStyle.None;
+            Contraseñatxt.Font = new Font("Myriad Pro", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Contraseñatxt.Location = new Point(755, 735);
             Contraseñatxt.Name = "Contraseñatxt";
             Contraseñatxt.PasswordChar = '*';
-            Contraseñatxt.Size = new Size(347, 27);
+            Contraseñatxt.Size = new Size(412, 24);
             Contraseñatxt.TabIndex = 1;
             // 
             // lblUsuario
@@ -78,7 +84,8 @@
             // btnLogin
             // 
             btnLogin.Font = new Font("Myriad Pro", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnLogin.Location = new Point(1410, 792);
+            btnLogin.ForeColor = Color.FromArgb(64, 64, 64);
+            btnLogin.Location = new Point(755, 820);
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(162, 39);
             btnLogin.TabIndex = 4;
@@ -89,7 +96,8 @@
             // btnCerrar
             // 
             btnCerrar.Font = new Font("Myriad Pro", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnCerrar.Location = new Point(1534, 896);
+            btnCerrar.ForeColor = Color.FromArgb(64, 64, 64);
+            btnCerrar.Location = new Point(851, 952);
             btnCerrar.Name = "btnCerrar";
             btnCerrar.Size = new Size(205, 37);
             btnCerrar.TabIndex = 5;
@@ -100,7 +108,8 @@
             // btnRegister
             // 
             btnRegister.Font = new Font("Myriad Pro", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnRegister.Location = new Point(1695, 792);
+            btnRegister.ForeColor = Color.FromArgb(64, 64, 64);
+            btnRegister.Location = new Point(1005, 820);
             btnRegister.Name = "btnRegister";
             btnRegister.Size = new Size(162, 39);
             btnRegister.TabIndex = 6;
@@ -114,7 +123,7 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Myriad Pro", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.ForeColor = SystemColors.ControlDarkDark;
-            label1.Location = new Point(1695, 759);
+            label1.Location = new Point(1005, 788);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
             label1.Size = new Size(163, 20);

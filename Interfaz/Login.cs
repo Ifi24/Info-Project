@@ -68,6 +68,10 @@ namespace Interfaz
 
             this.FormBorderStyle = FormBorderStyle.None; //Quita las opciones de arriba de la ventana.
             this.WindowState = FormWindowState.Maximized; //Se abre en modo Fullscreen.
+            // Para evitar lag y que todo cargue a la vez
+            this.DoubleBuffered = true;
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
+            this.UpdateStyles();
 
             PrepararBaseDatos();
         }
@@ -77,8 +81,9 @@ namespace Interfaz
         {
             if (string.IsNullOrWhiteSpace(Usuariotxt.Text) || string.IsNullOrWhiteSpace(Contraseñatxt.Text))
             {
-                MessageBox.Show("Por favor, rellene todos los campos. No se permiten espacios en blanco.",
-                                "Campos incompletos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MiMessageBox ventanaMensaje = new MiMessageBox();
+                ventanaMensaje.ConfigurarMensaje("Campos incompletos", "Por favor, rellene todos los campos. No se permiten espacios en blanco.", "INFO");
+                ventanaMensaje.ShowDialog();
                 return; // Salimos del método para que no ejecute el SQL
             }
 
@@ -91,7 +96,9 @@ namespace Interfaz
 
                 if (dt.Rows.Count > 0)
                 {
-                    MessageBox.Show("Usuario encontrado con éxito.\nBienvenido/a, " + Usuariotxt.Text);
+                    MiMessageBox ventanaMensaje = new MiMessageBox();
+                    ventanaMensaje.ConfigurarMensaje("Usuario encontrado",  "\nBienvenido / a, " + Usuariotxt.Text, "INFO");
+                    ventanaMensaje.ShowDialog();
                     // Creamos el form principal:
                     Principal FormInterfaz = new Principal(Usuariotxt.Text);
                     FormInterfaz.Show();
@@ -123,7 +130,9 @@ namespace Interfaz
                 int filasModificadas = command.ExecuteNonQuery();
                 if (filasModificadas == 1)
                 {
-                    DialogResult mensaje = MessageBox.Show("Usuario registrado con éxito.\n¿Desea iniciar sesión?", "Registro de Usuario", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    MiMessageBox ventanaMensaje = new MiMessageBox();
+                    ventanaMensaje.ConfigurarMensaje("Usuario registrado", "Se ha registrado su usuario exitosamente.\n¿Desea iniciar sesión?", "PREGUNTA");
+                    DialogResult mensaje = ventanaMensaje.ShowDialog();
                     if (mensaje == DialogResult.Yes)
                     {
                         this.DialogResult = DialogResult.OK;

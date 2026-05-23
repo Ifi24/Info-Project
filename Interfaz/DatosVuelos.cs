@@ -55,7 +55,9 @@ namespace Interfaz
         public void ProponerMasDatos()
         {
             //Mensaje de éxito y proponemos al usuario añadir más datos o no.
-            DialogResult respuesta = MessageBox.Show("¿Desea añadir más datos?", "Información", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            MiMessageBox ventanaMensaje = new MiMessageBox();
+            ventanaMensaje.ConfigurarMensaje("Datos guardados", "¿Desea añadir más datos?", "PREGUNTA");
+            DialogResult respuesta = ventanaMensaje.ShowDialog();
             if (respuesta == DialogResult.No) //Si no quiere, cerramos el form.
             {
                 this.DialogResult = DialogResult.OK;
@@ -91,7 +93,11 @@ namespace Interfaz
                 string al2 = TextBoxAerolinia2.Text;
 
                 misAviones.CrearVuelo(id2, xi2, yi2, xi2, yi2, xf2, yf2, v2, al2);
-                MessageBox.Show("Pareja de planes de vuelos cargados correctamente.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                
+                MiMessageBox ventanaMensaje = new MiMessageBox();
+                ventanaMensaje.ConfigurarMensaje("Vuelos cargados", "Pareja de vuelos cargados correctamente.", "INFO");
+                ventanaMensaje.ShowDialog();
+
                 ProponerMasDatos();
             }
             catch (FormatException) //Error de formato
@@ -150,15 +156,19 @@ namespace Interfaz
 
                 string info = "Se han autorellenado los vuelos con los siguientes datos:\n" +
                       "AVIÓN 1: " + id1 + "\n" +
-                      "- Velocidad: " + v1 + "\n" +
-                      "- Origen: (" + xi1 + ", " + yi1 + ")\n" +
-                      "- Final: (" + xf1 + ", " + yf1 + ")\n\n" +
+                      "· Velocidad: " + v1 + "\n" +
+                      "· Origen: (" + xi1 + ", " + yi1 + ")\n" +
+                      "· Final: (" + xf1 + ", " + yf1 + ")\n\n" +
                       "AVIÓN 2: " + id2 + "\n" +
-                      "- Velocidad: " + v2 + "\n" +
-                      "- Origen: (" + xi2 + ", " + yi2 + ")\n" +
-                      "- Final: (" + xf2 + ", " + yf2 + ")";
+                      "· Velocidad: " + v2 + "\n" +
+                      "· Origen: (" + xi2 + ", " + yi2 + ")\n" +
+                      "· Final: (" + xf2 + ", " + yf2 + ")";
 
-                MessageBox.Show(info, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MiMessageBox ventanaMensaje = new MiMessageBox();
+                ventanaMensaje.ConfigurarMensaje("Vuelos generados", info, "INFO");
+                ventanaMensaje.Size = new Size(450, 480);
+                ventanaMensaje.ShowDialog();
+
                 ProponerMasDatos();
             }
             catch (Exception ex)
@@ -178,7 +188,10 @@ namespace Interfaz
         {
             misAviones.GenerarConflicto();
 
-            MessageBox.Show("Escenario de conflicto generado automáticamente.", "Conflicto generado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MiMessageBox ventanaMensaje = new MiMessageBox();
+            ventanaMensaje.ConfigurarMensaje("Escenario generado", "Un escenario de conflicto se ha generado correctamente", "INFO");
+            ventanaMensaje.ShowDialog();
+
             ProponerMasDatos();
         }
     }

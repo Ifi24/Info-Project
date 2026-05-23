@@ -117,23 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="pausa" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\PAUSE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ralentizar1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ralentizar.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ralentizar2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ralentizar1.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ralentizar" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\RETROCEDER.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="acelerar" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\..\..\..\..\Desktop\Uni\2n de Carrera\2n QUATRIMESTRE\INFORMÀTICA II\PROYECTO\ACELERAR.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="play" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\..\..\..\..\Desktop\Uni\2n de Carrera\2n QUATRIMESTRE\INFORMÀTICA II\PROYECTO\PLAY.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
 </root>

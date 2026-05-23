@@ -1,4 +1,5 @@
 using FlightLib;
+using Microsoft.VisualBasic.Logging;
 using System.Collections.Generic;
 
 namespace Interfaz
@@ -24,6 +25,10 @@ namespace Interfaz
 
             this.FormBorderStyle = FormBorderStyle.None; //Quita las opciones de arriba de la ventana.
             this.WindowState = FormWindowState.Maximized; //Se abre en modo Fullscreen.
+            // Para evitar lag y que todo cargue a la vez
+            this.DoubleBuffered = true;
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
+            this.UpdateStyles();
 
             this.Usuario = nombreUsuario;
         }
@@ -43,7 +48,9 @@ namespace Interfaz
                 this.distanciaSeguridad = FormSeguridadyTiempo.GetDistancia();
                 this.tiempoCiclo = FormSeguridadyTiempo.GetTiempo();
 
-                MessageBox.Show("Cambios aplicados correctamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MiMessageBox ventanaMensaje = new MiMessageBox();
+                ventanaMensaje.ConfigurarMensaje("Cambios aplicados", "Los datos se han actualizado correctamente", "INFO");
+                ventanaMensaje.ShowDialog();
             }
         }
         // Abre un form para ver la simulación de los vuelos:
@@ -52,9 +59,18 @@ namespace Interfaz
             string infoConflictos = miLista.InformeConflictos(distanciaSeguridad);
 
             if (infoConflictos != "")
-                MessageBox.Show("Se han detectado los siguientes conflictos: \n" + infoConflictos, "Predicción de Conflictos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            {
+                MiMessageBox ventanaMensaje = new MiMessageBox();
+                ventanaMensaje.ConfigurarMensaje("Conflictos detectados", "Se han detectado los siguientes conflictos: \n" + infoConflictos, "INFO");
+                ventanaMensaje.ShowDialog();
+
+            }
             else
-                MessageBox.Show("No hay conflictos previstos.", "Predicción de Conflictos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            {
+                MiMessageBox ventanaMensaje = new MiMessageBox();
+                ventanaMensaje.ConfigurarMensaje("Conflictos no detectados", "No se ha detectado ningun conflicto futuro", "INFO");
+                ventanaMensaje.ShowDialog();
+            }
 
             // Abrimos el form.
             Simulación FormSimulación = new Simulación(miLista, distanciaSeguridad, tiempoCiclo);
@@ -81,8 +97,9 @@ namespace Interfaz
                 try
                 {
                     miLista.AbrirFichero(rutaArchivo);
-                    MessageBox.Show("Los datos de la simulación se han importado correctamente.",
-                        "¡Importación exitosa!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MiMessageBox ventanaMensaje = new MiMessageBox();
+                    ventanaMensaje.ConfigurarMensaje("Datos cargados", "Los datos de la simulación se han importado correctamente", "INFO");
+                    ventanaMensaje.ShowDialog();
 
                     this.distanciaSeguridad = miLista.GetDistanciaCargada();
                     this.tiempoCiclo = miLista.GetTiempoCargado();

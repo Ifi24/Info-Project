@@ -28,7 +28,7 @@ namespace Interfaz
         // Métodos
         // Gets y Sets:
         public double GetDistancia()
-        { 
+        {
             return this.dist;
         }
         public void SetDistancia(double d)
@@ -38,7 +38,7 @@ namespace Interfaz
 
         public double GetTiempo()
         {
-            return this.tiempo; 
+            return this.tiempo;
         }
         public void SetTiempo(double t)
         {
@@ -53,7 +53,7 @@ namespace Interfaz
                 this.dist = Convert.ToDouble(TextBoxDistSeg.Text);
                 this.tiempo = Convert.ToDouble(TextBoxTCiclo.Text);
 
-                if (dist < 0 || tiempo <=0)
+                if (dist < 0 || tiempo <= 0)
                 {
                     MessageBox.Show("Error:\nIntroduce valores positivos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -72,6 +72,11 @@ namespace Interfaz
         public string GuardarSegTiempo()
         {
             return $"{dist} {tiempo}";
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
