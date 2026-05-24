@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SQLite;
 using System.Drawing;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -17,6 +18,7 @@ namespace Interfaz
         double dist;
         double tiemp;
         double multvelocidad = 1;
+        private string cadenaConexion = "Data Source=LoginVuelos.db";
 
         List<PictureBox> misPics = new List<PictureBox>();
         List<Label> misLabels = new List<Label>();
@@ -249,16 +251,48 @@ namespace Interfaz
                 if (pic.Tag is FlightPlan fp) //Comprueba si el Tag del PictureBox es un FlightPlan i se lo asigna a la variable fp.
                 {
                     FlightLib.Position posicion = fp.GetCurrentPosition();
+                    string compañia = fp.GetAerolinia();
+                    // Valores por defecto por si la compañía no está registrada en la base de datos
+                    string telefono = "No asignado";
+                    string email = "No asignado";
 
+                    //Conexión a la base de datos
+                    SQLiteConnection conexionQuery = new SQLiteConnection(cadenaConexion);
+                    try
+                    {
+                        conexionQuery.Open();
+                        string query = "SELECT Telefono, Email FROM misCompanias WHERE Nombre = nombre"; //Pedimos el tel y el mail de la compañia
+                        SQLiteCommand cmd = new SQLiteCommand(query, conexionQuery);
+                        cmd.Parameters.AddWithValue("nombre", compañia);
+                        SQLiteDataReader reader = cmd.ExecuteReader();
+                        if (reader.Read()) //Si la base de datos encuentra una compañía con ese nombre cogemos sus datos de tel y mail y los guardamos
+                        {
+                            telefono = reader["Telefono"].ToString();
+                            email = reader["Email"].ToString();
+                        }
+                        reader.Close();
+                        conexionQuery.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        telefono = "Error al cargar";
+                        email = "Error al cargar";
+                    }
+
+                    // Construimos los datos 
                     string datosAvion = $"ID: {fp.GetId()}\n\n" +
                                         $"Posición X: {posicion.GetX():N2}\n" +
                                         $"Posición Y: {posicion.GetY():N2}\n\n" +
-                                        $"Velocidad: {fp.GetVelocidad():N2}\n" +
-                                        $"Aerolínea: {fp.GetAerolinia()}";
+                                        $"Velocidad: {fp.GetVelocidad():N2}\n\n" +
+                                        $"=======================\n" +
+                                        $"Aerolínea: {compañia}\n" +
+                                        $"Teléfono: {telefono}\n" +
+                                        $"Email: {email}\n" +
+                                        $"=======================";
 
                     MiMessageBox ventanaInfo = new MiMessageBox();
                     ventanaInfo.ConfigurarMensaje($"Información del avión: {fp.GetId()}", datosAvion, "INFO");
-                    ventanaInfo.Size = new Size(400, 300); //Cambiamos el tamaño para que quepa.
+                    ventanaInfo.Size = new Size(400, 380);
                     ventanaInfo.ShowDialog();
                 }
                 else
@@ -267,6 +301,7 @@ namespace Interfaz
                 }
             }
         }
+
 
         //Botón para mostrar todos los datos de los vuelos
         private void btn_DatosAviones_Click(object sender, EventArgs e)
