@@ -252,7 +252,7 @@
             // btn_Ralentizar
             // 
             btn_Ralentizar.BackColor = Color.Transparent;
-            btn_Ralentizar.BackgroundImage = Properties.Resources.RETROCEDER;
+            btn_Ralentizar.BackgroundImage = Properties.Resources.ralentizar;
             btn_Ralentizar.BackgroundImageLayout = ImageLayout.Stretch;
             btn_Ralentizar.FlatStyle = FlatStyle.Popup;
             btn_Ralentizar.Location = new Point(989, 981);
