@@ -32,11 +32,17 @@ namespace Interfaz
                 "FinalX float, FinalY float, " +
                 "Velocidad float, " +
                 "FOREIGN KEY(Username) REFERENCES misUsuarios(Username))"; //El usuario también debe existir en la tabla de usuarios
+            string sqlCompanias = "CREATE TABLE IF NOT EXISTS misCompanias (" +
+                "Nombre varchar(50) PRIMARY KEY NOT NULL, " + // Espacio para el nombre de la aerolínea (máx 50 caracteres).
+                "Telefono varchar(20) NOT NULL, " +           // Teléfono de contacto de la compañía.
+                "Email varchar(50) NOT NULL)";
 
             SQLiteCommand cmd1 = new SQLiteCommand(sqlUsuarios, cnx);
             cmd1.ExecuteNonQuery(); //Ejecuta la acción y muestra cuantos cambios ha habido.
             SQLiteCommand cmd2 = new SQLiteCommand(sqlDatos, cnx);
             cmd2.ExecuteNonQuery();
+            SQLiteCommand cmd3 = new SQLiteCommand(sqlCompanias, cnx);
+            cmd3.ExecuteNonQuery();
         }
 
         //Método para buscar y abrir la DataBase:
