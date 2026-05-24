@@ -261,9 +261,8 @@ namespace Interfaz
                     try
                     {
                         conexionQuery.Open();
-                        string query = "SELECT Telefono, Email FROM misCompanias WHERE Nombre = nombre"; //Pedimos el tel y el mail de la compañia
+                        string query = "SELECT Telefono, Email FROM misCompanias WHERE Nombre = '" + compañia + "'"; //Pedimos el tel y el mail de la compañia
                         SQLiteCommand cmd = new SQLiteCommand(query, conexionQuery);
-                        cmd.Parameters.AddWithValue("nombre", compañia);
                         SQLiteDataReader reader = cmd.ExecuteReader();
                         if (reader.Read()) //Si la base de datos encuentra una compañía con ese nombre cogemos sus datos de tel y mail y los guardamos
                         {

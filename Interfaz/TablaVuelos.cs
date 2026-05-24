@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SQLite;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
@@ -13,6 +14,7 @@ namespace Interfaz
     {
         FlightLib.FlightPlanList listaVuelos;
         Simulación simulacion;
+        private string cadenaConexion = "Data Source=LoginVuelos.db";
 
         public TablaVuelos(FlightLib.FlightPlanList miLista, Simulación sim)
         {
@@ -29,12 +31,14 @@ namespace Interfaz
         }
         private void TablaVuelos_Load(object sender, EventArgs e)
         {
-            dgvVuelos.ColumnCount = 5;
+            dgvVuelos.ColumnCount = 7;
             dgvVuelos.Columns[0].Name = "ID";
             dgvVuelos.Columns[1].Name = "Posición X";
             dgvVuelos.Columns[2].Name = "Posición Y";
             dgvVuelos.Columns[3].Name = "Velocidad";
             dgvVuelos.Columns[4].Name = "Aerolinia";
+            dgvVuelos.Columns[5].Name = "Teléfono"; 
+            dgvVuelos.Columns[6].Name = "Email";
             dgvVuelos.RowHeadersVisible = false;
             dgvVuelos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvVuelos.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
@@ -50,9 +54,38 @@ namespace Interfaz
                 double x = fp.GetCurrentPosition().GetX();
                 double y = fp.GetCurrentPosition().GetY();
                 double speed = fp.GetVelocidad();
-                string airline = fp.GetAerolinia();
+                string compañia = fp.GetAerolinia();
+                string telefono = "No asignado";
+                string email = "No asignado";
 
-                dgvVuelos.Rows.Add(id, x, y, speed, airline);
+                SQLiteConnection conexionQuery = new SQLiteConnection(cadenaConexion);
+                try
+                {
+                    conexionQuery.Open();
+                    string query = "SELECT Telefono, Email FROM misCompanias WHERE Nombre = '" + compañia + "'";
+                    SQLiteCommand cmd = new SQLiteCommand(query, conexionQuery);
+                    SQLiteDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        telefono = reader["Telefono"].ToString();
+                        email = reader["Email"].ToString();
+                    }
+
+                    reader.Close();
+                    conexionQuery.Close();
+                }
+                catch (Exception ex)
+                {
+                    if (conexionQuery.State == ConnectionState.Open)
+                    {
+                        conexionQuery.Close();
+                    }
+                    telefono = "Error";
+                    email = "Error";
+                }
+
+                dgvVuelos.Rows.Add(id, x, y, speed, compañia, telefono, email);
                 dgvVuelos.EditMode = DataGridViewEditMode.EditOnEnter;
             }
         }
