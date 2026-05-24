@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MiMessageBox));
             lblTitulo = new Label();
             lblMensaje = new Label();
             btnAceptar = new Button();
@@ -88,7 +87,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImage = Properties.Resources.AVION;
             ClientSize = new Size(645, 356);
             Controls.Add(btnCancelar);
             Controls.Add(btnAceptar);

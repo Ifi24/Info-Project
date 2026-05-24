@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SeguridadyTiempo));
             Distancia = new Label();
             Tiempo = new Label();
             TextBoxTCiclo = new TextBox();
@@ -115,7 +114,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImage = Properties.Resources.SMALL_GRID;
             ClientSize = new Size(479, 265);
             Controls.Add(button1);
             Controls.Add(label1);

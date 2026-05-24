@@ -143,6 +143,16 @@ namespace Interfaz.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap SIMULATION {
+            get {
+                object obj = ResourceManager.GetObject("SIMULATION", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap SIMULATION_GRIDMAP {
             get {
                 object obj = ResourceManager.GetObject("SIMULATION_GRIDMAP", resourceCulture);

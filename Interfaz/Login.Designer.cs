@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             Usuariotxt = new TextBox();
             Contraseñatxt = new TextBox();
             lblUsuario = new Label();
@@ -135,7 +134,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
-            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImage = Properties.Resources.LOGIN;
             ClientSize = new Size(1924, 1055);
             Controls.Add(label1);
             Controls.Add(btnRegister);

@@ -70,7 +70,7 @@
             // PanelSimulacion
             // 
             PanelSimulacion.BackColor = Color.Black;
-            PanelSimulacion.BackgroundImage = (Image)resources.GetObject("PanelSimulacion.BackgroundImage");
+            PanelSimulacion.BackgroundImage = Properties.Resources.SIMULATION_GRIDMAP;
             PanelSimulacion.BorderStyle = BorderStyle.FixedSingle;
             PanelSimulacion.Controls.Add(labelAlarma);
             PanelSimulacion.Location = new Point(388, 36);
@@ -293,7 +293,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaptionText;
-            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImage = Properties.Resources.SIMULATION;
             ClientSize = new Size(1880, 1055);
             Controls.Add(lblCords);
             Controls.Add(lblVelocidad);
