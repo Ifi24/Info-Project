@@ -73,6 +73,26 @@ namespace Interfaz.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap AVION {
+            get {
+                object obj = ResourceManager.GetObject("AVION", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap LOGIN {
+            get {
+                object obj = ResourceManager.GetObject("LOGIN", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap pausa {
             get {
                 object obj = ResourceManager.GetObject("pausa", resourceCulture);
@@ -116,6 +136,26 @@ namespace Interfaz.Properties {
         internal static System.Drawing.Bitmap ralentizar2 {
             get {
                 object obj = ResourceManager.GetObject("ralentizar2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SIMULATION_GRIDMAP {
+            get {
+                object obj = ResourceManager.GetObject("SIMULATION_GRIDMAP", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SMALL_GRID {
+            get {
+                object obj = ResourceManager.GetObject("SMALL_GRID", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
