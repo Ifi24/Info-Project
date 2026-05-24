@@ -143,6 +143,26 @@ namespace Interfaz.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap RETROCEDER {
+            get {
+                object obj = ResourceManager.GetObject("RETROCEDER", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RETROCEDER1 {
+            get {
+                object obj = ResourceManager.GetObject("RETROCEDER1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap SIMULATION {
             get {
                 object obj = ResourceManager.GetObject("SIMULATION", resourceCulture);

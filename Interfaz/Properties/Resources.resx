@@ -121,11 +121,23 @@
   <data name="pausa" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\PAUSE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ralentizar1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ralentizar.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="play" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\..\..\..\Desktop\Uni\2n de Carrera\2n QUATRIMESTRE\INFORMÀTICA II\PROYECTO\PLAY.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LOGIN" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LOGIN.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ralentizar2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ralentizar1.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SIMULATION_GRIDMAP" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MAP_GRID.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AVION" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\avion.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SIMULATION" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SIMULATION.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ralentizar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RETROCEDER.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -133,22 +145,16 @@
   <data name="acelerar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\..\..\..\..\Desktop\Uni\2n de Carrera\2n QUATRIMESTRE\INFORMÀTICA II\PROYECTO\ACELERAR.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="play" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\..\..\..\..\Desktop\Uni\2n de Carrera\2n QUATRIMESTRE\INFORMÀTICA II\PROYECTO\PLAY.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="AVION" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\avion.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="SMALL_GRID" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\grid_small.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="SIMULATION_GRIDMAP" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MAP_GRID.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ralentizar1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ralentizar.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="LOGIN" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LOGIN.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="RETROCEDER" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RETROCEDER1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="SIMULATION" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SIMULATION.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="RETROCEDER1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RETROCEDER2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

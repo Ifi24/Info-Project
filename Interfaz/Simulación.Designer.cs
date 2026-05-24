@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Simulación));
             btn_UnCiclo = new Button();
             PanelSimulacion = new Panel();
             labelAlarma = new Label();
@@ -225,7 +224,7 @@
             // btnPause
             // 
             btnPause.BackColor = Color.Transparent;
-            btnPause.BackgroundImage = (Image)resources.GetObject("btnPause.BackgroundImage");
+            btnPause.BackgroundImage = Properties.Resources.play;
             btnPause.BackgroundImageLayout = ImageLayout.Stretch;
             btnPause.FlatStyle = FlatStyle.Popup;
             btnPause.Location = new Point(1103, 981);
@@ -239,7 +238,7 @@
             // btn_Acelerar
             // 
             btn_Acelerar.BackColor = Color.Transparent;
-            btn_Acelerar.BackgroundImage = (Image)resources.GetObject("btn_Acelerar.BackgroundImage");
+            btn_Acelerar.BackgroundImage = Properties.Resources.acelerar;
             btn_Acelerar.BackgroundImageLayout = ImageLayout.Stretch;
             btn_Acelerar.FlatStyle = FlatStyle.Popup;
             btn_Acelerar.Location = new Point(1199, 981);
@@ -253,7 +252,7 @@
             // btn_Ralentizar
             // 
             btn_Ralentizar.BackColor = Color.Transparent;
-            btn_Ralentizar.BackgroundImage = (Image)resources.GetObject("btn_Ralentizar.BackgroundImage");
+            btn_Ralentizar.BackgroundImage = Properties.Resources.RETROCEDER;
             btn_Ralentizar.BackgroundImageLayout = ImageLayout.Stretch;
             btn_Ralentizar.FlatStyle = FlatStyle.Popup;
             btn_Ralentizar.Location = new Point(989, 981);
