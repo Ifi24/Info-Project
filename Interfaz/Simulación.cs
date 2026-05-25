@@ -291,7 +291,7 @@ namespace Interfaz
 
                     MiMessageBox ventanaInfo = new MiMessageBox();
                     ventanaInfo.ConfigurarMensaje($"Información del avión: {fp.GetId()}", datosAvion, "INFO");
-                    ventanaInfo.Size = new Size(400, 380);
+                    ventanaInfo.Size = new Size(500, 580);
                     ventanaInfo.ShowDialog();
                 }
                 else
