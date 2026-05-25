@@ -62,7 +62,7 @@ namespace Interfaz
                 try
                 {
                     conexionQuery.Open();
-                    string query = "SELECT Telefono, Email FROM misCompanias WHERE Nombre = '" + compañia + "'";
+                    string query = "SELECT Telefono, Email FROM misCompañias WHERE Compañia = '" + compañia + "'";
                     SQLiteCommand cmd = new SQLiteCommand(query, conexionQuery);
                     SQLiteDataReader reader = cmd.ExecuteReader();
 
