@@ -77,10 +77,10 @@ namespace Interfaz
                 misLabels.Add(lbl);
                 pic.BringToFront(); //Para asegurarnos de que se dibujan bien.
                 lbl.BringToFront();
-
-                ActualizarInterfaz();
-                PanelSimulacion.Invalidate(); //Ejecute el evento Paint
             }
+            ActualizarInterfaz();
+            PanelSimulacion.Invalidate(); //Ejecute el evento Paint
+           
         }
 
         // Método para actualizar cambios en la simulación:
