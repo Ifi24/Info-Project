@@ -255,7 +255,7 @@ namespace Interfaz
                 if (pic.Tag is FlightPlan fp) //Comprueba si el Tag del PictureBox es un FlightPlan i se lo asigna a la variable fp.
                 {
                     FlightLib.Position posicion = fp.GetCurrentPosition();
-                    string compañia = fp.GetAerolinia();
+                    string compañia = fp.GetAerolinia().Trim();
                     // Valores por defecto por si la compañía no está registrada en la base de datos
                     string telefono = "No asignado";
                     string email = "No asignado";
@@ -265,7 +265,7 @@ namespace Interfaz
                     try
                     {
                         conexionQuery.Open();
-                        string query = "SELECT Telefono, Email FROM misCompanias WHERE Nombre = '" + compañia + "'"; //Pedimos el tel y el mail de la compañia
+                        string query = "SELECT Telefono, Email FROM misCompañias WHERE Compañia = '" + compañia + "'"; //Pedimos el tel y el mail de la compañia
                         SQLiteCommand cmd = new SQLiteCommand(query, conexionQuery);
                         SQLiteDataReader reader = cmd.ExecuteReader();
                         if (reader.Read()) //Si la base de datos encuentra una compañía con ese nombre cogemos sus datos de tel y mail y los guardamos
@@ -514,7 +514,6 @@ namespace Interfaz
             }
 
             // 3. Solicitar un nombre identificativo para la simulación
-            // Nota: Requiere tener la referencia o escribir Microsoft.VisualBasic.Interaction.InputBox
             string nombreSimulacion = Microsoft.VisualBasic.Interaction.InputBox(
                 "Introduce un nombre para guardar esta simulación en tu cuenta:", 
                 "Guardar en Base de Datos", 
