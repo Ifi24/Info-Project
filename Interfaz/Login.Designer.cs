@@ -43,9 +43,10 @@
             Usuariotxt.BackColor = Color.WhiteSmoke;
             Usuariotxt.BorderStyle = BorderStyle.None;
             Usuariotxt.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Usuariotxt.Location = new Point(755, 594);
+            Usuariotxt.Location = new Point(1134, 876);
+            Usuariotxt.Margin = new Padding(5);
             Usuariotxt.Name = "Usuariotxt";
-            Usuariotxt.Size = new Size(412, 23);
+            Usuariotxt.Size = new Size(607, 37);
             Usuariotxt.TabIndex = 0;
             // 
             // Contraseñatxt
@@ -53,10 +54,11 @@
             Contraseñatxt.BackColor = Color.WhiteSmoke;
             Contraseñatxt.BorderStyle = BorderStyle.None;
             Contraseñatxt.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Contraseñatxt.Location = new Point(755, 735);
+            Contraseñatxt.Location = new Point(1134, 1083);
+            Contraseñatxt.Margin = new Padding(5);
             Contraseñatxt.Name = "Contraseñatxt";
             Contraseñatxt.PasswordChar = '*';
-            Contraseñatxt.Size = new Size(412, 23);
+            Contraseñatxt.Size = new Size(607, 37);
             Contraseñatxt.TabIndex = 1;
             // 
             // lblUsuario
@@ -65,9 +67,10 @@
             lblUsuario.BackColor = Color.Transparent;
             lblUsuario.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblUsuario.ForeColor = Color.White;
-            lblUsuario.Location = new Point(130, 60);
+            lblUsuario.Location = new Point(211, 96);
+            lblUsuario.Margin = new Padding(5, 0, 5, 0);
             lblUsuario.Name = "lblUsuario";
-            lblUsuario.Size = new Size(0, 18);
+            lblUsuario.Size = new Size(0, 29);
             lblUsuario.TabIndex = 2;
             // 
             // lblContraseña
@@ -75,18 +78,20 @@
             lblContraseña.AutoSize = true;
             lblContraseña.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblContraseña.ForeColor = Color.White;
-            lblContraseña.Location = new Point(130, 152);
+            lblContraseña.Location = new Point(211, 243);
+            lblContraseña.Margin = new Padding(5, 0, 5, 0);
             lblContraseña.Name = "lblContraseña";
-            lblContraseña.Size = new Size(0, 18);
+            lblContraseña.Size = new Size(0, 29);
             lblContraseña.TabIndex = 3;
             // 
             // btnLogin
             // 
             btnLogin.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnLogin.ForeColor = Color.FromArgb(64, 64, 64);
-            btnLogin.Location = new Point(755, 820);
+            btnLogin.Location = new Point(1098, 1193);
+            btnLogin.Margin = new Padding(5);
             btnLogin.Name = "btnLogin";
-            btnLogin.Size = new Size(162, 39);
+            btnLogin.Size = new Size(263, 62);
             btnLogin.TabIndex = 4;
             btnLogin.Text = "LOGIN";
             btnLogin.UseVisualStyleBackColor = true;
@@ -96,9 +101,10 @@
             // 
             btnCerrar.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnCerrar.ForeColor = Color.FromArgb(64, 64, 64);
-            btnCerrar.Location = new Point(851, 952);
+            btnCerrar.Location = new Point(1267, 1265);
+            btnCerrar.Margin = new Padding(5);
             btnCerrar.Name = "btnCerrar";
-            btnCerrar.Size = new Size(205, 37);
+            btnCerrar.Size = new Size(333, 59);
             btnCerrar.TabIndex = 5;
             btnCerrar.Text = "SALIR";
             btnCerrar.UseVisualStyleBackColor = true;
@@ -108,9 +114,10 @@
             // 
             btnRegister.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnRegister.ForeColor = Color.FromArgb(64, 64, 64);
-            btnRegister.Location = new Point(1005, 820);
+            btnRegister.Location = new Point(1504, 1193);
+            btnRegister.Margin = new Padding(5);
             btnRegister.Name = "btnRegister";
-            btnRegister.Size = new Size(175, 39);
+            btnRegister.Size = new Size(284, 62);
             btnRegister.TabIndex = 6;
             btnRegister.Text = "REGISTRARSE";
             btnRegister.UseVisualStyleBackColor = true;
@@ -122,20 +129,20 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Microsoft Sans Serif", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.ForeColor = SystemColors.ControlDarkDark;
-            label1.Location = new Point(1005, 788);
-            label1.Margin = new Padding(2, 0, 2, 0);
+            label1.Location = new Point(1504, 1148);
             label1.Name = "label1";
-            label1.Size = new Size(175, 20);
+            label1.Size = new Size(291, 32);
             label1.TabIndex = 7;
             label1.Text = "¿No estás registrado?";
             // 
             // Login
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             BackgroundImage = Properties.Resources.LOGIN;
-            ClientSize = new Size(1924, 1055);
+            BackgroundImageLayout = ImageLayout.Zoom;
+            ClientSize = new Size(2884, 1579);
             Controls.Add(label1);
             Controls.Add(btnRegister);
             Controls.Add(btnCerrar);
@@ -144,6 +151,7 @@
             Controls.Add(lblUsuario);
             Controls.Add(Contraseñatxt);
             Controls.Add(Usuariotxt);
+            Margin = new Padding(5);
             Name = "Login";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Login";

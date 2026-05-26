@@ -50,17 +50,17 @@
             toolTip1 = new ToolTip(components);
             lblVelocidad = new Label();
             lblCords = new Label();
+            button4 = new Button();
             PanelSimulacion.SuspendLayout();
             SuspendLayout();
             // 
             // btn_UnCiclo
             // 
-            btn_UnCiclo.Font = new Font("Myriad Pro", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btn_UnCiclo.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btn_UnCiclo.ForeColor = Color.FromArgb(64, 64, 64);
-            btn_UnCiclo.Location = new Point(51, 123);
-            btn_UnCiclo.Margin = new Padding(2);
+            btn_UnCiclo.Location = new Point(83, 197);
             btn_UnCiclo.Name = "btn_UnCiclo";
-            btn_UnCiclo.Size = new Size(288, 31);
+            btn_UnCiclo.Size = new Size(468, 50);
             btn_UnCiclo.TabIndex = 1;
             btn_UnCiclo.Text = "Avanzar un Ciclo";
             btn_UnCiclo.UseVisualStyleBackColor = true;
@@ -72,9 +72,10 @@
             PanelSimulacion.BackgroundImage = Properties.Resources.SIMULATION_GRIDMAP;
             PanelSimulacion.BorderStyle = BorderStyle.FixedSingle;
             PanelSimulacion.Controls.Add(labelAlarma);
-            PanelSimulacion.Location = new Point(388, 36);
+            PanelSimulacion.Location = new Point(630, 58);
+            PanelSimulacion.Margin = new Padding(5);
             PanelSimulacion.Name = "PanelSimulacion";
-            PanelSimulacion.Size = new Size(1400, 900);
+            PanelSimulacion.Size = new Size(2274, 1439);
             PanelSimulacion.TabIndex = 0;
             PanelSimulacion.Paint += PanelSimulacion_Paint;
             PanelSimulacion.MouseMove += PanelSimulacion_MouseMove;
@@ -84,9 +85,10 @@
             labelAlarma.AutoSize = true;
             labelAlarma.Font = new Font("Segoe UI", 19.875F, FontStyle.Bold, GraphicsUnit.Point, 0);
             labelAlarma.ForeColor = Color.Red;
-            labelAlarma.Location = new Point(431, 8);
+            labelAlarma.Location = new Point(700, 13);
+            labelAlarma.Margin = new Padding(5, 0, 5, 0);
             labelAlarma.Name = "labelAlarma";
-            labelAlarma.Size = new Size(0, 46);
+            labelAlarma.Size = new Size(0, 71);
             labelAlarma.TabIndex = 0;
             // 
             // label1
@@ -94,9 +96,10 @@
             label1.AutoSize = true;
             label1.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = SystemColors.Control;
-            label1.Location = new Point(440, 952);
+            label1.Location = new Point(715, 1523);
+            label1.Margin = new Padding(5, 0, 5, 0);
             label1.Name = "label1";
-            label1.Size = new Size(0, 18);
+            label1.Size = new Size(0, 29);
             label1.TabIndex = 2;
             // 
             // label3
@@ -104,9 +107,10 @@
             label3.AutoSize = true;
             label3.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = SystemColors.Control;
-            label3.Location = new Point(1837, 925);
+            label3.Location = new Point(2985, 1480);
+            label3.Margin = new Padding(5, 0, 5, 0);
             label3.Name = "label3";
-            label3.Size = new Size(0, 18);
+            label3.Size = new Size(0, 29);
             label3.TabIndex = 4;
             // 
             // label4
@@ -114,9 +118,10 @@
             label4.AutoSize = true;
             label4.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label4.ForeColor = SystemColors.Control;
-            label4.Location = new Point(1782, 952);
+            label4.Location = new Point(2896, 1523);
+            label4.Margin = new Padding(5, 0, 5, 0);
             label4.Name = "label4";
-            label4.Size = new Size(0, 18);
+            label4.Size = new Size(0, 29);
             label4.TabIndex = 0;
             // 
             // TimerSimulación
@@ -125,11 +130,12 @@
             // 
             // button1
             // 
-            button1.Font = new Font("Myriad Pro", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button1.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             button1.ForeColor = Color.FromArgb(64, 64, 64);
-            button1.Location = new Point(51, 344);
+            button1.Location = new Point(83, 550);
+            button1.Margin = new Padding(5);
             button1.Name = "button1";
-            button1.Size = new Size(288, 31);
+            button1.Size = new Size(468, 50);
             button1.TabIndex = 18;
             button1.Text = "Cambiar tiempo y distancia";
             button1.UseVisualStyleBackColor = true;
@@ -137,11 +143,12 @@
             // 
             // btn_CargarSimulacion
             // 
-            btn_CargarSimulacion.Font = new Font("Myriad Pro", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btn_CargarSimulacion.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btn_CargarSimulacion.ForeColor = Color.FromArgb(64, 64, 64);
-            btn_CargarSimulacion.Location = new Point(51, 571);
+            btn_CargarSimulacion.Location = new Point(83, 914);
+            btn_CargarSimulacion.Margin = new Padding(5);
             btn_CargarSimulacion.Name = "btn_CargarSimulacion";
-            btn_CargarSimulacion.Size = new Size(288, 31);
+            btn_CargarSimulacion.Size = new Size(468, 50);
             btn_CargarSimulacion.TabIndex = 20;
             btn_CargarSimulacion.Text = "Cargar Simulación";
             btn_CargarSimulacion.UseVisualStyleBackColor = true;
@@ -149,11 +156,12 @@
             // 
             // btn_GuardarSimulacion
             // 
-            btn_GuardarSimulacion.Font = new Font("Myriad Pro", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btn_GuardarSimulacion.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btn_GuardarSimulacion.ForeColor = Color.FromArgb(64, 64, 64);
-            btn_GuardarSimulacion.Location = new Point(51, 518);
+            btn_GuardarSimulacion.Location = new Point(83, 829);
+            btn_GuardarSimulacion.Margin = new Padding(5);
             btn_GuardarSimulacion.Name = "btn_GuardarSimulacion";
-            btn_GuardarSimulacion.Size = new Size(288, 31);
+            btn_GuardarSimulacion.Size = new Size(468, 50);
             btn_GuardarSimulacion.TabIndex = 18;
             btn_GuardarSimulacion.Text = "Guardar Simulación";
             btn_GuardarSimulacion.UseVisualStyleBackColor = true;
@@ -161,11 +169,12 @@
             // 
             // btn_Deshacer
             // 
-            btn_Deshacer.Font = new Font("Myriad Pro", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btn_Deshacer.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btn_Deshacer.ForeColor = Color.FromArgb(64, 64, 64);
-            btn_Deshacer.Location = new Point(51, 171);
+            btn_Deshacer.Location = new Point(83, 274);
+            btn_Deshacer.Margin = new Padding(5);
             btn_Deshacer.Name = "btn_Deshacer";
-            btn_Deshacer.Size = new Size(288, 31);
+            btn_Deshacer.Size = new Size(468, 50);
             btn_Deshacer.TabIndex = 15;
             btn_Deshacer.Text = "Deshacer ciclo";
             btn_Deshacer.UseVisualStyleBackColor = true;
@@ -173,11 +182,12 @@
             // 
             // button3
             // 
-            button3.Font = new Font("Myriad Pro", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button3.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             button3.ForeColor = Color.FromArgb(64, 64, 64);
-            button3.Location = new Point(51, 430);
+            button3.Location = new Point(83, 688);
+            button3.Margin = new Padding(5);
             button3.Name = "button3";
-            button3.Size = new Size(288, 31);
+            button3.Size = new Size(468, 50);
             button3.TabIndex = 13;
             button3.Text = "Reiniciar Simulación";
             button3.UseVisualStyleBackColor = true;
@@ -185,12 +195,11 @@
             // 
             // btn_PredecirConflictos
             // 
-            btn_PredecirConflictos.Font = new Font("Myriad Pro", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btn_PredecirConflictos.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btn_PredecirConflictos.ForeColor = Color.FromArgb(64, 64, 64);
-            btn_PredecirConflictos.Location = new Point(51, 246);
-            btn_PredecirConflictos.Margin = new Padding(2);
+            btn_PredecirConflictos.Location = new Point(83, 394);
             btn_PredecirConflictos.Name = "btn_PredecirConflictos";
-            btn_PredecirConflictos.Size = new Size(288, 31);
+            btn_PredecirConflictos.Size = new Size(468, 50);
             btn_PredecirConflictos.TabIndex = 11;
             btn_PredecirConflictos.Text = "Predecir Conflictos";
             btn_PredecirConflictos.UseVisualStyleBackColor = true;
@@ -198,12 +207,11 @@
             // 
             // btn_DatosAviones
             // 
-            btn_DatosAviones.Font = new Font("Myriad Pro", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btn_DatosAviones.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btn_DatosAviones.ForeColor = Color.FromArgb(64, 64, 64);
-            btn_DatosAviones.Location = new Point(51, 296);
-            btn_DatosAviones.Margin = new Padding(2);
+            btn_DatosAviones.Location = new Point(83, 474);
             btn_DatosAviones.Name = "btn_DatosAviones";
-            btn_DatosAviones.Size = new Size(288, 31);
+            btn_DatosAviones.Size = new Size(468, 50);
             btn_DatosAviones.TabIndex = 9;
             btn_DatosAviones.Text = "Mostrar todos los datos";
             btn_DatosAviones.UseVisualStyleBackColor = true;
@@ -211,11 +219,12 @@
             // 
             // cerrarBtn
             // 
-            cerrarBtn.Font = new Font("Myriad Pro", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cerrarBtn.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cerrarBtn.ForeColor = Color.FromArgb(64, 64, 64);
-            cerrarBtn.Location = new Point(51, 878);
+            cerrarBtn.Location = new Point(83, 1405);
+            cerrarBtn.Margin = new Padding(5);
             cerrarBtn.Name = "cerrarBtn";
-            cerrarBtn.Size = new Size(288, 32);
+            cerrarBtn.Size = new Size(468, 51);
             cerrarBtn.TabIndex = 12;
             cerrarBtn.Text = "Cerrar Simulación";
             cerrarBtn.UseVisualStyleBackColor = true;
@@ -227,10 +236,9 @@
             btnPause.BackgroundImage = Properties.Resources.play;
             btnPause.BackgroundImageLayout = ImageLayout.Stretch;
             btnPause.FlatStyle = FlatStyle.Popup;
-            btnPause.Location = new Point(1103, 981);
-            btnPause.Margin = new Padding(2);
+            btnPause.Location = new Point(1792, 1570);
             btnPause.Name = "btnPause";
-            btnPause.Size = new Size(54, 53);
+            btnPause.Size = new Size(88, 85);
             btnPause.TabIndex = 22;
             btnPause.UseVisualStyleBackColor = false;
             btnPause.Click += btnPause_Click;
@@ -241,10 +249,9 @@
             btn_Acelerar.BackgroundImage = Properties.Resources.acelerar;
             btn_Acelerar.BackgroundImageLayout = ImageLayout.Stretch;
             btn_Acelerar.FlatStyle = FlatStyle.Popup;
-            btn_Acelerar.Location = new Point(1199, 981);
-            btn_Acelerar.Margin = new Padding(2);
+            btn_Acelerar.Location = new Point(1948, 1570);
             btn_Acelerar.Name = "btn_Acelerar";
-            btn_Acelerar.Size = new Size(67, 53);
+            btn_Acelerar.Size = new Size(109, 85);
             btn_Acelerar.TabIndex = 21;
             btn_Acelerar.UseVisualStyleBackColor = false;
             btn_Acelerar.Click += btn_Acelerar_Click;
@@ -255,10 +262,9 @@
             btn_Ralentizar.BackgroundImage = Properties.Resources.ralentizar;
             btn_Ralentizar.BackgroundImageLayout = ImageLayout.Stretch;
             btn_Ralentizar.FlatStyle = FlatStyle.Popup;
-            btn_Ralentizar.Location = new Point(989, 981);
-            btn_Ralentizar.Margin = new Padding(2);
+            btn_Ralentizar.Location = new Point(1607, 1570);
             btn_Ralentizar.Name = "btn_Ralentizar";
-            btn_Ralentizar.Size = new Size(70, 53);
+            btn_Ralentizar.Size = new Size(114, 85);
             btn_Ralentizar.TabIndex = 20;
             btn_Ralentizar.UseVisualStyleBackColor = false;
             btn_Ralentizar.Click += btn_Ralentizar_Click;
@@ -267,11 +273,12 @@
             // 
             lblVelocidad.AutoSize = true;
             lblVelocidad.BackColor = Color.Transparent;
-            lblVelocidad.Font = new Font("Myriad Pro", 19.8000011F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            lblVelocidad.Font = new Font("Microsoft Sans Serif", 19.8000011F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             lblVelocidad.ForeColor = Color.White;
-            lblVelocidad.Location = new Point(1633, 993);
+            lblVelocidad.Location = new Point(2654, 1589);
+            lblVelocidad.Margin = new Padding(5, 0, 5, 0);
             lblVelocidad.Name = "lblVelocidad";
-            lblVelocidad.Size = new Size(53, 41);
+            lblVelocidad.Size = new Size(85, 61);
             lblVelocidad.TabIndex = 23;
             lblVelocidad.Text = "x1";
             // 
@@ -279,21 +286,36 @@
             // 
             lblCords.AutoSize = true;
             lblCords.BackColor = Color.Transparent;
-            lblCords.Font = new Font("Myriad Pro", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblCords.Font = new Font("Microsoft Sans Serif", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblCords.ForeColor = SystemColors.ControlLightLight;
-            lblCords.Location = new Point(453, 993);
+            lblCords.Location = new Point(736, 1589);
+            lblCords.Margin = new Padding(5, 0, 5, 0);
             lblCords.Name = "lblCords";
-            lblCords.Size = new Size(124, 36);
+            lblCords.Size = new Size(246, 55);
             lblCords.TabIndex = 26;
             lblCords.Text = "X:  0  Y:  0";
             // 
+            // button4
+            // 
+            button4.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button4.ForeColor = Color.FromArgb(64, 64, 64);
+            button4.Location = new Point(83, 1108);
+            button4.Margin = new Padding(5);
+            button4.Name = "button4";
+            button4.Size = new Size(468, 50);
+            button4.TabIndex = 28;
+            button4.Text = "Cambios de velocidad";
+            button4.UseVisualStyleBackColor = true;
+            // 
             // Simulación
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaptionText;
             BackgroundImage = Properties.Resources.SIMULATION;
-            ClientSize = new Size(1880, 1055);
+            BackgroundImageLayout = ImageLayout.Zoom;
+            ClientSize = new Size(2884, 1579);
+            Controls.Add(button4);
             Controls.Add(lblCords);
             Controls.Add(lblVelocidad);
             Controls.Add(btn_Acelerar);
@@ -312,6 +334,7 @@
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(PanelSimulacion);
+            Margin = new Padding(5);
             Name = "Simulación";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Simulación";
@@ -345,5 +368,6 @@
         private Button button1;
         private Label lblVelocidad;
         private Label lblCords;
+        private Button button4;
     }
 }

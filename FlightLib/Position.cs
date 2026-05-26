@@ -35,6 +35,8 @@ namespace FlightLib
             this.x = x;
         }
 
+        
+
         // Obtiene la coordenada en el eje Y.
         public double GetY()
         {

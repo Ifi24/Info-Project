@@ -33,14 +33,14 @@
             cargarListaDeVuelosToolStripMenuItem = new ToolStripMenuItem();
             introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem = new ToolStripMenuItem();
             verSimulaciónToolStripMenuItem = new ToolStripMenuItem();
+            cargarSimulaciónToolStripMenuItem = new ToolStripMenuItem();
+            opcionesToolStripMenuItem = new ToolStripMenuItem();
             flowLayoutPanel1 = new FlowLayoutPanel();
             Titulo = new Label();
             label1 = new Label();
             label3 = new Label();
             label4 = new Label();
             btnCerrar = new Button();
-            cargarSimulaciónToolStripMenuItem = new ToolStripMenuItem();
-            opcionesToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             SuspendLayout();
@@ -55,7 +55,7 @@
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(10, 3, 0, 3);
-            menuStrip1.Size = new Size(250, 1579);
+            menuStrip1.Size = new Size(193, 1579);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -67,7 +67,7 @@
             Opciones.ForeColor = SystemColors.Control;
             Opciones.Name = "Opciones";
             Opciones.Padding = new Padding(10, 10, 5, 0);
-            Opciones.Size = new Size(229, 53);
+            Opciones.Size = new Size(172, 53);
             Opciones.Text = "Opciones";
             // 
             // cargarListaDeVuelosToolStripMenuItem
@@ -97,12 +97,26 @@
             verSimulaciónToolStripMenuItem.Text = "Ver Simulación";
             verSimulaciónToolStripMenuItem.Click += verSimulaciónToolStripMenuItem_Click;
             // 
+            // cargarSimulaciónToolStripMenuItem
+            // 
+            cargarSimulaciónToolStripMenuItem.BackColor = Color.White;
+            cargarSimulaciónToolStripMenuItem.Name = "cargarSimulaciónToolStripMenuItem";
+            cargarSimulaciónToolStripMenuItem.Size = new Size(935, 48);
+            cargarSimulaciónToolStripMenuItem.Text = "Cargar Simulación";
+            cargarSimulaciónToolStripMenuItem.Click += cargarSimulaciónToolStripMenuItem_Click;
+            // 
+            // opcionesToolStripMenuItem
+            // 
+            opcionesToolStripMenuItem.Name = "opcionesToolStripMenuItem";
+            opcionesToolStripMenuItem.Size = new Size(935, 48);
+            opcionesToolStripMenuItem.Text = "Opciones";
+            // 
             // flowLayoutPanel1
             // 
             flowLayoutPanel1.BackColor = Color.DarkSlateGray;
             flowLayoutPanel1.Controls.Add(Titulo);
             flowLayoutPanel1.Location = new Point(211, 62);
-            flowLayoutPanel1.Margin = new Padding(5, 5, 5, 5);
+            flowLayoutPanel1.Margin = new Padding(5);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new Size(2972, 155);
             flowLayoutPanel1.TabIndex = 1;
@@ -162,7 +176,7 @@
             // btnCerrar
             // 
             btnCerrar.Location = new Point(1424, 1587);
-            btnCerrar.Margin = new Padding(5, 5, 5, 5);
+            btnCerrar.Margin = new Padding(5);
             btnCerrar.Name = "btnCerrar";
             btnCerrar.Size = new Size(367, 46);
             btnCerrar.TabIndex = 5;
@@ -170,25 +184,12 @@
             btnCerrar.UseVisualStyleBackColor = true;
             btnCerrar.Click += btnCerrar_Click;
             // 
-            // cargarSimulaciónToolStripMenuItem
-            // 
-            cargarSimulaciónToolStripMenuItem.BackColor = Color.White;
-            cargarSimulaciónToolStripMenuItem.Name = "cargarSimulaciónToolStripMenuItem";
-            cargarSimulaciónToolStripMenuItem.Size = new Size(935, 48);
-            cargarSimulaciónToolStripMenuItem.Text = "Cargar Simulación";
-            cargarSimulaciónToolStripMenuItem.Click += cargarSimulaciónToolStripMenuItem_Click;
-            // 
-            // opcionesToolStripMenuItem
-            // 
-            opcionesToolStripMenuItem.Name = "opcionesToolStripMenuItem";
-            opcionesToolStripMenuItem.Size = new Size(935, 48);
-            opcionesToolStripMenuItem.Text = "Opciones";
-            // 
             // Principal
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Desktop;
+            BackgroundImageLayout = ImageLayout.Zoom;
             ClientSize = new Size(2884, 1579);
             Controls.Add(btnCerrar);
             Controls.Add(label1);
@@ -197,7 +198,7 @@
             Controls.Add(flowLayoutPanel1);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
-            Margin = new Padding(5, 5, 5, 5);
+            Margin = new Padding(5);
             Name = "Principal";
             Text = "Principal";
             menuStrip1.ResumeLayout(false);

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SQLite;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
@@ -27,6 +28,14 @@ namespace Interfaz
 
             //Hacemos que se puedan leer las teclas (para añadir en un futuro funcion de escribir sin usar ratón).
             this.KeyPreview = true;
+
+            // 1. Cargamos las aerolíneas existentes en ambos desplegables
+            CargarAerolineas(comboBoxAerolinia1);
+            CargarAerolineas(comboBoxAerolinia2);
+
+            // 2. Enlazamos el evento para cuando seleccionen una opción
+            comboBoxAerolinia1.SelectedIndexChanged += comboBoxAerolinia_SelectedIndexChanged;
+            comboBoxAerolinia2.SelectedIndexChanged += comboBoxAerolinia_SelectedIndexChanged;
         }
 
         // Métodos:
@@ -40,6 +49,7 @@ namespace Interfaz
             TextBoxYI1.Clear();
             TextBoxXF1.Clear();
             TextBoxYF1.Clear();
+            comboBoxAerolinia1.SelectedIndex = -1;
 
             TextBoxID2.Clear();
             TextBoxV2.Clear();
@@ -47,10 +57,40 @@ namespace Interfaz
             TextBoxYI2.Clear();
             TextBoxXF2.Clear();
             TextBoxYF2.Clear();
+            comboBoxAerolinia2.SelectedIndex = -1;
 
             TextBoxID1.Focus();
         }
+        // Método para rellenar los COmboBox desde la base de datos
+        private void CargarAerolineas(ComboBox combo)
+        {
+            combo.Items.Clear();
+            string DataSource = "Data Source=LoginVuelos.db";
 
+            try
+            {
+                using (SQLiteConnection cnx = new SQLiteConnection(DataSource))
+                {
+                    string sql = "SELECT Compañia FROM misCompañias ORDER BY Compañia ASC";
+                    SQLiteDataAdapter adapter = new SQLiteDataAdapter(sql, cnx);
+                    DataTable dt = new DataTable();
+                    adapter.Fill(dt);
+
+                    foreach (DataRow fila in dt.Rows)
+                    {
+                        combo.Items.Add(fila["Compañia"].ToString());
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar las aerolíneas: " + ex.Message);
+            }
+
+            combo.Items.Add("[Añadir una compañía...]");
+        }
+        
         // Método para preguntar si se quieren añadir más datos (para evitar repeticiones):
         public void ProponerMasDatos()
         {
@@ -66,7 +106,30 @@ namespace Interfaz
             else
                 LimpiarFormulario();
         }
+        // Evento que slata cuando el usuario escoge uuna opcion del desplegable
+        private void comboBoxAerolinia_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboBox comboActual = (ComboBox)sender;
+            //Si seleccionan la opcion de añadir una compañía:
+            if (comboActual.SelectedItem != null && comboActual.SelectedItem.ToString() == "[Añadir una compañía...]")
+            {
+                GestionAerolineas ventanaGestion = new GestionAerolineas();
+                ventanaGestion.ShowDialog();
+                CargarAerolineas(comboBoxAerolinia1);
+                CargarAerolineas(comboBoxAerolinia2);
 
+                //Como una sleccion automatica, si el usuario añadio una compañia la dejamos seleccionada automaticamente
+                if (!string.IsNullOrEmpty(ventanaGestion.GetUltimaCompañiaAñadida()))
+                {
+                    comboActual.SelectedItem = ventanaGestion.GetUltimaCompañiaAñadida();
+                }
+                else
+                {
+                    //si cerró la ventana sin añadir ninguna, deseleccionamos la opción especial
+                    comboActual.SelectedIndex = -1;
+                }
+            }
+        }
         //Botón para guardar los datos de vuelo:
         private void button1_Click(object sender, EventArgs e)
         {
@@ -79,7 +142,9 @@ namespace Interfaz
                 double yi1 = Convert.ToDouble(TextBoxYI1.Text);
                 double xf1 = Convert.ToDouble(TextBoxXF1.Text);
                 double yf1 = Convert.ToDouble(TextBoxYF1.Text);
-                string al1 = TextBoxAerolinia1.Text; //AL = aerolinia
+                string al1 = ""; //al = aerolinia
+                if (comboBoxAerolinia1.SelectedItem != null)
+                    al1 = comboBoxAerolinia1.SelectedItem.ToString();
 
                 misAviones.CrearVuelo(id1, xi1, yi1, xi1, yi1, xf1, yf1, v1, al1);
 
@@ -90,10 +155,12 @@ namespace Interfaz
                 double yi2 = Convert.ToDouble(TextBoxYI2.Text);
                 double xf2 = Convert.ToDouble(TextBoxXF2.Text);
                 double yf2 = Convert.ToDouble(TextBoxYF2.Text);
-                string al2 = TextBoxAerolinia2.Text;
+                string al2 = ""; //al = aerolinia
+                if (comboBoxAerolinia2.SelectedItem != null)
+                    al1 = comboBoxAerolinia2.SelectedItem.ToString();
 
                 misAviones.CrearVuelo(id2, xi2, yi2, xi2, yi2, xf2, yf2, v2, al2);
-                
+
                 MiMessageBox ventanaMensaje = new MiMessageBox();
                 ventanaMensaje.ConfigurarMensaje("Vuelos cargados", "Pareja de vuelos cargados correctamente.", "INFO");
                 ventanaMensaje.ShowDialog();
@@ -131,7 +198,7 @@ namespace Interfaz
                 TextBoxYI1.Text = Convert.ToString(yi1);
                 TextBoxXF1.Text = Convert.ToString(xf1);
                 TextBoxYF1.Text = Convert.ToString(yf1);
-                TextBoxAerolinia1.Text = al1;
+                comboBoxAerolinia1.SelectedItem = al1;
 
                 misAviones.CrearVuelo(id1, xi1, yi1, xi1, yi1, xf1, yf1, v1, al1);
 
@@ -150,7 +217,7 @@ namespace Interfaz
                 TextBoxYI2.Text = Convert.ToString(yi2);
                 TextBoxXF2.Text = Convert.ToString(xf2);
                 TextBoxYF2.Text = Convert.ToString(yf2);
-                TextBoxAerolinia2.Text = al2;
+                comboBoxAerolinia1.SelectedItem = al2;
 
                 misAviones.CrearVuelo(id2, xi2, yi2, xi2, yi2, xf2, yf2, v2, al2);
 
@@ -194,5 +261,7 @@ namespace Interfaz
 
             ProponerMasDatos();
         }
+
+       
     }
 }

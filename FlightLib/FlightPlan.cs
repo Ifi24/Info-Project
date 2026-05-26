@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SQLite;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,6 +18,7 @@ namespace FlightLib
         Position finalPosition; 
         double velocidad; //m/s
         string aerolinia;
+        
 
         //Para guardar un historial de posiciones para hacer y deshacer:
         Stack<Position> historialPosiciones = new Stack<Position>();
@@ -345,6 +349,71 @@ namespace FlightLib
 
             return devolver;
         }
+
+        // Metodo para conseguir email de la base de datos
+        public string GetEmail()
+        {
+            string email = "No disponible";
+            string dataSource = "Data Source=LoginVuelos.db";
+
+            try
+            {
+                using (SQLiteConnection cnx = new SQLiteConnection(dataSource))
+                {
+                    // Concatenamos directamente la aerolínea en el string SQL
+                    string sql = "SELECT Email FROM misCompañias WHERE Compañia = '" + this.aerolinia + "'";
+
+                    SQLiteDataAdapter adapter = new SQLiteDataAdapter(sql, cnx);
+                    DataTable dt = new DataTable();
+                    adapter.Fill(dt);
+
+                    // Si encontró la aerolínea, extraemos el valor de la primera fila
+                    if (dt.Rows.Count > 0)
+                    {
+                        email = dt.Rows[0]["Email"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al obtener el email: " + ex.Message);
+            }
+
+            return email;
+        }
+
+        // Metodo para conseguir el telefono
+        public string GetTelefono()
+        {
+            string telefono = "No disponible";
+            string dataSource = "Data Source=LoginVuelos.db";
+
+            try
+            {
+                using (SQLiteConnection cnx = new SQLiteConnection(dataSource))
+                {
+                    // Concatenamos directamente la aerolínea en el string SQL
+                    string sql = "SELECT Telefono FROM misCompañias WHERE Compañia = '" + this.aerolinia + "'";
+
+                    SQLiteDataAdapter adapter = new SQLiteDataAdapter(sql, cnx);
+                    DataTable dt = new DataTable();
+                    adapter.Fill(dt);
+
+                    // Si encontró la aerolínea, extraemos el valor de la primera fila
+                    if (dt.Rows.Count > 0)
+                    {
+                        telefono = dt.Rows[0]["Telefono"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al obtener el teléfono: " + ex.Message);
+            }
+
+            return telefono;
+        }
+
         // Método para comprobar errores (se podría eliminar al final):
 
         public void EscribeConsola()

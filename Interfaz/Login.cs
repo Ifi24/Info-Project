@@ -61,6 +61,12 @@ namespace Interfaz
                 CrearBaseDatos();
                 AbrirBaseDatos();
                 CrearTabla();
+                string query = "INSERT INTO misCompañias VALUES ('EETAC Air', '934137000', 'eetac.web@upc.edu')";
+                string query2 = "INSERT INTO misCompañias VALUES ('UPC Airlines', '934016200', 'rector@upc.edu')";
+                SQLiteCommand cmd1 = new SQLiteCommand(query, cnx);
+                cmd1.ExecuteNonQuery();
+                SQLiteCommand cmd2 = new SQLiteCommand(query2, cnx);
+                cmd2.ExecuteNonQuery();
             }
             catch (Exception ex)
             {

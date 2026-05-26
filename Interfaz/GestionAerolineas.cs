@@ -12,6 +12,14 @@ namespace Interfaz
     public partial class GestionAerolineas : Form
     {
         private string cadenaConexion = "Data Source=LoginVuelos.db";
+
+        private string ultimaCompañiaAñadida = "";
+
+        public string GetUltimaCompañiaAñadida()
+        {
+            return ultimaCompañiaAñadida;
+        }
+
         public GestionAerolineas()
         {
             InitializeComponent();
@@ -98,6 +106,7 @@ namespace Interfaz
 
                 MessageBox.Show("Compañía añadida correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                this.ultimaCompañiaAñadida = txtCompañia.Text;
                 // Limpiamos los cuadros de texto para la siguiente
                 txtCompañia.Clear();
                 txtTelefono.Clear();
