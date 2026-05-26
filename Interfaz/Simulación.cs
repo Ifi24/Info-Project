@@ -534,34 +534,5 @@ namespace Interfaz
         {
             lblCords.Text = $"X:  {e.X}  Y:  {e.Y}";
         }
-
-        private void btnCambiarVelocidad_Click(object sender, EventArgs e)
-        {
-            SaveFileDialog ventanaGuardar = new SaveFileDialog();
-            ventanaGuardar.Filter = "Archivo de texto (*.txt)|*.txt";
-            ventanaGuardar.Title = "Guardar Reporte de Cambios de Velocidad";
-
-            if (ventanaGuardar.ShowDialog() == DialogResult.OK)
-            {
-                System.IO.StreamWriter escritor = new System.IO.StreamWriter(ventanaGuardar.FileName);
-
-                escritor.WriteLine("=========================================================");
-                escritor.WriteLine("  REPORTE DE CAMBIOS DE VELOCIDAD - NOTIFICACIÓN TRÁFICO ");
-                escritor.WriteLine("  Generado el: " + DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"));
-                escritor.WriteLine("=========================================================");
-                escritor.WriteLine();
-
-                bool huboCambios = false;
-                SQLiteConnection conexionQuery = new SQLiteConnection(cadenaConexion);
-
-                try
-                {
-                    conexionQuery.Open();
-
-                    // Recorremos todos los aviones que están actualmente en la simulación
-                    for (int i = 0; i < listaVuelos.GetNumAviones(); i++)
-                    {
-                        FlightPlan fp = listaVuelos.GetFlightPlan(i);
-
     }
 }
