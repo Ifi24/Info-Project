@@ -115,6 +115,17 @@ namespace Interfaz
                 }
             }
         }
+
+        private void opcionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void gestionarCompañíasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GestionAerolineas ventanaGestion = new GestionAerolineas();
+            ventanaGestion.ShowDialog();
         }
     }
+}
 
