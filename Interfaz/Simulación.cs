@@ -80,7 +80,7 @@ namespace Interfaz
             }
             ActualizarInterfaz();
             PanelSimulacion.Invalidate(); //Ejecute el evento Paint
-           
+
         }
 
         // Método para actualizar cambios en la simulación:
@@ -535,6 +535,9 @@ namespace Interfaz
             lblCords.Text = $"X:  {e.X}  Y:  {e.Y}";
         }
 
-        
+        private void btnCambiarVelocidad_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
