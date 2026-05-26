@@ -51,7 +51,6 @@
             lblVelocidad = new Label();
             lblCords = new Label();
             button4 = new Button();
-            btnCambiarVelocidad = new Button();
             PanelSimulacion.SuspendLayout();
             SuspendLayout();
             // 
@@ -60,7 +59,7 @@
             btn_UnCiclo.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btn_UnCiclo.ForeColor = Color.FromArgb(64, 64, 64);
             btn_UnCiclo.Location = new Point(51, 123);
-            btn_UnCiclo.Margin = new Padding(2, 2, 2, 2);
+            btn_UnCiclo.Margin = new Padding(2);
             btn_UnCiclo.Name = "btn_UnCiclo";
             btn_UnCiclo.Size = new Size(288, 31);
             btn_UnCiclo.TabIndex = 1;
@@ -190,7 +189,7 @@
             btn_PredecirConflictos.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btn_PredecirConflictos.ForeColor = Color.FromArgb(64, 64, 64);
             btn_PredecirConflictos.Location = new Point(51, 246);
-            btn_PredecirConflictos.Margin = new Padding(2, 2, 2, 2);
+            btn_PredecirConflictos.Margin = new Padding(2);
             btn_PredecirConflictos.Name = "btn_PredecirConflictos";
             btn_PredecirConflictos.Size = new Size(288, 31);
             btn_PredecirConflictos.TabIndex = 11;
@@ -203,7 +202,7 @@
             btn_DatosAviones.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btn_DatosAviones.ForeColor = Color.FromArgb(64, 64, 64);
             btn_DatosAviones.Location = new Point(51, 296);
-            btn_DatosAviones.Margin = new Padding(2, 2, 2, 2);
+            btn_DatosAviones.Margin = new Padding(2);
             btn_DatosAviones.Name = "btn_DatosAviones";
             btn_DatosAviones.Size = new Size(288, 31);
             btn_DatosAviones.TabIndex = 9;
@@ -230,7 +229,7 @@
             btnPause.BackgroundImageLayout = ImageLayout.Stretch;
             btnPause.FlatStyle = FlatStyle.Popup;
             btnPause.Location = new Point(1103, 981);
-            btnPause.Margin = new Padding(2, 2, 2, 2);
+            btnPause.Margin = new Padding(2);
             btnPause.Name = "btnPause";
             btnPause.Size = new Size(54, 53);
             btnPause.TabIndex = 22;
@@ -244,7 +243,7 @@
             btn_Acelerar.BackgroundImageLayout = ImageLayout.Stretch;
             btn_Acelerar.FlatStyle = FlatStyle.Popup;
             btn_Acelerar.Location = new Point(1199, 981);
-            btn_Acelerar.Margin = new Padding(2, 2, 2, 2);
+            btn_Acelerar.Margin = new Padding(2);
             btn_Acelerar.Name = "btn_Acelerar";
             btn_Acelerar.Size = new Size(67, 53);
             btn_Acelerar.TabIndex = 21;
@@ -258,7 +257,7 @@
             btn_Ralentizar.BackgroundImageLayout = ImageLayout.Stretch;
             btn_Ralentizar.FlatStyle = FlatStyle.Popup;
             btn_Ralentizar.Location = new Point(989, 981);
-            btn_Ralentizar.Margin = new Padding(2, 2, 2, 2);
+            btn_Ralentizar.Margin = new Padding(2);
             btn_Ralentizar.Name = "btn_Ralentizar";
             btn_Ralentizar.Size = new Size(70, 53);
             btn_Ralentizar.TabIndex = 20;
@@ -300,18 +299,6 @@
             button4.Text = "Cambios de velocidad";
             button4.UseVisualStyleBackColor = true;
             // 
-            // btnCambiarVelocidad
-            // 
-            btnCambiarVelocidad.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnCambiarVelocidad.ForeColor = Color.FromArgb(64, 64, 64);
-            btnCambiarVelocidad.Location = new Point(51, 497);
-            btnCambiarVelocidad.Name = "btnCambiarVelocidad";
-            btnCambiarVelocidad.Size = new Size(288, 31);
-            btnCambiarVelocidad.TabIndex = 29;
-            btnCambiarVelocidad.Text = "Exportar cambios de velocidad";
-            btnCambiarVelocidad.UseVisualStyleBackColor = true;
-            btnCambiarVelocidad.Click += btnCambiarVelocidad_Click;
-            // 
             // Simulación
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -320,7 +307,6 @@
             BackgroundImage = Properties.Resources.SIMULATION;
             BackgroundImageLayout = ImageLayout.Zoom;
             ClientSize = new Size(1184, 659);
-            Controls.Add(btnCambiarVelocidad);
             Controls.Add(button4);
             Controls.Add(lblCords);
             Controls.Add(lblVelocidad);
@@ -374,6 +360,5 @@
         private Label lblVelocidad;
         private Label lblCords;
         private Button button4;
-        private Button btnCambiarVelocidad;
     }
 }
