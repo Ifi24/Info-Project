@@ -35,105 +35,88 @@
             verSimulaciónToolStripMenuItem = new ToolStripMenuItem();
             cargarSimulaciónToolStripMenuItem = new ToolStripMenuItem();
             gestionarCompañíasToolStripMenuItem = new ToolStripMenuItem();
-            flowLayoutPanel1 = new FlowLayoutPanel();
-            Titulo = new Label();
             label1 = new Label();
             label3 = new Label();
             label4 = new Label();
             btnCerrar = new Button();
+            dgv_SimulacionesGuardadas = new DataGridView();
             menuStrip1.SuspendLayout();
-            flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgv_SimulacionesGuardadas).BeginInit();
             SuspendLayout();
             // 
             // menuStrip1
             // 
-            menuStrip1.BackColor = SystemColors.WindowFrame;
+            menuStrip1.BackColor = Color.Transparent;
             menuStrip1.Dock = DockStyle.Left;
             menuStrip1.ImageScalingSize = new Size(20, 20);
             menuStrip1.Items.AddRange(new ToolStripItem[] { Opciones });
             menuStrip1.LayoutStyle = ToolStripLayoutStyle.VerticalStackWithOverflow;
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Padding = new Padding(10, 3, 0, 3);
-            menuStrip1.Size = new Size(250, 1054);
+            menuStrip1.Size = new Size(368, 1055);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
             // Opciones
             // 
-            Opciones.BackColor = Color.DarkSlateGray;
+            Opciones.BackColor = Color.Transparent;
             Opciones.DropDownItems.AddRange(new ToolStripItem[] { cargarListaDeVuelosToolStripMenuItem, introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem, verSimulaciónToolStripMenuItem, cargarSimulaciónToolStripMenuItem, gestionarCompañíasToolStripMenuItem });
-            Opciones.Font = new Font("Tahoma", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Opciones.Font = new Font("Myriad Pro", 40.1999969F, FontStyle.Bold, GraphicsUnit.Point, 0);
             Opciones.ForeColor = SystemColors.Control;
             Opciones.Name = "Opciones";
             Opciones.Padding = new Padding(10, 10, 5, 0);
-            Opciones.Size = new Size(229, 53);
-            Opciones.Text = "Opciones";
+            Opciones.Size = new Size(355, 95);
+            Opciones.Text = "OPCIONES";
             // 
             // cargarListaDeVuelosToolStripMenuItem
             // 
-            cargarListaDeVuelosToolStripMenuItem.BackColor = Color.DarkSlateGray;
-            cargarListaDeVuelosToolStripMenuItem.ForeColor = SystemColors.Control;
+            cargarListaDeVuelosToolStripMenuItem.BackColor = Color.SteelBlue;
+            cargarListaDeVuelosToolStripMenuItem.Font = new Font("Myriad Pro", 30F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            cargarListaDeVuelosToolStripMenuItem.ForeColor = SystemColors.ButtonFace;
             cargarListaDeVuelosToolStripMenuItem.Name = "cargarListaDeVuelosToolStripMenuItem";
-            cargarListaDeVuelosToolStripMenuItem.Size = new Size(935, 48);
+            cargarListaDeVuelosToolStripMenuItem.Size = new Size(1211, 64);
             cargarListaDeVuelosToolStripMenuItem.Text = "Introducir Datos de Vuelo";
             cargarListaDeVuelosToolStripMenuItem.Click += cargarListaDeVuelosToolStripMenuItem_Click;
             // 
             // introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem
             // 
-            introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem.BackColor = Color.DarkSlateGray;
-            introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem.ForeColor = SystemColors.Control;
+            introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem.BackColor = Color.SteelBlue;
+            introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem.Font = new Font("Myriad Pro", 30F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem.ForeColor = SystemColors.ButtonFace;
             introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem.Name = "introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem";
-            introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem.Size = new Size(935, 48);
+            introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem.Size = new Size(1211, 64);
             introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem.Text = "Introducir Distancia Seguridad y Tiempo de Ciclo";
             introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem.Click += introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem_Click;
             // 
             // verSimulaciónToolStripMenuItem
             // 
-            verSimulaciónToolStripMenuItem.BackColor = Color.DarkSlateGray;
-            verSimulaciónToolStripMenuItem.ForeColor = SystemColors.Control;
+            verSimulaciónToolStripMenuItem.BackColor = Color.SteelBlue;
+            verSimulaciónToolStripMenuItem.Font = new Font("Myriad Pro", 30F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            verSimulaciónToolStripMenuItem.ForeColor = SystemColors.ButtonFace;
             verSimulaciónToolStripMenuItem.Name = "verSimulaciónToolStripMenuItem";
-            verSimulaciónToolStripMenuItem.Size = new Size(935, 48);
+            verSimulaciónToolStripMenuItem.Size = new Size(1211, 64);
             verSimulaciónToolStripMenuItem.Text = "Ver Simulación";
             verSimulaciónToolStripMenuItem.Click += verSimulaciónToolStripMenuItem_Click;
             // 
             // cargarSimulaciónToolStripMenuItem
             // 
-            cargarSimulaciónToolStripMenuItem.BackColor = Color.White;
+            cargarSimulaciónToolStripMenuItem.BackColor = Color.SteelBlue;
+            cargarSimulaciónToolStripMenuItem.Font = new Font("Myriad Pro", 30F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            cargarSimulaciónToolStripMenuItem.ForeColor = SystemColors.ButtonFace;
             cargarSimulaciónToolStripMenuItem.Name = "cargarSimulaciónToolStripMenuItem";
-            cargarSimulaciónToolStripMenuItem.Size = new Size(935, 48);
+            cargarSimulaciónToolStripMenuItem.Size = new Size(1211, 64);
             cargarSimulaciónToolStripMenuItem.Text = "Cargar Simulación";
             cargarSimulaciónToolStripMenuItem.Click += cargarSimulaciónToolStripMenuItem_Click;
             // 
             // gestionarCompañíasToolStripMenuItem
             // 
+            gestionarCompañíasToolStripMenuItem.BackColor = Color.SteelBlue;
+            gestionarCompañíasToolStripMenuItem.Font = new Font("Myriad Pro", 30F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            gestionarCompañíasToolStripMenuItem.ForeColor = SystemColors.ButtonFace;
             gestionarCompañíasToolStripMenuItem.Name = "gestionarCompañíasToolStripMenuItem";
-            gestionarCompañíasToolStripMenuItem.Size = new Size(935, 48);
+            gestionarCompañíasToolStripMenuItem.Size = new Size(1211, 64);
             gestionarCompañíasToolStripMenuItem.Text = "Gestionar Compañías";
             gestionarCompañíasToolStripMenuItem.Click += gestionarCompañíasToolStripMenuItem_Click;
-            // 
-            // flowLayoutPanel1
-            // 
-            flowLayoutPanel1.BackColor = Color.DarkSlateGray;
-            flowLayoutPanel1.Controls.Add(Titulo);
-            flowLayoutPanel1.Location = new Point(211, 62);
-            flowLayoutPanel1.Margin = new Padding(5, 5, 5, 5);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(2972, 155);
-            flowLayoutPanel1.TabIndex = 1;
-            // 
-            // Titulo
-            // 
-            Titulo.Anchor = AnchorStyles.None;
-            Titulo.AutoSize = true;
-            Titulo.Font = new Font("Tahoma", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            Titulo.ForeColor = SystemColors.Control;
-            Titulo.Location = new Point(5, 0);
-            Titulo.Margin = new Padding(5, 0, 5, 0);
-            Titulo.Name = "Titulo";
-            Titulo.Size = new Size(748, 77);
-            Titulo.TabIndex = 0;
-            Titulo.Text = "Simulador de Aviación";
             // 
             // label1
             // 
@@ -142,12 +125,10 @@
             label1.BackColor = SystemColors.Control;
             label1.Font = new Font("Tahoma", 12F, FontStyle.Italic, GraphicsUnit.Point, 0);
             label1.ForeColor = SystemColors.ActiveCaptionText;
-            label1.Location = new Point(231, 160);
-            label1.Margin = new Padding(5, 0, 5, 0);
+            label1.Location = new Point(142, 496);
             label1.Name = "label1";
-            label1.Size = new Size(710, 39);
+            label1.Size = new Size(0, 24);
             label1.TabIndex = 1;
-            label1.Text = "Grupo 8: Ana López, Ifesinachi Egbera, Laia Alba";
             label1.TextAlign = ContentAlignment.BottomLeft;
             // 
             // label3
@@ -155,57 +136,65 @@
             label3.AutoSize = true;
             label3.Font = new Font("Tahoma", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = SystemColors.Control;
-            label3.Location = new Point(247, 298);
-            label3.Margin = new Padding(5, 0, 5, 0);
+            label3.Location = new Point(152, 186);
             label3.Name = "label3";
-            label3.Size = new Size(252, 45);
+            label3.Size = new Size(0, 28);
             label3.TabIndex = 3;
-            label3.Text = "¡Bienvenido!";
             // 
             // label4
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label4.ForeColor = SystemColors.Control;
-            label4.Location = new Point(302, 342);
-            label4.Margin = new Padding(5, 0, 5, 0);
+            label4.Location = new Point(186, 214);
             label4.Name = "label4";
-            label4.Size = new Size(615, 39);
+            label4.Size = new Size(0, 24);
             label4.TabIndex = 4;
-            label4.Text = "Este es nuestro proyecto de informática II";
             // 
             // btnCerrar
             // 
-            btnCerrar.Location = new Point(1424, 1587);
-            btnCerrar.Margin = new Padding(5, 5, 5, 5);
+            btnCerrar.Font = new Font("Myriad Pro", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnCerrar.ForeColor = Color.FromArgb(64, 64, 64);
+            btnCerrar.Location = new Point(1421, 910);
             btnCerrar.Name = "btnCerrar";
-            btnCerrar.Size = new Size(367, 46);
+            btnCerrar.Size = new Size(205, 36);
             btnCerrar.TabIndex = 5;
             btnCerrar.Text = "Cerrar";
             btnCerrar.UseVisualStyleBackColor = true;
             btnCerrar.Click += btnCerrar_Click;
             // 
+            // dgv_SimulacionesGuardadas
+            // 
+            dgv_SimulacionesGuardadas.BackgroundColor = SystemColors.ScrollBar;
+            dgv_SimulacionesGuardadas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgv_SimulacionesGuardadas.GridColor = Color.Black;
+            dgv_SimulacionesGuardadas.Location = new Point(1283, 271);
+            dgv_SimulacionesGuardadas.Name = "dgv_SimulacionesGuardadas";
+            dgv_SimulacionesGuardadas.RowHeadersWidth = 51;
+            dgv_SimulacionesGuardadas.Size = new Size(489, 575);
+            dgv_SimulacionesGuardadas.TabIndex = 6;
+            // 
             // Principal
             // 
-            AutoScaleDimensions = new SizeF(13F, 32F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Desktop;
-            BackgroundImageLayout = ImageLayout.Zoom;
-            ClientSize = new Size(1924, 1054);
+            BackgroundImage = Properties.Resources.PRINCIPAL;
+            BackgroundImageLayout = ImageLayout.None;
+            ClientSize = new Size(1924, 1055);
+            Controls.Add(dgv_SimulacionesGuardadas);
             Controls.Add(btnCerrar);
             Controls.Add(label1);
             Controls.Add(label4);
             Controls.Add(label3);
-            Controls.Add(flowLayoutPanel1);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
-            Margin = new Padding(5, 5, 5, 5);
             Name = "Principal";
             Text = "Principal";
+            Load += Principal_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
-            flowLayoutPanel1.ResumeLayout(false);
-            flowLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgv_SimulacionesGuardadas).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -217,13 +206,12 @@
         private ToolStripMenuItem cargarListaDeVuelosToolStripMenuItem;
         private ToolStripMenuItem introducirDistanciaSeguridadYTiempoDeCicloToolStripMenuItem;
         private ToolStripMenuItem verSimulaciónToolStripMenuItem;
-        private FlowLayoutPanel flowLayoutPanel1;
-        private Label Titulo;
         private Label label1;
         private Label label3;
         private Label label4;
         private Button btnCerrar;
         private ToolStripMenuItem cargarSimulaciónToolStripMenuItem;
         private ToolStripMenuItem gestionarCompañíasToolStripMenuItem;
+        private DataGridView dgv_SimulacionesGuardadas;
     }
 }

@@ -113,6 +113,16 @@ namespace Interfaz.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap PRINCIPAL {
+            get {
+                object obj = ResourceManager.GetObject("PRINCIPAL", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ralentizar {
             get {
                 object obj = ResourceManager.GetObject("ralentizar", resourceCulture);

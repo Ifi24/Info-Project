@@ -19,12 +19,13 @@ namespace Interfaz
         double dist;
         double tiemp;
         double multvelocidad = 1;
+        string usuarioActual;
         private string cadenaConexion = "Data Source=LoginVuelos.db";
 
         List<PictureBox> misPics = new List<PictureBox>();
         List<Label> misLabels = new List<Label>();
 
-        public Simulación(FlightLib.FlightPlanList miLista, double distSeguridad, double tiempoCiclo)
+        public Simulación(FlightLib.FlightPlanList miLista, double distSeguridad, double tiempoCiclo, string usuarioLogueado)
         {
             InitializeComponent();
 
@@ -39,6 +40,7 @@ namespace Interfaz
             this.listaVuelos = miLista;
             this.dist = distSeguridad;
             this.tiemp = tiempoCiclo;
+            this.usuarioActual = usuarioLogueado;
 
             this.TimerSimulación.Tick += new EventHandler(TimerSimulación_Tick);
             this.TimerSimulación.Interval = (int)(this.tiemp * 1000);
@@ -138,7 +140,7 @@ namespace Interfaz
             Graphics g = e.Graphics;
             using (Pen Lapiz = new Pen(Color.Gray, 1) { DashStyle = System.Drawing.Drawing2D.DashStyle.Dot }) //Para las línias.
             using (Pen Rotulador = new Pen(Color.Blue, 2)) //Para las elipses
-
+            {
                 for (int i = 0; i < listaVuelos.GetNumAviones(); i++) // Dibujamos uno por uno.
                 {
                     FlightPlan fp = listaVuelos.GetFlightPlan(i);
@@ -156,6 +158,7 @@ namespace Interfaz
                     float diametro = (float)this.dist * 2;
                     g.DrawEllipse(Rotulador, x - (float)this.dist, y - (float)this.dist, diametro, diametro);
                 }
+            }
         }
 
         // Método para mover los aviones un ciclo:
@@ -181,6 +184,45 @@ namespace Interfaz
             listaVuelos.ReiniciarVuelos();
             ActualizarInterfaz();
         }
+        //Método para verificar cada paso de la simulación:
+        private void VerificarPaso()
+        {
+            for (int i = 0; i < listaVuelos.GetNumAviones(); i++)
+            {
+                for (int j = i + 1; j < listaVuelos.GetNumAviones(); j++)
+                {
+                    FlightPlan v1 = listaVuelos.GetFlightPlan(i);
+                    FlightPlan v2 = listaVuelos.GetFlightPlan(j);
+
+                    if (v1.PrediccionConflicto(v2, this.dist)) // Si se detecta conflicto
+                    {
+                        // Avisamos al usuario y le preguntamos si quiere resolverlo:
+                        MiMessageBox ventanaPregunta = new MiMessageBox();
+                        ventanaPregunta.ConfigurarMensaje("Resolución", $"¡Conflicto futuro detectado entre {v1.GetId()} y {v2.GetId()}!\n¿Desea resolverlo?", "PREGUNTA");
+                        DialogResult respuesta = ventanaPregunta.ShowDialog();
+
+                        if (respuesta == DialogResult.Yes)
+                        {
+                            // Intentamos resolverlo cambiando la velocidad de v2
+                            bool logrado = v2.ResolverConflicto(v1, this.dist);
+                            MiMessageBox ventanaResultado = new MiMessageBox();
+
+                            if (logrado)
+                            {
+                                ventanaResultado.ConfigurarMensaje("Conflicto resuelto", $"{v2.GetId()} ha cambiado su velocidad.", "INFO");
+                            }
+                            else
+                            {
+                                ventanaResultado.ConfigurarMensaje("Atención", $"No se pudo encontrar solución para el conflicto entre {v1.GetId()} y {v2.GetId()}", "ERROR");
+                            }
+                            ventanaResultado.ShowDialog();
+                        }
+                    }
+                }
+            }
+            // Una vez revisados todos, arrancamos la simulación
+            TimerSimulación.Start();
+        }
 
         // Botón que mueve un ciclo:
         private void btn_UnCiclo_Click(object sender, EventArgs e)
@@ -198,50 +240,11 @@ namespace Interfaz
         private void btnAutoCiclo_Click(object sender, EventArgs e)
         {
             if (TimerSimulación.Enabled)
-            {
-                //Si ya esta funcionando, lo paramos.
+                // Si ya está funcionando, lo paramos.
                 TimerSimulación.Stop();
-            }
-            else //Si queremos que funcione:
-            {
-                for (int i = 0; i < listaVuelos.GetNumAviones(); i++)
-                {
-                    for (int j = i + 1; j < listaVuelos.GetNumAviones(); j++)
-                    {
-                        FlightPlan v1 = listaVuelos.GetFlightPlan(i);
-                        FlightPlan v2 = listaVuelos.GetFlightPlan(j);
-
-                        if (v1.PrediccionConflicto(v2, this.dist)) // Si se detecta conflicto...
-                        {
-                            //Avisamos al usuario y le preguntamos si quiere resolverlo:
-                            MiMessageBox ventanaMensaje = new MiMessageBox();
-                            ventanaMensaje.ConfigurarMensaje("Conflicto detectado", "Futuro conflicto detectado entre " + v1.GetId() + " y " + v2.GetId() + ".\n¿Desea resolverlo?", "PREGUNTA");
-                            DialogResult respuesta = ventanaMensaje.ShowDialog();
-
-                            if (respuesta == DialogResult.Yes)
-                            {
-                                // Intentamos resolverlo cambiando la velocidad de uno de ellos (v2)
-                                bool logrado = v2.ResolverConflicto(v1, this.dist);
-
-                                if (logrado)
-                                {
-                                    MiMessageBox ventanaMensaje2 = new MiMessageBox();
-                                    ventanaMensaje2.ConfigurarMensaje("Conflicto resuelto", v2.GetId() + " ha cambiado su velocidad.", "INFO");
-                                    ventanaMensaje2.ShowDialog();
-                                }
-                                else
-                                {
-                                    MiMessageBox ventanaMensaje2 = new MiMessageBox();
-                                    ventanaMensaje2.ConfigurarMensaje("Conflicto sin resolver", "No se pudo encontrar una solución para el conflicto entre " + v1.GetId() + " y " + v2.GetId(), "INFO");
-                                    ventanaMensaje2.ShowDialog();
-                                }
-                            }
-                        }
-                    }
-                }
-                // Una vez revisados todos, arrancamos
-                TimerSimulación.Start();
-            }
+            else
+                // Si estaba parado, procesamos conflictos y arrancamos.
+                VerificarPaso();
         }
 
         // Método que muestra los datos de un avión al que se le hace click:
@@ -384,16 +387,13 @@ namespace Interfaz
         }
 
         // Boton para cargar la simulación
-        // MENSAJE DE ADVERTENCIA DE QUE SE VA A BORRAR TODO --> PREGUNTAR SI DESEA GUARDAR ANTES
         private void btn_CargarSimulacion_Click(object sender, EventArgs e)
         {
-
-
             MiMessageBox ventanaMensaje = new MiMessageBox();
             ventanaMensaje.ConfigurarMensaje("Atención", "¿Está seguro de querer cargar un nuevo archivo?\nSi lo hace, perderá todo el progreso actual de la simulación", "PREGUNTA");
             DialogResult respuesta = ventanaMensaje.ShowDialog();
 
-            if (respuesta == DialogResult.OK)
+            if (respuesta == DialogResult.Yes)
             {
                 OpenFileDialog ventanaAbrir = new OpenFileDialog();
 
@@ -433,58 +433,21 @@ namespace Interfaz
                     }
                 }
             }
-            else if (respuesta == DialogResult.Cancel)
-            {
-                return;
-            }
         }
 
         private void btnPause_Click(object sender, EventArgs e)
         {
             if (TimerSimulación.Enabled)
             {
-                //Si ya esta funcionando, lo paramos.
+                // Si ya está funcionando, lo paramos y cambiamos el icono a play.
                 TimerSimulación.Stop();
                 btnPause.BackgroundImage = Properties.Resources.play;
             }
-            else //Si queremos que funcione:
+            else
             {
+                // Si estaba pausado, cambiamos el icono a Pausa y procesamos la simulación.
                 btnPause.BackgroundImage = Properties.Resources.pausa;
-                for (int i = 0; i < listaVuelos.GetNumAviones(); i++)
-                {
-                    for (int j = i + 1; j < listaVuelos.GetNumAviones(); j++)
-                    {
-                        FlightPlan v1 = listaVuelos.GetFlightPlan(i);
-                        FlightPlan v2 = listaVuelos.GetFlightPlan(j);
-
-                        if (v1.PrediccionConflicto(v2, this.dist)) // Si se detecta conflicto...
-                        {
-                            MiMessageBox ventanaPregunta = new MiMessageBox();
-                            ventanaPregunta.ConfigurarMensaje("Resolución Automática", "¡Conflicto futuro detectado entre " + v1.GetId() + " y " + v2.GetId() + "!\n¿Desea resolverlo?", "PREGUNTA");
-                            DialogResult respuesta = ventanaPregunta.ShowDialog();
-
-                            if (respuesta == DialogResult.Yes)
-                            {
-                                // Intentamos resolverlo cambiando la velocidad de uno de ellos (v2)
-                                bool logrado = v2.ResolverConflicto(v1, this.dist);
-                                MiMessageBox ventanaResultado = new MiMessageBox();
-
-                                if (logrado)
-                                {
-                                    ventanaResultado.ConfigurarMensaje("Conflicto resuelto", v2.GetId() + " ha cambiado su velocidad.", "INFO");
-                                }
-                                else
-                                {
-                                    ventanaResultado.ConfigurarMensaje("Atención", "No se pudo encontrar solución para el conflicto entre " + v1.GetId() + " y " + v2.GetId(), "ERROR");
-                                }
-                                ventanaResultado.ShowDialog();
-                            }
-                        }
-                    }
-                    // Una vez revisados todos, arrancamos
-                    TimerSimulación.Start();
-                    btnPause.BackgroundImage = Properties.Resources.pausa;
-                }
+                VerificarPaso();
             }
         }
 
@@ -533,6 +496,93 @@ namespace Interfaz
         private void PanelSimulacion_MouseMove(object sender, MouseEventArgs e)
         {
             lblCords.Text = $"X:  {e.X}  Y:  {e.Y}";
+        }
+
+        private void btn_cambiarsimcuenta(object sender, EventArgs e)
+        {
+            if (listaVuelos == null || listaVuelos.GetNumAviones() == 0)
+            {
+                MessageBox.Show("No hay datos de vuelo activos en la simulación para guardar.", "Simulación vacía", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 2. Detener temporalmente el Timer si la simulación está en ejecución para evitar problemas de concurrencia
+            bool estabaActivo = TimerSimulación.Enabled;
+            if (estabaActivo)
+            {
+                TimerSimulación.Stop();
+            }
+
+            // 3. Solicitar un nombre identificativo para la simulación
+            // Nota: Requiere tener la referencia o escribir Microsoft.VisualBasic.Interaction.InputBox
+            string nombreSimulacion = Microsoft.VisualBasic.Interaction.InputBox(
+                "Introduce un nombre para guardar esta simulación en tu cuenta:", 
+                "Guardar en Base de Datos", 
+                "Simulacion_" + DateTime.Now.ToString("ddMMyy_HHmm")
+            ).Trim();
+
+            // Si cancela la ventana o el campo queda completamente en blanco, reanudamos el timer si correspondía y salimos
+            if (string.IsNullOrEmpty(nombreSimulacion))
+            {
+                if (estabaActivo) TimerSimulación.Start();
+                return;
+            }
+
+            try
+            {
+                // 4. Crear un archivo de texto temporal para que FlightLib exporte el contenido estructurado en un String
+                string rutaTemporal = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "temp_db_radar.txt");
+                
+                // Usamos el método propio de tu librería pasándole las variables de tu formulario actual
+                listaVuelos.GuardarFichero(rutaTemporal, this.dist, this.tiemp);
+
+                // Volcamos todo el contenido plano generado del fichero a una variable String
+                string contenidoTextoPlanos = System.IO.File.ReadAllText(rutaTemporal);
+
+                // Limpiamos eliminando el fichero físico del disco temporal
+                System.IO.File.Delete(rutaTemporal);
+
+                // 5. Inserción SQL en la base de datos local
+                using (SQLiteConnection cnx = new SQLiteConnection(cadenaConexion))
+                {
+                    cnx.Open();
+
+                    string queryInsert = "INSERT INTO misSimulaciones (Username, NombreSimulacion, ContenidoTexto, FechaGuardado) " +
+                                         "VALUES (@user, @nombre, @contenido, @fecha)";
+
+                    using (SQLiteCommand cmd = new SQLiteCommand(queryInsert, cnx))
+                    {
+                        // Vinculamos los parámetros usando tus variables globales del formulario
+                        cmd.Parameters.AddWithValue("@user", this.usuarioActual);
+                        cmd.Parameters.AddWithValue("@nombre", nombreSimulacion);
+                        cmd.Parameters.AddWithValue("@contenido", contenidoTextoPlanos);
+                        cmd.Parameters.AddWithValue("@fecha", DateTime.Now.ToString("dd/MM/yyyy HH:mm"));
+
+                        int resultadoFila = cmd.ExecuteNonQuery();
+
+                        if (resultadoFila == 1)
+                        {
+                            // Mostramos confirmación de éxito con tu MessageBox personalizado
+                            MiMessageBox ventanaMensaje = new MiMessageBox();
+                            ventanaMensaje.ConfigurarMensaje("Guardado exitoso", $"La simulación '{nombreSimulacion}' se ha guardado correctamente en tu cuenta de usuario.", "INFO");
+                            ventanaMensaje.ShowDialog();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Hubo un error al intentar registrar la simulación en la cuenta:\n" + ex.Message,
+                    "Error al guardar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                // 6. Si el simulador estaba corriendo antes de darle al botón, vuelve a arrancar de forma automática
+                if (estabaActivo)
+                {
+                    TimerSimulación.Start();
+                }
+            }
         }
     }
 }

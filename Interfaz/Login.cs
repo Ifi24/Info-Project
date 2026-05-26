@@ -36,6 +36,13 @@ namespace Interfaz
                 "Compañia varchar(50) PRIMARY KEY NOT NULL, " + // Espacio para el nombre de la aerolínea (máx 50 caracteres).
                 "Telefono varchar(20) NOT NULL, " +           // Teléfono de contacto de la compañía.
                 "Email varchar(50) NOT NULL)";
+            string sqlSimulaciones = "CREATE TABLE IF NOT EXISTS misSimulaciones (" +
+                "IdSimulacion INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "Username varchar(20), " +
+                "NombreSimulacion varchar(50), " +
+                "ContenidoTexto TEXT, " +
+                "FechaGuardado varchar(20), " +
+                "FOREIGN KEY(Username) REFERENCES misUsuarios(Username))"; //El usuario también debe existir en la tabla de usuarios
 
             SQLiteCommand cmd1 = new SQLiteCommand(sqlUsuarios, cnx);
             cmd1.ExecuteNonQuery(); //Ejecuta la acción y muestra cuantos cambios ha habido.
@@ -43,6 +50,8 @@ namespace Interfaz
             cmd2.ExecuteNonQuery();
             SQLiteCommand cmd3 = new SQLiteCommand(sqlCompanias, cnx);
             cmd3.ExecuteNonQuery();
+            SQLiteCommand cmd4 = new SQLiteCommand(sqlSimulaciones, cnx);
+            cmd4.ExecuteNonQuery();
         }
 
         //Método para buscar y abrir la DataBase:
@@ -61,8 +70,8 @@ namespace Interfaz
                 CrearBaseDatos();
                 AbrirBaseDatos();
                 CrearTabla();
-                string query = "INSERT INTO misCompañias VALUES ('EETAC Air', '934137000', 'eetac.web@upc.edu')";
-                string query2 = "INSERT INTO misCompañias VALUES ('UPC Airlines', '934016200', 'rector@upc.edu')";
+                string query = "INSERT OR IGNORE INTO misCompañias VALUES ('EETAC Air', '934137000', 'eetac.web@upc.edu')";
+                string query2 = "INSERT OR IGNORE INTO misCompañias VALUES ('UPC Airlines', '934016200', 'rector@upc.edu')";
                 SQLiteCommand cmd1 = new SQLiteCommand(query, cnx);
                 cmd1.ExecuteNonQuery();
                 SQLiteCommand cmd2 = new SQLiteCommand(query2, cnx);

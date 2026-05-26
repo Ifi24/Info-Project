@@ -51,6 +51,7 @@
             lblVelocidad = new Label();
             lblCords = new Label();
             button4 = new Button();
+            btn_guardarsimcuenta = new Button();
             PanelSimulacion.SuspendLayout();
             SuspendLayout();
             // 
@@ -130,7 +131,7 @@
             button1.ForeColor = Color.FromArgb(64, 64, 64);
             button1.Location = new Point(51, 344);
             button1.Name = "button1";
-            button1.Size = new Size(288, 31);
+            button1.Size = new Size(288, 36);
             button1.TabIndex = 18;
             button1.Text = "Cambiar tiempo y distancia";
             button1.UseVisualStyleBackColor = true;
@@ -140,11 +141,11 @@
             // 
             btn_CargarSimulacion.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btn_CargarSimulacion.ForeColor = Color.FromArgb(64, 64, 64);
-            btn_CargarSimulacion.Location = new Point(51, 571);
+            btn_CargarSimulacion.Location = new Point(51, 549);
             btn_CargarSimulacion.Name = "btn_CargarSimulacion";
-            btn_CargarSimulacion.Size = new Size(288, 31);
+            btn_CargarSimulacion.Size = new Size(288, 34);
             btn_CargarSimulacion.TabIndex = 20;
-            btn_CargarSimulacion.Text = "Cargar Simulación";
+            btn_CargarSimulacion.Text = "Cargar Simulación (fichero)\r\n";
             btn_CargarSimulacion.UseVisualStyleBackColor = true;
             btn_CargarSimulacion.Click += btn_CargarSimulacion_Click;
             // 
@@ -152,11 +153,11 @@
             // 
             btn_GuardarSimulacion.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btn_GuardarSimulacion.ForeColor = Color.FromArgb(64, 64, 64);
-            btn_GuardarSimulacion.Location = new Point(51, 534);
+            btn_GuardarSimulacion.Location = new Point(51, 502);
             btn_GuardarSimulacion.Name = "btn_GuardarSimulacion";
             btn_GuardarSimulacion.Size = new Size(288, 31);
             btn_GuardarSimulacion.TabIndex = 18;
-            btn_GuardarSimulacion.Text = "Guardar Simulación";
+            btn_GuardarSimulacion.Text = "Guardar Simulación (fichero)\r\n";
             btn_GuardarSimulacion.UseVisualStyleBackColor = true;
             btn_GuardarSimulacion.Click += btn_GuardarSimulacion_Click;
             // 
@@ -204,7 +205,7 @@
             btn_DatosAviones.Location = new Point(51, 296);
             btn_DatosAviones.Margin = new Padding(2);
             btn_DatosAviones.Name = "btn_DatosAviones";
-            btn_DatosAviones.Size = new Size(288, 31);
+            btn_DatosAviones.Size = new Size(288, 30);
             btn_DatosAviones.TabIndex = 9;
             btn_DatosAviones.Text = "Mostrar todos los datos";
             btn_DatosAviones.UseVisualStyleBackColor = true;
@@ -292,12 +293,24 @@
             // 
             button4.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             button4.ForeColor = Color.FromArgb(64, 64, 64);
-            button4.Location = new Point(51, 692);
+            button4.Location = new Point(51, 694);
             button4.Name = "button4";
             button4.Size = new Size(288, 31);
             button4.TabIndex = 28;
             button4.Text = "Cambios de velocidad";
             button4.UseVisualStyleBackColor = true;
+            // 
+            // btn_guardarsimcuenta
+            // 
+            btn_guardarsimcuenta.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btn_guardarsimcuenta.ForeColor = Color.FromArgb(64, 64, 64);
+            btn_guardarsimcuenta.Location = new Point(51, 621);
+            btn_guardarsimcuenta.Name = "btn_guardarsimcuenta";
+            btn_guardarsimcuenta.Size = new Size(288, 31);
+            btn_guardarsimcuenta.TabIndex = 29;
+            btn_guardarsimcuenta.Text = "Guardar Simulación (cuenta)";
+            btn_guardarsimcuenta.UseVisualStyleBackColor = true;
+            btn_guardarsimcuenta.Click += btn_cambiarsimcuenta;
             // 
             // Simulación
             // 
@@ -305,8 +318,9 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaptionText;
             BackgroundImage = Properties.Resources.SIMULATION;
-            BackgroundImageLayout = ImageLayout.Zoom;
-            ClientSize = new Size(1184, 659);
+            BackgroundImageLayout = ImageLayout.None;
+            ClientSize = new Size(1599, 890);
+            Controls.Add(btn_guardarsimcuenta);
             Controls.Add(button4);
             Controls.Add(lblCords);
             Controls.Add(lblVelocidad);
@@ -360,5 +374,6 @@
         private Label lblVelocidad;
         private Label lblCords;
         private Button button4;
+        private Button btn_guardarsimcuenta;
     }
 }
